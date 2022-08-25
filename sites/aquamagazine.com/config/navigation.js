@@ -18,6 +18,7 @@ const resources = [
   { href: '/magazine', label: 'Magazine' },
   { href: 'https://www.aquamag.live', label: 'AQUA Live', target: '_blank' },
   { href: '/news/pool-hot-tub-alliance-news', label: 'PHTA News' },
+  { href: 'https://library.aquamagazine.com/', label: 'Content Library', target: '_blank' },
 ];
 
 const utilities = [
