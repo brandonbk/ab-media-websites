@@ -1,5 +1,3 @@
 const configure = require('@ab-media/package-global/config/omeda');
 
-module.exports = configure({
-  rapidIdentification: { productId: 68 },
-});
+module.exports = configure({});

@@ -2,18 +2,18 @@ const digitalEdition = require('./digital-edition');
 const navigation = require('./navigation');
 const gam = require('./gam');
 const nativeX = require('./native-x');
-const identityX = require('./identity-x');
 const magazine = require('./magazine');
 const newsletter = require('./newsletter');
 const search = require('./search');
 const subscribe = require('./subscribe');
 const omeda = require('./omeda');
+const identityX = require('./identity-x');
+const omedaIdentityX = require('./omeda-identity-x');
 
 module.exports = {
   navigation,
   gam,
   nativeX,
-  identityX,
   magazine,
   // temp fix till we update base-cms package
   // Dep Upgrades after https://github.com/parameter1/base-cms/pull/364
@@ -22,6 +22,8 @@ module.exports = {
   ],
   newsletter,
   omeda,
+  identityX,
+  omedaIdentityX,
   digitalEdition,
   search,
   company: 'AB Media Inc',
