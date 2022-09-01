@@ -61,6 +61,7 @@ module.exports = {
     { provider: 'instagram', href: 'https://www.instagram.com/aqua_magazine/', target: '_blank' },
     { provider: 'pinterest', href: 'https://www.pinterest.com/aquamagazine/_created/', target: '_blank' },
     { provider: 'twitter', href: 'https://twitter.com/aquamagazine', target: '_blank' },
+    { provider: 'linkedin', href: 'https://www.linkedin.com/company/4231363/', target: '_blank' },
   ],
   podcastLinks: [],
   gtm: {
