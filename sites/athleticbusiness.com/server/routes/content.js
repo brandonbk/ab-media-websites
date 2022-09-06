@@ -1,3 +1,6 @@
+const companyQueryFragmentFn = require('@ab-media/package-global/graphql/fragment-factories/content-company');
+const contentQueryFragmentFn = require('@ab-media/package-global/graphql/fragment-factories/content-page');
+
 const withContent = require('@ab-media/package-global/middleware/with-content');
 const queryFragment = require('@ab-media/package-global/graphql/fragments/content-page');
 const contact = require('@ab-media/package-global/templates/content/contact');
@@ -8,6 +11,7 @@ const content = require('../templates/content');
 const projectsGraphQLClient = require('../middleware/projects-graphql-client');
 
 module.exports = (app) => {
+  const { site } = app.locals;
   app.get('/*?contact/:id(\\d{8})*', withContent({
     template: contact,
     queryFragment,
@@ -15,21 +19,21 @@ module.exports = (app) => {
 
   app.get('/*?company/:id(\\d{8})*', projectsGraphQLClient(), withContent({
     template: company,
-    queryFragment,
+    queryFragment: companyQueryFragmentFn(site.get('leaders.alias')),
   }));
 
   app.get('/*?media-gallery/:id(\\d{8})*', withContent({
     template: mediaGallery,
-    queryFragment,
+    queryFragment: contentQueryFragmentFn(site.get('leaders.alias')),
   }));
 
   app.get('/*?whitepaper/:id(\\d{8})*', withContent({
     template: whitepaper,
-    queryFragment,
+    queryFragment: contentQueryFragmentFn(site.get('leaders.alias')),
   }));
 
   app.get('/*?:id(\\d{8})*', withContent({
     template: content,
-    queryFragment,
+    queryFragment: contentQueryFragmentFn(site.get('leaders.alias')),
   }));
 };
