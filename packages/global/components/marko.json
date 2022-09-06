@@ -3,6 +3,7 @@
     "./blocks/marko.json",
     "./directory-facets/marko.json",
     "./layouts/marko.json",
+    "./leaders/marko.json",
     "./search/marko.json"
   ],
   "<global-image-slider>": {

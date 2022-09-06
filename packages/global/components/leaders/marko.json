@@ -1,0 +1,12 @@
+{
+  "<global-leaders-all>": {
+    "template": "./all.marko"
+  },
+  "<global-leaders-home-page>": {
+    "template": "./home-page.marko"
+  },
+  "<global-leaders-contextual>": {
+    "template": "./contextual.marko",
+    "@content-id": "number"
+  }
+}
