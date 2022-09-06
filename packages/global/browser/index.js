@@ -1,5 +1,6 @@
 import GCSE from '@parameter1/base-cms-marko-web-gcse/browser';
 import MonoRail from '@parameter1/base-cms-marko-web-theme-monorail/browser';
+import Leaders from '@parameter1/base-cms-marko-web-leaders/browser';
 
 const AutoScroll = () => import(/* webpackChunkName: "global-auto-scroll" */ './auto-scroll.vue');
 const BillboardCookie = () => import(/* webpackChunkName: "global-billboard-cookie" */ './billboard-cookie.vue');
@@ -13,6 +14,7 @@ export default (Browser) => {
 
   GCSE(Browser);
   MonoRail(Browser);
+  Leaders(Browser);
 
   Browser.register('GlobalBillboardCookie', BillboardCookie);
 
