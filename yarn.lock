@@ -2206,6 +2206,16 @@
   dependencies:
     inflected "^2.1.0"
 
+"@parameter1/base-cms-leaders-program@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@parameter1/base-cms-leaders-program/-/base-cms-leaders-program-3.0.0.tgz#155644e2d370b122067616536a8824a73b62be0a"
+  integrity sha512-pMw4mledRCbBWEFgJhuMAollNS5/O4ho6NTgdwWCW2VfuvSdPET1uKdHV4QyHibk3WvA1zFqu1RbgidGpi96kw==
+  dependencies:
+    core-js "^3.18.2"
+    object-path "^0.11.8"
+    portal-vue "^2.1.7"
+    vue "^2.6.14"
+
 "@parameter1/base-cms-marko-compiler@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@parameter1/base-cms-marko-compiler/-/base-cms-marko-compiler-3.0.0.tgz#f11c221898c87ae271e1a69381ced6c691bba03f"
@@ -2322,6 +2332,16 @@
     express "^4.17.1"
     graphql "^14.7.0"
     graphql-tag "^2.12.5"
+
+"@parameter1/base-cms-marko-web-leaders@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@parameter1/base-cms-marko-web-leaders/-/base-cms-marko-web-leaders-3.0.0.tgz#f70be8ac894761ab06cbe73a5af4b7a03225e326"
+  integrity sha512-/TSgoJidbO8+R3cfOI93awrZlq0mQtU8YXcOqzG/4aR6aO+TsXSFUM/I+hQ/rqAT3cSCSpkiHDiCQ54KRjzrAQ==
+  dependencies:
+    "@parameter1/base-cms-leaders-program" "^3.0.0"
+    "@parameter1/base-cms-marko-web-icons" "^3.0.0"
+    "@parameter1/base-cms-object-path" "^3.0.0"
+    object-path "^0.11.8"
 
 "@parameter1/base-cms-marko-web-native-x@^3.0.0":
   version "3.0.0"
@@ -10367,6 +10387,11 @@ plumb@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/plumb/-/plumb-0.1.0.tgz#4c57790a509692832fdbf10dfaddd7948c5cb574"
   integrity sha1-TFd5ClCWkoMv2/EN+t3XlIxctXQ=
+
+portal-vue@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/portal-vue/-/portal-vue-2.1.7.tgz#ea08069b25b640ca08a5b86f67c612f15f4e4ad4"
+  integrity sha512-+yCno2oB3xA7irTt0EU5Ezw22L2J51uKAacE/6hMPMoO/mx3h4rXFkkBkT4GFsMDv/vEe8TNKC3ujJJ0PTwb6g==
 
 posix-character-classes@^0.1.0:
   version "0.1.1"
