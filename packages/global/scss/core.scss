@@ -38,6 +38,13 @@
       display: none;
     }
   }
+  &__content-body p {
+    .image-with-caption[data-embed-type="image"][data-embed-align="right"] {
+      @include media-breakpoint-up(md) {
+        text-align: left;
+      }
+    }
+  }
 }
 
 // sponsored native-x story
