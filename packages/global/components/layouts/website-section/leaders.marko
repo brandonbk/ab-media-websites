@@ -1,0 +1,73 @@
+import hierarchyAliases from "@parameter1/base-cms-marko-web/utils/hierarchy-aliases";
+import { getAsArray } from "@parameter1/base-cms-object-path";
+
+$ const { id, alias, name, pageNode } = input;
+$ const sections = getAsArray(input, "sections");
+$ const { GAM, site, config } = out.global;
+
+<theme-website-section-page id=id alias=alias name=name>
+  <@head>
+    <marko-web-gtm-website-section-context|{ context }| alias=alias>
+      <marko-web-gtm-push data=context />
+    </marko-web-gtm-website-section-context>
+    <marko-web-resolve-page|{ data: section }| node=pageNode>
+      <marko-web-p1-events-track-website-section node=section />
+    </marko-web-resolve-page>
+    <${input.head} />
+  </@head>
+  <@page>
+    <marko-web-resolve-page|{ data: section }| node=pageNode>
+      $ const aliases = hierarchyAliases(section);
+      <marko-web-page-wrapper>
+        <@section|{ aliases }| modifiers=["first"]>
+          <theme-gam-define-display-ad
+            name="leaderboard"
+            position="section_page"
+            aliases=aliases
+            modifiers=["inter-block"]
+          />
+          <theme-gam-wallpaper-ad aliases=aliases position="section_page" />
+        </@section>
+        <@section>
+          <div class="leaders-index-page__header-wrapper">
+            <div class="leaders-index-page__logo">
+              <marko-web-img
+                src=site.get("leaders.header.imgSrc")
+                alt=site.get("leaders.title")
+              />
+            </div>
+            <div class="leaders-index-page__header">
+              <h1 class="leaders-index-page__title">
+                ${site.get("leaders.title")}
+              </h1>
+              <div class="leaders-index-page__description">
+                <if(input.pageDescription)>
+                  <${input.pageDescription} />
+                </if>
+                <else>
+                  <p>Welcome to <em>${config.siteName()}'s</em> ${site.get("leaders.title")} program.</p>
+                </else>
+              </div>
+            </div>
+            <div class="leaders-index-page__body">
+              <${input.pageBody} />
+            </div>
+          </div>
+        </@section>
+        <@section|{ alias }| modifiers=["leaders-full-width"]>
+          <global-leaders-all />
+        </@section>
+
+        <for|s| of=sections>
+          <@section|{ blockName }| modifiers=s.modifiers>
+            <${s.renderBody}
+              block-name=blockName
+              section=section
+              aliases=aliases
+            />
+          </@section>
+        </for>
+      </marko-web-page-wrapper>
+    </marko-web-resolve-page>
+  </@page>
+</theme-website-section-page>
