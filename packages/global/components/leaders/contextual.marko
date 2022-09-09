@@ -14,6 +14,10 @@ $ const { contentId } = input;
     offsetTop: 50,
     viewAllHref: '/leaders',
     columns: 1,
+    useContentPrimarySection: true,
+    mediaQueries: [
+      { prop: "columns", value: 2, query: "(min-width: 700px)" },
+    ],
     calloutPrefix: site.get("leaders.calloutPrefix") || "Browse these",
     calloutValue: site.get("leaders.calloutValue") || "leading business partners",
     viewAllText: site.get("leaders.viewAllText") || "View All Companies &gt;",
