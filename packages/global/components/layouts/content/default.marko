@@ -1,6 +1,8 @@
 import { get, getAsArray } from "@parameter1/base-cms-object-path";
 import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
 import getContentPreview from "@parameter1/base-cms-marko-web-theme-monorail/utils/get-content-preview";
+import GlobalLeadersContextual from "../../leaders/contextual";
+
 
 $ const { site, pagination: p } = out.global;
 $ const { id, type, pageNode, ...rest } = input;
@@ -113,6 +115,10 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
 
               <theme-gam-inject-ads selector=`#${bodyId}` detect-embeds=true>
                 $ const desktopCounts = [1000, 2750, 4500, 6250, 8000, 9750, 11500, 13250, 15000, 16750, 18500];
+                <@inject
+                  at=1500
+                  html=GlobalLeadersContextual.renderToString({ contentId: id, $global: out.global })
+                />
                 <for|char| of=desktopCounts>
                   <!-- desktop/tablet only -->
                   <@inject
@@ -190,8 +196,6 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
         <if(displayComments)>
           <theme-identity-x-comment-stream content=content />
         </if>
-
-        <global-leaders-contextual content-id=id />
 
         <if(displayReadNext)>
           <theme-read-next-block
