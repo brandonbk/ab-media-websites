@@ -7,6 +7,7 @@
   },
   "<global-leaders-contextual>": {
     "template": "./contextual.marko",
-    "@content-id": "number"
+    "@content-id": "number",
+    "@skip-if-exists": "boolean"
   }
 }

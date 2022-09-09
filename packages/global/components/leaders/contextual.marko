@@ -2,7 +2,7 @@ $ const { site } = out.global;
 $ const { contentId } = input;
 
 <if(contentId && site.get("leaders.enabled"))>
-  <marko-web-leaders props={
+  <marko-web-leaders skip-if-exists=input.skipIfExists props={
     contentId,
     open: "auto",
     iconSet: "chevron",

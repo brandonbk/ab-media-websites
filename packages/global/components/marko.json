@@ -6,6 +6,14 @@
     "./leaders/marko.json",
     "./search/marko.json"
   ],
+  "<global-ssr-gam-inject>": {
+    "template": "./ssr-gam-inject.marko",
+    "<component-input>": {},
+    "@inject <inject>[]": {},
+    "@position": "string",
+    "@selector": "string",
+    "@to-render": "expression"
+  },
   "<global-image-slider>": {
     "template": "./image-slider.marko"
   },
