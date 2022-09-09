@@ -8,6 +8,6 @@
   "<global-leaders-contextual>": {
     "template": "./contextual.marko",
     "@content-id": "number",
-    "@skip-if-exists": "boolean"
+    "@skip-when-exists": "boolean"
   }
 }
