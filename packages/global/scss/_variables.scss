@@ -11,3 +11,9 @@ $leaderboard-min-height-mobile: 100px !default;
 $leaderboard-min-height-desktop: 250px !default;
 
 $theme-site-footer-corporate-logo-height: 40px !default;
+
+// override defaults for leaders styles
+$leaders-section-contextual-title-font-size: 16px;
+$leaders-section-contextual-title-color: $leaders-primary-color;
+$leaders-section-contextual-title-font-weight: normal;
+$leaders-section-contextual-title-transform: none;

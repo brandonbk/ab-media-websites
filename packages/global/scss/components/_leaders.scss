@@ -19,20 +19,6 @@
   &__header {
     border-radius: 4px 4px 0 0;
   }
-  &--contextual {
-    #{ $self }__body {
-      border-right: 2px solid $leaders-gray-5;
-      border-bottom: none;
-      border-left: 2px solid $leaders-gray-5;
-      border-radius: 0;
-    }
-    #{ $self }__footer {
-      border-right: 2px solid $leaders-gray-5;
-      border-bottom: 2px solid $leaders-gray-5;
-      border-left: 2px solid $leaders-gray-5;
-      border-radius: 0 0 4px 4px;
-    }
-  }
 }
 .leaders-section {
   $self: &;
