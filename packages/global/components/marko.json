@@ -6,11 +6,10 @@
     "./leaders/marko.json",
     "./search/marko.json"
   ],
-  "<global-ssr-gam-inject>": {
-    "template": "./ssr-gam-inject.marko",
+  "<global-ssr-html-inject>": {
+    "template": "./ssr-html-inject.marko",
     "<component-input>": {},
     "@inject <inject>[]": {},
-    "@position": "string",
     "@selector": "string",
     "@to-render": "expression"
   },

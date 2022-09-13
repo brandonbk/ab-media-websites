@@ -1,18 +1,12 @@
 import cheerio from "cheerio";
 import { getAsArray } from "@parameter1/base-cms-object-path";
-import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
-import DefineDisplayAd from "@parameter1/base-cms-marko-web-theme-monorail/components/gam/define-display-ad";
 
 $ const { toRender, componentInput } = input;
 $ const html = toRender.renderToString({ ...componentInput, $global: out.global });
 
 $ const inject = getAsArray(input, "inject").filter(o => o && o.at);
 $ const toInject = inject.reduce((o, i) => {
-  const { at } = i;
-  delete i.at;
-  i.position = defaultValue(input.position, "content_body");
-  const html = i.html ? i.html : DefineDisplayAd.renderToString({ ...i, $global: out.global });
-  return { ...o, [at]: html };
+  return { ...o, [i.at]: i.html };
 }, {});
 
 $ const targetLengths = Object.keys(toInject).map(n => parseInt(n, 10)).filter(n => n && n >= 1);
