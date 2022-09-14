@@ -19,6 +19,20 @@
   &__header {
     border-radius: 4px 4px 0 0;
   }
+  &--contextual {
+    #{ $self }__body {
+      border-right: 2px solid $leaders-gray-5;
+      border-bottom: none;
+      border-left: 2px solid $leaders-gray-5;
+      border-radius: 0;
+    }
+    #{ $self }__footer {
+      border-right: 2px solid $leaders-gray-5;
+      border-bottom: 2px solid $leaders-gray-5;
+      border-left: 2px solid $leaders-gray-5;
+      border-radius: 0 0 4px 4px;
+    }
+  }
 }
 .leaders-section {
   $self: &;
@@ -84,5 +98,49 @@
         }
       }
     }
+  }
+}
+
+.page--content-company {
+  .inquiry-form {
+    .inquiry-form-button.btn-primary {
+      padding-left: 20px;
+    }
+  }
+  .node-list:not(.inquiry-form) {
+    .node-list__header {
+      background-color: $gray-100;
+      color: $gray-800;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      border-radius: 4px;
+      font-size: 16px;
+      line-height: 1.25rem;
+      text-transform: uppercase;
+    }
+  }
+}
+.content-section-header {
+  color: $gray-800;
+  display: block;
+  text-align: left;
+  text-transform: uppercase;
+  &--border {
+    border-bottom: 1px solid $gray-800;
+    padding-bottom: 0.25rem;
+  }
+  &:not(:first-child) {
+    margin-top: 1.5rem;
+  }
+}
+
+.ldp {
+  display: flex;
+  align-items: center;
+  &__logo img {
+    border: 3px solid #fff;
+    border-radius: 100px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px 0px inset;
+    margin-right: 2rem;
   }
 }
