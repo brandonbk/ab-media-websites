@@ -3,8 +3,16 @@
     "./blocks/marko.json",
     "./directory-facets/marko.json",
     "./layouts/marko.json",
+    "./leaders/marko.json",
     "./search/marko.json"
   ],
+  "<global-ssr-html-inject>": {
+    "template": "./ssr-html-inject.marko",
+    "<component-input>": {},
+    "@inject <inject>[]": {},
+    "@selector": "string",
+    "@to-render": "expression"
+  },
   "<global-image-slider>": {
     "template": "./image-slider.marko"
   },

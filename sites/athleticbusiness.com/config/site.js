@@ -10,9 +10,12 @@ const omeda = require('./omeda');
 const identityX = require('./identity-x');
 const omedaIdentityX = require('./omeda-identity-x');
 
+const leaders = require('./leaders');
+
 module.exports = {
   navigation,
   gam,
+  leaders,
   nativeX,
   magazine,
   // temp fix till we update base-cms package

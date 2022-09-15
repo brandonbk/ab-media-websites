@@ -25,6 +25,9 @@ x-env-defaults: &env
   BASE_BROWSE_GRAPHQL_URI: ${BASE_BROWSE_GRAPHQL_URI-https://base-browse.virgon.base.parameter1.com/graphql}
   RECAPTCHA_V3_SITE_KEY: ${RECAPTCHA_V3_SITE_KEY-}
   RECAPTCHA_V3_SECRET_KEY: ${RECAPTCHA_V3_SECRET_KEY-}
+  LEADERS_ENABLED: ${LEADERS_ENABLED-false}
+  LEADERS_ALIAS: ${LEADERS_ALIAS-}
+  LEADERS_LOGO: ${LEADERS_LOGO-}
 
 x-env-virgon-dev: &env-virgon-dev
   GRAPHQL_URI: ${GRAPHQL_URI-http://host.docker.internal:10103}

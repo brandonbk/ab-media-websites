@@ -9,6 +9,14 @@ $theme-site-header-breakpoints: (
 // Colors
 $primary: #103a57;
 
+$leaders-primary-color: #103a57;
+$leaders-primary-color-light: #103a57bf;
+$leaders-accent-color: #d70025;
+$leaders-section-contextual-title-font-size: 16px;
+$leaders-section-contextual-title-color: $leaders-primary-color;
+$leaders-section-contextual-title-font-weight: normal;
+$leaders-section-contextual-title-transform: none;
+
 @import "../../node_modules/@ab-media/package-global/scss/core";
 
 .project-gallery-architects,

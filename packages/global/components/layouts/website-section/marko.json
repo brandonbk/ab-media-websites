@@ -8,6 +8,17 @@
     "@name": "string",
     "@page-node": "object"
   },
+  "<global-website-section-leaders-layout>": {
+    "template": "./leaders.marko",
+    "<page-description>": {},
+    "<page-body>": {},
+    "<head>": {},
+    "@sections <section>[]": {},
+    "@id": "number",
+    "@alias": "string",
+    "@name": "string",
+    "@page-node": "object"
+  },
   "<global-website-section-feed-layout>": {
     "template": "./feed.marko",
     "@sections <section>[]": {},

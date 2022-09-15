@@ -1,12 +1,14 @@
-import { getAsArray } from "@parameter1/base-cms-object-path";
+import { getAsArray, getAsObject, get } from "@parameter1/base-cms-object-path";
+import eventLinkAttrs from "@parameter1/base-cms-marko-web-p1-events/utils/link-attrs";
+import eventEntity from "@parameter1/base-cms-marko-web-p1-events/utils/base-content-entity";
+import queryFragment from "@parameter1/base-cms-marko-web-theme-monorail/graphql/fragments/content-list";
 import { buildImgixUrl } from "@parameter1/base-cms-image";
 import imageHeight from "@parameter1/base-cms-marko-web/components/node/utils/image-height";
-import queryFragment from "@parameter1/base-cms-marko-web-theme-monorail/graphql/fragments/section-feed-block";
 
 $ const { id, type, pageNode, ...rest } = input;
 $ const sections = getAsArray(input, "sections");
-
-$ const { $projectsGraphQL } = out.global;
+$ const { site, i18n, $projectsGraphQL } = out.global;
+$ const lang = site.config.lang || "en";
 
 <global-content-wrapper-layout
   id=id
@@ -24,105 +26,261 @@ $ const { $projectsGraphQL } = out.global;
   </@section>
 
   <@section|{ aliases, blockName, content }| modifiers=["content-header"]>
+    <theme-gam-wallpaper-ad aliases=aliases position="content_page" />
+    $ const { primarySection } = content;
+    <if(content.isLeader && site.get('leaders.enabled'))>
+      <div>
+        <div class="content-page-header  content-page-header--full-width">
+          <theme-content-page-breadcrumbs section=primarySection />
+          <div class="row">
+            <div class="col-md-9 col-sm-12 col-lg-10">
+              <div class="ldp">
+                <div class="ldp__logo">
+                  <global-company-logo content=content />
+                </div>
+                <div class="ldp__title">
+                  <marko-web-content-name tag="h1" class="page-wrapper__title" obj=content />
+                  <marko-web-content-city-state-zip tag="p" class="text-small text-muted" obj=content />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-lg-2 col-sm-12 justify-content-center d-flex flex-column px-3 py-3">
+              <div class="ldp__social">
+                <marko-web-leaders-company-website-link company=content lang=lang/>
+                <div class="mt-2 d-flex justify-content-around">
+                  <for|item| of=content.socialLinks>
+                    <marko-web-leaders-company-social-link company=content item=item />
+                  </for>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </if>
     <div class="row">
       <div class="col-lg-8">
-        <div class="content-page-header">
-          <marko-web-content-name tag="h1" block-name=blockName obj=content />
-          $ const { primaryImage } = content;
-          $ const detailsBlock = "details";
-          <marko-web-block name=detailsBlock>
-            <if(primaryImage && primaryImage.src)>
-              $ const imgWidth = 200;
-              $ const imgHeight = imageHeight(imgWidth, "16:9");
-              $ const src = buildImgixUrl(primaryImage.src, {
-                w: imgWidth,
-                h: imgHeight,
-                fit: "fill"
-              });
-              $ const srcset = [`${buildImgixUrl(src, { dpr: 2 })} 2x`];
-              <marko-web-img
-                src=src
-                srcset=srcset
-                alt=primaryImage.alt
-                class=`${detailsBlock}__image`
-              />
-            </if>
-            <global-content-company-details obj=content />
-          </marko-web-block>
-        </div>
+        <if(!content.isLeader || !site.get('leaders.enabled'))>
+          <div class="content-page-header">
+            <marko-web-content-name tag="h1" block-name=blockName obj=content />
+            $ const { primaryImage } = content;
+            $ const detailsBlock = "details";
+            <marko-web-block name=detailsBlock>
+              <if(primaryImage && primaryImage.src)>
+                $ const imgWidth = 200;
+                $ const imgHeight = imageHeight(imgWidth, "16:9");
+                $ const src = buildImgixUrl(primaryImage.src, {
+                  w: imgWidth,
+                  h: imgHeight,
+                  fit: "fill"
+                });
+                $ const srcset = [`${buildImgixUrl(src, { dpr: 2 })} 2x`];
+                <marko-web-img
+                  src=src
+                  srcset=srcset
+                  alt=primaryImage.alt
+                  class=`${detailsBlock}__image`
+                />
+              </if>
+              <global-content-company-details obj=content />
+            </marko-web-block>
+          </div>
+          <div class="content-page-body">
+            <default-theme-page-contents|{ blockName }| attrs={ "data-gallery-id": id }>
+              $ const bodyId = `content-body-${content.id}`;
+              <marko-web-content-body block-name=blockName obj=content attrs={ id: bodyId } />
+            </default-theme-page-contents>
+          </div>
 
-        <div class="content-page-body">
-          <default-theme-page-contents|{ blockName }| attrs={ "data-gallery-id": id }>
-            $ const bodyId = `content-body-${content.id}`;
-            <marko-web-content-body block-name=blockName obj=content attrs={ id: bodyId } />
-          </default-theme-page-contents>
-        </div>
 
-        <marko-web-query|{ nodes }|
-          name="all-company-content"
-          params={
-            companyId: content.id,
-            includeContentTypes: ["MediaGallery"],
-            includeLabels: "Buyers Guide Project Gallery",
-            limit: 10,
-            queryFragment,
-          }
-        >
-          <theme-content-directory-section-flow nodes=nodes>
-            <@header>Project Galleries</@header>
+          <marko-web-query|{ nodes }|
+            name="all-company-content"
+            params={
+              companyId: content.id,
+              includeContentTypes: ["MediaGallery"],
+              includeLabels: "Buyers Guide Project Gallery",
+              limit: 10,
+              queryFragment,
+            }
+          >
+            <theme-content-directory-section-flow nodes=nodes>
+              <@header>Project Galleries</@header>
+              <@node with-dates=false />
+            </theme-content-directory-section-flow>
+          </marko-web-query>
+
+          <global-directory-featured-projects-block
+            graphql-client=$projectsGraphQL
+            short-ids=content.projectShortIds
+          />
+
+          <marko-web-query|{ nodes }|
+            name="all-company-content"
+            params={
+              companyId: content.id,
+              includeContentTypes: ["Product", "PressRelease"],
+              limit: 10,
+              queryFragment,
+            }
+          >
+            <theme-content-directory-section-flow nodes=nodes>
+              <@header>Products & Press Releases</@header>
+            </theme-content-directory-section-flow>
+          </marko-web-query>
+
+          <marko-web-query|{ nodes }|
+            name="all-company-content"
+            params={
+              companyId: content.id,
+              includeContentTypes: ["Video"],
+              limit: 10,
+              queryFragment,
+            }
+          >
+            <theme-content-directory-section-flow nodes=nodes>
+              <@header>Videos</@header>
+            </theme-content-directory-section-flow>
+          </marko-web-query>
+
+          <marko-web-query|{ nodes }|
+            name="all-company-content"
+            params={
+              companyId: content.id,
+              excludeContentTypes: ["Product", "PressRelease", "Video", "Document", "Promotion", "MediaGallery"],
+              limit: 10,
+              queryFragment,
+            }
+          >
+            <theme-content-directory-section-flow nodes=nodes>
+              <@header>More from ${content.name}</@header>
+            </theme-content-directory-section-flow>
+          </marko-web-query>
+
+          <global-directory-sections-block schedules=content.websiteSchedules />
+
+        </if>
+        <else>
+          <div class="content-page-body">
+            <marko-web-node-list collapsible=false class="mt-block">
+              <@header>
+                ${i18n("Company Overview")}
+              </@header>
+              <@body>
+                <label class="content-section-header content-section-header--border">${i18n("About")} ${content.name}</label>
+                <marko-web-content-teaser tag="p" obj=content />
+                <label class="content-section-header content-section-header--border">${i18n("Product Summary")}</label>
+                <marko-web-obj-text tag="p" obj=content field="productSummary" type="content" html=true />
+              </@body>
+            </marko-web-node-list>
+
+            <marko-web-node-list collapsible=false class="mt-block">
+              <@header>
+                <if(content.isLeader)>${site.get("leaders.title")}</if>
+                <else>${i18n("Company Details")}</else>
+              </@header>
+              <@body>
+                <label class="content-section-header content-section-header--border">${i18n("At-a-glance")}</label>
+                <global-leaders-details company=content lang=lang/>
+
+                <label class="content-section-header content-section-header--border">${i18n("Contact")}</label>
+                $ const { socialLinks, ...contentSansSocial } = content;
+                <default-theme-content-contact-details
+                  obj=contentSansSocial
+                  website-link-attrs=eventLinkAttrs({
+                    category: "Company Profile Page",
+                    label: "Company Website",
+                    entity: eventEntity(content.id, "company"),
+                  })
+                  lang=lang
+                />
+
+                <label class="content-section-header content-section-header--border">${i18n("More info on")} ${content.name}</label>
+                <global-content-body-with-tracking block-name="leaders-more-info" content=content />
+              </@body>
+            </marko-web-node-list>
+
+            <marko-web-query|{ nodes }|
+              name="all-company-content"
+              params={
+                companyId: id,
+                includeContentTypes: ["Promotion"],
+                queryFragment,
+                limit: 4,
+                withSite: false,
+              }
+            >
+              <marko-web-node-list class="mt-block">
+                <@header>
+                  ${i18n("Featured Products")}
+                </@header>
+                <@nodes|{ nodes: items }| nodes=nodes>
+                  <default-theme-card-deck-flow cols=4 nodes=items modifiers=["featured-products"]>
+                    <@slot|{ node, index }|>
+                      <theme-featured-products-card-node
+                        company-id=id
+                        image-width=340
+                        node=node
+                      />
+                    </@slot>
+                  </default-theme-card-deck-flow>
+                </@nodes>
+              </marko-web-node-list>
+            </marko-web-query>
+          </div>
+          $ const videos = getAsArray(content, "videos.edges").map(({ node }) => node);
+          <marko-web-node-list class="mt-block">
+            <@header>
+              ${i18n("Featured Videos")}
+            </@header>
+            <@nodes|{ nodes }| nodes=videos>
+              <default-theme-card-deck-flow cols=3 nodes=nodes modifiers=["featured-videos"]>
+                <@slot|{ node, index }|>
+                  <div class="node-list__node">
+                    <theme-youtube-card-node
+                      node=node
+                      company-id=content.id
+                      image-position="top"
+                      link-attrs={
+                        "data-company-id": content.id,
+                        "data-company-name": content.name,
+                      }
+                    />
+                  </div>
+                </@slot>
+              </default-theme-card-deck-flow>
+            </@nodes>
+            <@footer>
+              $ const url = get(content, "youtube.url");
+              <a href=url target="_blank" rel="noopener" class="btn btn-sm btn-block btn-secondary">
+                ${i18n("View all videos")} &gt;
+              </a>
+            </@footer>
+          </marko-web-node-list>
+
+          <theme-latest-content-list-block
+            query-name="all-company-content"
+            query-params={ companyId: id, includeContentTypes: ["Article"], limit: 3, withSite: false }
+            title=`${i18n("Case Studies")}`
+            with-native-x-section=false
+            flush-x=false
+            class="mt-block"
+          >
             <@node with-dates=false />
-          </theme-content-directory-section-flow>
-        </marko-web-query>
+          </theme-latest-content-list-block>
 
-        <global-directory-featured-projects-block
-          graphql-client=$projectsGraphQL
-          short-ids=content.projectShortIds
-        />
+          <theme-latest-content-list-block
+            query-name="all-company-content"
+            query-params={ companyId: id, includeContentTypes: ["News", "PressRelease"], withSite: false, limit: 5 }
+            title=`${i18n("Company News")}`
+            with-native-x-section=false
+            flush-x=false
+            class="mt-block"
+          >
+            <@node with-dates=false />
+          </theme-latest-content-list-block>
 
-        <marko-web-query|{ nodes }|
-          name="all-company-content"
-          params={
-            companyId: content.id,
-            includeContentTypes: ["Product", "PressRelease"],
-            limit: 10,
-            queryFragment,
-          }
-        >
-          <theme-content-directory-section-flow nodes=nodes>
-            <@header>Products & Press Releases</@header>
-          </theme-content-directory-section-flow>
-        </marko-web-query>
-
-        <marko-web-query|{ nodes }|
-          name="all-company-content"
-          params={
-            companyId: content.id,
-            includeContentTypes: ["Video"],
-            limit: 10,
-            queryFragment,
-          }
-        >
-          <theme-content-directory-section-flow nodes=nodes>
-            <@header>Videos</@header>
-          </theme-content-directory-section-flow>
-        </marko-web-query>
-
-        <marko-web-query|{ nodes }|
-          name="all-company-content"
-          params={
-            companyId: content.id,
-            excludeContentTypes: ["Product", "PressRelease", "Video", "Document", "Promotion", "MediaGallery"],
-            limit: 10,
-            queryFragment,
-          }
-        >
-          <theme-content-directory-section-flow nodes=nodes>
-            <@header>More from ${content.name}</@header>
-          </theme-content-directory-section-flow>
-        </marko-web-query>
-
-        <global-directory-sections-block schedules=content.websiteSchedules />
-
+        </else>
         <${input.afterBody}
           aliases=aliases
           block-name=blockName
@@ -131,62 +289,55 @@ $ const { $projectsGraphQL } = out.global;
       </div>
 
       <div class="col-lg-4 pt-block">
-        $ const { site } = out.global;
         $ const inquiry = site.getAsObject('inquiry');
-        <if(inquiry.enabled && content.enableRmi)>
-          <marko-web-node-list collapsible=false>
-            <@header>Request More Information</@header>
-            <@body>
-              <marko-web-inquiry-form content=content with-header=false modifiers=["node-list"] />
-            </@body>
+        <if(content.isLeader && site.get('leaders.enabled'))>
+          <theme-company-inquiry-form-block content=content initially-expanded=false consent-checkboxes=getAsArray(site, 'config.inquiry.consentCheckboxes') />
+          $ const contacts = getAsArray(content, "contacts.edges").map(({ node }) => node);
+          <marko-web-node-list class="mt-block">
+            <@header>
+              <if(contacts.length > 1)>
+                ${i18n("Key Contacts")}
+              </if>
+              <else>
+                ${i18n("Key Contact")}
+              </else>
+            </@header>
+            <@nodes|{ nodes }| nodes=contacts>
+              <for|node| of=nodes>
+                <theme-author-card-node node=node with-email=true />
+              </for>
+            </@nodes>
           </marko-web-node-list>
         </if>
-
-        <marko-web-query|{ nodes }|
-          name="all-company-content"
-          params={
-            companyId: content.id,
-            includeContentTypes: ["Document", "Promotion"],
-            limit: 10,
-            includeLabels: "Buyers Guide Catalog",
-            queryFragment,
-          }
-        >
-          <theme-content-directory-section-flow nodes=nodes>
-            <@header>Catalogs</@header>
-            <@node with-dates=false>
-              <@image width=100 ar="3:4" />
-            </@node>
-          </theme-content-directory-section-flow>
-        </marko-web-query>
-
-        <if(input.rightRail)>
-          <${input.rightRail}
-            aliases=aliases
-            block-name=blockName
-            content=content
-          />
-        </if>
         <else>
-          <!-- <theme-gam-define-display-ad
-            name="rotation-1"
-            position="content_page"
-            aliases=aliases
-            modifiers=["max-width-300", "center", "margin-auto-x", "rail"]
-            class="mb-block"
-          /> -->
+          <if(inquiry.enabled && content.enableRmi)>
+            <marko-web-node-list collapsible=false>
+              <@header>Request More Information</@header>
+              <@body>
+                <marko-web-inquiry-form content=content with-header=false modifiers=["node-list"] />
+              </@body>
+            </marko-web-node-list>
+          </if>
+          <marko-web-query|{ nodes }|
+            name="all-company-content"
+            params={
+              companyId: content.id,
+              includeContentTypes: ["Document", "Promotion"],
+              limit: 10,
+              includeLabels: "Buyers Guide Catalog",
+              queryFragment,
+            }
+          >
+            <theme-content-directory-section-flow nodes=nodes>
+              <@header>Catalogs</@header>
+              <@node with-dates=false>
+                <@image width=100 ar="3:4" />
+              </@node>
+            </theme-content-directory-section-flow>
+          </marko-web-query>
         </else>
       </div>
     </div>
-  </@section>
-
-  <@section|{ aliases }|>
-    <theme-gam-define-display-ad
-      name="rotation"
-      position="content_page"
-      aliases=aliases
-      modifiers=["inter-block"]
-    />
   </@section>
 
   <for|s| of=sections>

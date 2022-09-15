@@ -1,0 +1,58 @@
+import { getAsArray } from "@parameter1/base-cms-object-path";
+import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
+import MarkoWebContentBody from "@parameter1/base-cms-marko-web/components/element/content/body";
+import DefineDisplayAd from "@parameter1/base-cms-marko-web-theme-monorail/components/gam/define-display-ad";
+import GlobalLeadersContextual from "../../../leaders/contextual";
+
+$ const { content } = input;
+$ const blockName = defaultValue('input.blockName', 'page-contents');
+$ const aliases = getAsArray(input, 'aliases');
+$ const isSponsored = getAsArray(content, "labels").includes("Sponsored");
+$ const bodyId = `content-body-${content.id}`;
+
+$ const desktopCounts = [1000, 2750, 4500, 6250, 8000, 9750, 11500, 13250, 15000, 16750, 18500];
+$ const desktopHtml = DefineDisplayAd.renderToString({
+  name: 'inline-content-desktop',
+  aliases,
+  modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
+  position: 'content_body',
+  $global: out.global,
+});
+
+$ const mobileLeaderboardHtml = DefineDisplayAd.renderToString({
+  name: "inline-leaderboard-mobile",
+  aliases,
+  modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
+  position: 'content_body',
+  $global: out.global,
+});
+
+$ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12050, 13350, 14650, 15950, 17250];
+$ const mobileHtml = DefineDisplayAd.renderToString({
+  name: 'inline-content-mobile',
+  aliases,
+  modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
+  position: 'content_body',
+  $global: out.global,
+});
+
+<global-ssr-html-inject
+  to-render=MarkoWebContentBody
+  selector=`#${bodyId}`
+>
+  <@component-input block-name=blockName obj=content attrs={ id: bodyId } />
+  <@inject
+    at=1500
+    html=GlobalLeadersContextual.renderToString({ contentId: content.id, $global: out.global })
+  />
+
+  <for|char| of=desktopCounts>
+    <@inject at=char html=desktopHtml />
+  </for>
+
+  <@inject at=250 html=mobileLeaderboardHtml />
+
+  <for|char| of=mobileCounts>
+    <@inject at=char html=mobileHtml />
+  </for>
+</global-ssr-html-inject>

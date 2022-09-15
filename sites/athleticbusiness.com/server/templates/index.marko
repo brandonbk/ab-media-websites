@@ -42,6 +42,12 @@ $ const { site } = out.global;
     <site-architectural-showcase-block />
   </@section>
 
+  <if(site.get("leaders.enabled"))>
+    <@section>
+      <global-leaders-home-page />
+    </@section>
+  </if>
+
   <@section>
     <site-promo-card-rotation-block />
   </@section>
