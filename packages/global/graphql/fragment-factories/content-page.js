@@ -16,6 +16,7 @@ fragment LeadersContentPageFragment on Content {
   company {
     id
     name
+    enableRmi
     siteContext {
       path
       canonicalUrl
@@ -188,5 +189,9 @@ fragment LeadersContentPageFragment on Content {
       }
     }
   }
+  # finds linked projects (architectural showcase, etc) of this content item
+  projectShortIds: customAttribute(input: {
+    path: "projectShortIds"
+  })
 }
 `;

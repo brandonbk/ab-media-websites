@@ -12,6 +12,9 @@ fragment LeadersWebsiteContentCompanyFragment on Content {
   siteContext {
     path
   }
+  ... on Inquirable {
+    enableRmi
+  }
   ... on ContentCompany {
 
     address1
@@ -82,6 +85,14 @@ fragment LeadersWebsiteContentCompanyFragment on Content {
         }
       }
     }
+    websiteSchedules {
+      section {
+        id
+        alias
+        name
+        fullName
+      }
+    }
   }
   ... on SocialLinkable {
     socialLinks {
@@ -90,6 +101,10 @@ fragment LeadersWebsiteContentCompanyFragment on Content {
       label
     }
   }
+  # finds linked projects (architectural showcase, etc) of this content item
+  projectShortIds: customAttribute(input: {
+    path: "projectShortIds"
+  })
 }
 
 `;
