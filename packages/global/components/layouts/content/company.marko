@@ -311,7 +311,12 @@ $ const lang = site.config.lang || "en";
         </if>
         <else>
           <if(inquiry.enabled && content.enableRmi)>
-            <theme-company-inquiry-form-block content=content initially-expanded=false consent-checkboxes=getAsArray(site, 'config.inquiry.consentCheckboxes') />
+            <marko-web-node-list collapsible=false>
+              <@header>Request More Information</@header>
+              <@body>
+                <marko-web-inquiry-form content=content with-header=false modifiers=["node-list"] />
+              </@body>
+            </marko-web-node-list>
           </if>
           <marko-web-query|{ nodes }|
             name="all-company-content"
