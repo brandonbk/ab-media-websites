@@ -1,8 +1,6 @@
 $ const { site } = out.global;
 $ const { contentId } = input;
 
-$ console.log('skipWhenExists: ',input.skipWhenExists)
-
 <if(contentId && site.get("leaders.enabled"))>
   <marko-web-leaders skip-when-exists=input.skipWhenExists props={
     contentId,
