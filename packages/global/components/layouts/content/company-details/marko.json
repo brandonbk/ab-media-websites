@@ -1,0 +1,26 @@
+{
+  "<global-company-logo>": {
+    "template": "./company-logo.marko",
+    "@content": "object"
+  },
+  "<global-leaders-details>": {
+    "template": "./leaders-details.marko",
+    "@company": "object",
+    "@lang": "string"
+  },
+  "<global-content-company-details>": {
+    "template": "./index.marko",
+    "@obj": "object",
+    "@show-email": {
+      "type": "boolean",
+      "default-value": true
+    },
+    "@tag": {
+      "type": "string",
+      "default-value": "div"
+    },
+    "@class": "string",
+    "@modifiers": "array",
+    "@attrs": "object"
+  }
+}

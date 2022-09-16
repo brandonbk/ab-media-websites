@@ -1,4 +1,8 @@
 {
+  "taglib-imports": [
+    "./contact-details/marko.json",
+    "./company-details/marko.json"
+  ],
   "<global-content-default-layout>": {
     "template": "./default.marko",
     "<after-body>": {},

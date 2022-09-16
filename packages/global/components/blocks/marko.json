@@ -2,6 +2,17 @@
   "taglib-imports": [
     "./promos/marko.json"
   ],
+  "<global-content-body-with-tracking>": {
+    "template": "./content-body-with-tracking.marko",
+    "@content": {
+      "type": "object",
+      "required": true
+    },
+    "@block-name": {
+      "type": "string",
+      "required": true
+    }
+  },
   "<global-leaderboard-ad-block>": {
     "template": "./leaderboard-ad.marko"
   },
