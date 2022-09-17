@@ -6,7 +6,7 @@ import GlobalLeadersContextual from "../../../leaders/contextual";
 
 $ const { global: $global } = out;
 $ const { content } = input;
-$ const blockName = defaultValue('input.blockName', 'page-contents');
+$ const blockName = defaultValue(input.blockName, 'page-contents');
 $ const aliases = getAsArray(input, 'aliases');
 $ const bodyId = `content-body-${content.id}`;
 
