@@ -1,6 +1,6 @@
 {
   "name": "@ab-media/aquamagazine.com",
-  "version": "1.43.3",
+  "version": "1.43.4",
   "author": "Brandon Krigbaum <brandon@parameter1.com>",
   "repository": "https://github.com/parameter1/ab-media-websites/tree/master/sites/aquamagazine.com",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "test": "yarn lint && yarn compile && yarn build"
   },
   "dependencies": {
-    "@ab-media/package-global": "^1.43.3",
+    "@ab-media/package-global": "^1.43.4",
     "@parameter1/base-cms-marko-core": "^3.3.1",
     "@parameter1/base-cms-marko-web": "^3.4.0",
     "@parameter1/base-cms-marko-web-gtm": "^3.0.0",
