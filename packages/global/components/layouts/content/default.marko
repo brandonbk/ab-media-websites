@@ -222,7 +222,8 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
 
       <@section|{ content, aliases, blockName }|>
         <if(BAM && BAM.enable)>
-          <marko-web-broadstreet-zone zone-id=BAM.zones.rotation />
+          <marko-web-broadstreet-zone zone-id=BAM.zones.rotation modifiers=["rotation", "rotation-desktop", "content_page", "inter-block"] />
+          <marko-web-broadstreet-zone alt-zone-id=BAM.zones.rotation modifiers=["rotation", "rotation-mobile", "content_page", "inter-block"] />
         </if>
         <else>
           <theme-gam-define-display-ad
