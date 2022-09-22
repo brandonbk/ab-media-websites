@@ -29,7 +29,6 @@ $ const createContainerScript = `
   window.broadstreet = window.broadstreet || { run: [] };
   window.broadstreet.run.push(function() { broadstreet.watch(${ JSON.stringify(config) }); });
 `
-$ console.log(createContainerScript);
 <if(on)>
   <marko-web-deferred-script-loader-register
     name="broadstreettag"
