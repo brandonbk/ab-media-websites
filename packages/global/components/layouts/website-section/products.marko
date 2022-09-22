@@ -3,7 +3,7 @@ import { getAsArray } from "@parameter1/base-cms-object-path";
 $ const { id, alias, name, pageNode } = input;
 $ const sections = getAsArray(input, "sections");
 
-$ const { pagination: p } = out.global;
+$ const { pagination: p, BAM } = out.global;
 $ const perPage = 10;
 
 <global-website-section-default-layout
@@ -56,43 +56,13 @@ $ const perPage = 10;
         </theme-latest-products-feed-block>
       </div>
       <div class="col-lg-4 pt-block">
-        <theme-gam-define-display-ad
-          name="rotation-1"
-          position="section_page"
-          aliases=aliases
-          modifiers=["max-width-300", "center", "margin-auto-x", "rail"]
-        />
-
         <${input.railSlotA}
           block-name=blockName
           section=section
           aliases=aliases
         />
-
-        <theme-gam-define-display-ad
-          name="rotation-2"
-          position="section_page"
-          aliases=aliases
-          modifiers=["max-width-300", "center", "margin-auto-x", "rail"]
-        />
-
-        <theme-gam-define-display-ad
-          name="rotation-3"
-          position="section_page"
-          aliases=aliases
-          modifiers=["max-width-300", "center", "margin-auto-x", "rail"]
-        />
       </div>
     </div>
-  </@section>
-
-  <@section|{ aliases }|>
-    <theme-gam-define-display-ad
-      name="leaderboard-2"
-      position="section_page"
-      aliases=aliases
-      modifiers=["inter-block"]
-    />
   </@section>
 
   <@section modifiers=["my-block-lg"]>
@@ -109,12 +79,4 @@ $ const perPage = 10;
     </@section>
   </for>
 
-  <@section|{ aliases }|>
-    <theme-gam-define-display-ad
-      name="leaderboard-2"
-      position="section_page"
-      aliases=aliases
-      modifiers=["inter-block"]
-    />
-  </@section>
 </global-website-section-default-layout>
