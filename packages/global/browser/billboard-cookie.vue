@@ -6,6 +6,10 @@ import cookies from 'js-cookie';
 
 export default {
   props: {
+    adManagerType: {
+      type: String,
+      default: 'gam',
+    },
     adUnitPath: {
       type: String,
       required: true,
@@ -24,15 +28,20 @@ export default {
     },
   },
   created() {
-    const { googletag } = window;
-    if (!googletag) return;
-    googletag.cmd.push(() => {
-      googletag.pubads().addEventListener('slotOnload', (event) => {
-        if (event.slot.getAdUnitPath() === this.adUnitPath) {
-          cookies.set(this.cookieName, this.cookieValue, { expires: this.expires });
-        }
+    const { adManagerType } = this;
+    if (adManagerType === 'gam') {
+      const { googletag } = window;
+      if (!googletag) return;
+      googletag.cmd.push(() => {
+        googletag.pubads().addEventListener('slotOnload', (event) => {
+          if (event.slot.getAdUnitPath() === this.adUnitPath) {
+            cookies.set(this.cookieName, this.cookieValue, { expires: this.expires });
+          }
+        });
       });
-    });
+    } else if (adManagerType === 'bam') {
+      cookies.set(this.cookieName, this.cookieValue, { expires: this.expires });
+    }
   },
 };
 </script>
