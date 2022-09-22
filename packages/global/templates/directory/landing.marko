@@ -3,7 +3,7 @@ import { getAsArray } from "@parameter1/base-cms-object-path";
 import queryFragment from "../../graphql/fragments/directory-section-micro-feed-block";
 
 $ const { id, alias, name, pageNode } = input;
-$ const { $markoWebSearch: search } = out.global;
+$ const { $markoWebSearch: search, BAM } = out.global;
 $ const sortField = (search.input.searchQuery) ? undefined : "NAME";
 $ const sortOrder = (search.input.searchQuery) ? undefined : "ASC";
 $ const currentPage = search.getCurrentPage();
@@ -137,10 +137,15 @@ $ const rootAliases = ["directory"];
     </div>
   </@section>
   <@section>
-    <theme-gam-define-display-ad
-      name="rotation"
-      position="static_page"
-      modifiers=["inter-block"]
-    />
+    <if(BAM && BAM.enable)>
+      <marko-web-broadstreet-zone zone-id=BAM.zones.rotation modifiers=["inter-block", "rotation", "static_page"] />
+    </if>
+    <else>
+      <theme-gam-define-display-ad
+        name="rotation"
+        position="static_page"
+        modifiers=["inter-block"]
+      />
+    </else>
   </@section>
 </global-website-section-default-layout>
