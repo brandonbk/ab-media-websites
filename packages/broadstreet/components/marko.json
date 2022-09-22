@@ -9,8 +9,8 @@
   },
   "<marko-web-broadstreet-zone>": {
     "template": "./zone.marko",
-    "@zone-id": "string",
-    "@with-alt-zone": "boolean",
+    "@zone-id": "number",
+    "@alt-zone-id": "number",
     "@modifiers": "array"
   }
 }
