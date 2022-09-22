@@ -21,7 +21,10 @@ $ const expires = 1/24; // Days
 </else-if>
 
 <if(adManagerType === 'bam')>
-  <marko-web-broadstreet-zone zone-id=BAM.zones[name] modifiers=["break-container", name] />
+  <marko-web-broadstreet-zone
+    zone-id=BAM.zones[name]
+    modifiers=[...input.modifiers,  "break-container", name]
+  />
 </if>
 <else>
   <theme-gam-define-display-ad
