@@ -2,9 +2,11 @@ import { getAsArray } from "@parameter1/base-cms-object-path";
 import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
 import MarkoWebContentBody from "@parameter1/base-cms-marko-web/components/element/content/body";
 import DefineDisplayAd from "@parameter1/base-cms-marko-web-theme-monorail/components/gam/define-display-ad";
+import BAMZone from "@ab-media/base-cms-marko-web-broadstreet/components/zone";
 import GlobalLeadersContextual from "../../../leaders/contextual";
 
 $ const { global: $global } = out;
+$ const { BAM } = $global;
 $ const { content } = input;
 $ const blockName = defaultValue(input.blockName, 'page-contents');
 $ const aliases = getAsArray(input, 'aliases');
@@ -24,39 +26,78 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
   />
 
   <for|char| of=desktopCounts>
-    <@inject
-      at=char
-      html=DefineDisplayAd.renderToString({
-        name: 'inline-content-desktop',
-        aliases,
-        modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
-        position: 'content_body',
-        $global
-      })
-    />
+    <if(BAM && BAM.enable)>
+      <@inject
+        at=char
+        html=BAMZone.renderToString({
+          zoneId: BAM.zones.rotation,
+          modifiers: ["margin-auto-x",  "inline-content", "inline-content-desktop"],
+          $global
+        })
+      />
+    </if>
+    <else>
+      <@inject
+        at=char
+        html=DefineDisplayAd.renderToString({
+          name: "inline-content-desktop",
+          aliases,
+          modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
+          position: 'content_body',
+          $global
+        })
+      />
+    </else>
   </for>
 
-  <@inject
-    at=250
-    html=DefineDisplayAd.renderToString({
-      name: "inline-leaderboard-mobile",
-      aliases,
-      modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
-      position: 'content_body',
-      $global
-    })
-  />
-
-  <for|char| of=mobileCounts>
+  <if(BAM && BAM.enable)>
     <@inject
-      at=char
+      at=250
+      pass="second"
+      html=BAMZone.renderToString({
+        altZoneId: BAM.zones.leaderboard,
+        modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile", "inline-leaderboard-mobile"],
+        $global
+      })
+    />
+  </if>
+  <else>
+    <@inject
+      at=250
+      pass="second"
       html=DefineDisplayAd.renderToString({
-        name: 'inline-content-mobile',
+        name: "inline-leaderboard-mobile",
         aliases,
         modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
         position: 'content_body',
         $global
       })
     />
+  </else>
+  <for|char| of=mobileCounts>
+    <if(BAM && BAM.enable)>
+      <@inject
+        at=char
+        pass="second"
+        html=BAMZone.renderToString({
+          altZoneId: BAM.zones.rotation,
+          modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile"],
+          $global
+        })
+      />
+    </if>
+    <else>
+      <@inject
+        at=char
+        pass="second"
+        html=DefineDisplayAd.renderToString({
+          name: "inline-leaderboard-mobile",
+          aliases,
+          modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
+          position: 'content_body',
+          $global
+        })
+      />
+    </else>
   </for>
 </global-ssr-html-inject>
