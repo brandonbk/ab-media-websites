@@ -3,7 +3,7 @@ import queryFragment from "@parameter1/base-cms-marko-web-theme-monorail/graphql
 
 $ const { id, type, pageNode } = data;
 
-$ const { pagination: p, req } = out.global;
+$ const { pagination: p, req, BAM } = out.global;
 $ const perPage = 10;
 
 <global-content-wrapper-layout
@@ -12,11 +12,10 @@ $ const perPage = 10;
   page-node=pageNode
 >
   <@section|{ aliases }| modifiers=["first-sm"]>
-    <theme-gam-define-display-ad
-      name="leaderboard"
+    <global-leaderboard-ad-block
       position="content_page"
       aliases=aliases
-      modifiers=["inter-block"]
+      modifiers=["inter-block", "combined-leaderboard", "content-leaderboard"]
     />
   </@section>
 
@@ -81,12 +80,17 @@ $ const perPage = 10;
   </@section>
 
   <@section|{ aliases }|>
-    <theme-gam-define-display-ad
-      name="rotation"
-      position="content_page"
-      aliases=aliases
-      modifiers=["inter-block"]
-    />
+    <if(BAM && BAM.enable)>
+      <marko-web-broadstreet-zone zone-id=BAM.zones.rotation modifiers=["roataion", "inter-block", "content_page"] />
+    </if>
+    <else>
+      <theme-gam-define-display-ad
+        name="rotation"
+        position="content_page"
+        aliases=aliases
+        modifiers=["inter-block"]
+      />
+    </else>
   </@section>
 
   <@section>
@@ -94,12 +98,18 @@ $ const perPage = 10;
   </@section>
 
   <@section|{ aliases }|>
-    <theme-gam-define-display-ad
-      name="rotation"
-      position="content_page"
-      aliases=aliases
-      modifiers=["inter-block"]
-    />
+    <if(BAM && BAM.enable)>
+      <marko-web-broadstreet-zone zone-id=BAM.zones.rotation modifiers=["inter-block", "rotation"] />
+      <marko-web-broadstreet-zone alt-zone-id=BAM.zones.rotation modifiers=["inter-block", "rotation"] />
+    </if>
+    <else>
+      <theme-gam-define-display-ad
+        name="rotation"
+        position="content_page"
+        aliases=aliases
+        modifiers=["inter-block"]
+      />
+    </else>
   </@section>
 
   <@section>
