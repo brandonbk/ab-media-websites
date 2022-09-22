@@ -1,0 +1,16 @@
+{
+  "<marko-web-broadstreet-init>": {
+    "template": "./init.marko",
+    "@src": "string",
+    "@on": "string",
+    "@target-tag": "string",
+    "@request-frame": "boolean",
+    "@config": "object"
+  },
+  "<marko-web-broadstreet-zone>": {
+    "template": "./zone.marko",
+    "@zone-id": "string",
+    "@with-alt-zone": "boolean",
+    "@modifiers": "array"
+  }
+}

@@ -1,0 +1,32 @@
+$altZoneWidth: 800px !default;
+.broadstreet-zone {
+  > div:only-child {
+    padding-top: 30px !important;
+  }
+}
+// remove background color on non-desktop ads
+.ad-container--inline-content,
+.ad-container--inter-block {
+  @media (max-width: 991px) {
+    background-color: transparent;
+  }
+}
+.ad-container--leaderboard {
+  min-height: 195px;
+}
+
+.ad-container--inline-content-desktop,
+.ad-container--inline-content-mobile {
+  min-height: 150px;
+}
+.ad-container--inline-content-mobile {
+  @media (min-width: $altZoneWidth) {
+    display: none;
+  }
+}
+.content-leaderboard,
+.ad-container--inline-content-desktop {
+  @media (max-width: $altZoneWidth) {
+    display: none;
+  }
+}
