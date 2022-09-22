@@ -2,7 +2,7 @@ import { get, getAsArray } from "@parameter1/base-cms-object-path";
 import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
 import getContentPreview from "@parameter1/base-cms-marko-web-theme-monorail/utils/get-content-preview";
 
-$ const { site, pagination: p } = out.global;
+$ const { site, pagination: p, BAM } = out.global;
 $ const { id, type, pageNode, ...rest } = input;
 $ const sections = getAsArray(input, "sections");
 
@@ -28,7 +28,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
     <global-leaderboard-ad-block
       position="content_page"
       aliases=aliases
-      modifiers=["inter-block", "combined-leaderboard"]
+      modifiers=["inter-block", "combined-leaderboard", "content-leaderboard"]
     />
   </@section>
 
@@ -167,12 +167,17 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
 
   <if(showBottomAdBlock)>
     <@section|{ aliases }|>
-      <theme-gam-define-display-ad
-        name="rotation"
-        position="content_page"
-        aliases=aliases
-        modifiers=["inter-block"]
-      />
+      <if(BAM && BAM.enable)>
+        <marko-web-broadstreet-zone zone-id=BAM.zones.rotation modifiers=["roataion", "inter-block", "content_page"] />
+      </if>
+      <else>
+        <theme-gam-define-display-ad
+          name="rotation"
+          position="content_page"
+          aliases=aliases
+          modifiers=["inter-block"]
+        />
+      </else>
     </@section>
   </if>
 
@@ -216,12 +221,17 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
       </@section>
 
       <@section|{ content, aliases, blockName }|>
-        <theme-gam-define-display-ad
-          name="rotation"
-          position="content_page"
-          aliases=aliases
-          modifiers=["inter-block"]
-        />
+        <if(BAM && BAM.enable)>
+          <marko-web-broadstreet-zone zone-id=BAM.zones.rotation />
+        </if>
+        <else>
+          <theme-gam-define-display-ad
+            name="rotation"
+            position="content_page"
+            aliases=aliases
+            modifiers=["inter-block"]
+          />
+        </else>
       </@section>
     </for>
   </if>

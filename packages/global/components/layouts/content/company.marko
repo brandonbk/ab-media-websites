@@ -7,7 +7,12 @@ import imageHeight from "@parameter1/base-cms-marko-web/components/node/utils/im
 
 $ const { id, type, pageNode, ...rest } = input;
 $ const sections = getAsArray(input, "sections");
-$ const { site, i18n, $projectsGraphQL } = out.global;
+$ const {
+  site,
+  BAM,
+  i18n,
+  $projectsGraphQL
+} = out.global;
 $ const lang = site.config.lang || "en";
 
 <global-content-wrapper-layout
@@ -17,16 +22,14 @@ $ const lang = site.config.lang || "en";
   ...rest
 >
   <@section|{ aliases }| modifiers=["first-sm"]>
-    <theme-gam-define-display-ad
-      name="leaderboard"
+    <global-leaderboard-ad-block
       position="content_page"
       aliases=aliases
-      modifiers=["inter-block"]
+      modifiers=["inter-block", "combined-leaderboard", "content-leaderboard"]
     />
   </@section>
 
   <@section|{ aliases, blockName, content }| modifiers=["content-header"]>
-    <theme-gam-wallpaper-ad aliases=aliases position="content_page" />
     $ const { primarySection } = content;
     <if(content.isLeader && site.get('leaders.enabled'))>
       <div>
