@@ -20,6 +20,10 @@ $ const alias = get(input, "primarySection.alias");
   </@head>
   <@page>
     <marko-web-resolve-page|{ data: content }| node=pageNode>
+      <if(BAM && BAM.enable)>
+        $ const aliases = hierarchyAliases(content.primarySection);
+        <marko-web-bam-targeting keywords=[ id, type, ...aliases] />
+      </if>
       $ const aliases = hierarchyAliases(content.primarySection);
       $ const authors = getAsArray(content, "authors.edges").map((edge) => edge.node);
       <marko-web-page-wrapper>
@@ -36,7 +40,7 @@ $ const alias = get(input, "primarySection.alias");
 
         <@section>
           <if(BAM && BAM.enable)>
-            <marko-web-broadstreet-zone zone-id=BAM.zones.rotation modifiers=["roataion", "inter-block", "content_page"] />
+            <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["roataion", "inter-block", "content_page"] />
           </if>
           <else>
             <theme-gam-define-display-ad

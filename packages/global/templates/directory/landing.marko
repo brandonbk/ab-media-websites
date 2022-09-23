@@ -138,7 +138,7 @@ $ const rootAliases = ["directory"];
   </@section>
   <@section>
     <if(BAM && BAM.enable)>
-      <marko-web-broadstreet-zone zone-id=BAM.zones.rotation modifiers=["inter-block", "rotation", "static_page"] />
+      <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["inter-block", "rotation", "static_page"] />
     </if>
     <else>
       <theme-gam-define-display-ad

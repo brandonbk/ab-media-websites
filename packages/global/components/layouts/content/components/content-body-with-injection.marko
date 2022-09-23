@@ -30,7 +30,7 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
       <@inject
         at=char
         html=BAMZone.renderToString({
-          zoneId: BAM.zones.rotation,
+          zoneAlias: "contentDesktopRotation",
           modifiers: ["margin-auto-x",  "inline-content", "inline-content-desktop"],
           $global
         })
@@ -55,7 +55,7 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
       at=250
       pass="second"
       html=BAMZone.renderToString({
-        altZoneId: BAM.zones.leaderboard,
+        zoneAlias: "leaderboard",
         modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile", "inline-leaderboard-mobile"],
         $global
       })
@@ -80,7 +80,7 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
         at=char
         pass="second"
         html=BAMZone.renderToString({
-          altZoneId: BAM.zones.rotation,
+          zoneAlias: "contentMobileRotation",
           modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile"],
           $global
         })

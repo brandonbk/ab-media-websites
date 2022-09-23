@@ -1,13 +1,21 @@
-import { BEM, warn } from "@parameter1/base-cms-utils";
-import { getAsArray } from "@parameter1/base-cms-object-path";
+import { randomElementId, BEM, warn } from "@parameter1/base-cms-utils";
+import { getAsArray, getAsObject } from "@parameter1/base-cms-object-path";
 
-$ const { zoneId, altZoneId } = input;
+$ const { BAM } = out.global;
+
+$ const { zoneAlias } = input;
 $ const blockName = input.blockName || "ad-container"
 $ const modifiers = getAsArray(input, 'modifiers');
 $ modifiers.push("broadstreet", "inter-block");
-$ const classNames = [blockName, ...BEM.applyModifiers(blockName, modifiers), input.class];
-<div class=classNames data-zone-id=zoneId data-alt-zone-id=altZoneId>
-  <marko-web-element block-name=blockName name="wrapper" >
-  <${"broadstreet-zone"} class="broadstreet-zone" zone-id=zoneId alt-zone-id=altZoneId />
-  </marko-web-element>
+
+$ const zone = getAsObject(BAM, `zones.${zoneAlias}`);
+$ const containerId = randomElementId({ prefix: 'div-broadstreet-ad' });
+
+<div
+  class=[blockName, ...BEM.applyModifiers(blockName, modifiers), input.class]
+>
+  <div id=containerId class=`${blockName} ${blockName}__wrapper` />
+  <script>
+    defineBroadstreetZone('${containerId}', ${JSON.stringify(zone.zoneIdSizeMapping)});
+  </script>
 </div>

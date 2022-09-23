@@ -35,7 +35,7 @@ $ const sections = getAsArray(input, "sections");
 
   <@section|{ aliases }|>
     <if(BAM && BAM.enable)>
-      <marko-web-broadstreet-zone zone-id=BAM.zones.rotation modifiers=["rotation", "home_page", "section_page", "inter-block"] />
+      <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "home_page", "section_page", "inter-block"] />
     </if>
     <else>
       <theme-gam-define-display-ad

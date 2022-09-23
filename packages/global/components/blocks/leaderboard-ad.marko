@@ -22,7 +22,7 @@ $ const expires = 1/24; // Days
 
 <if(adManagerType === 'bam')>
   <marko-web-broadstreet-zone
-    zone-id=BAM.zones[name]
+    zone-alias=name
     modifiers=[...input.modifiers,  "break-container", name]
   />
 </if>

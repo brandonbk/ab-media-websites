@@ -81,7 +81,7 @@ $ const perPage = 10;
 
   <@section|{ aliases }|>
     <if(BAM && BAM.enable)>
-      <marko-web-broadstreet-zone zone-id=BAM.zones.rotation modifiers=["roataion", "inter-block", "content_page"] />
+      <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["roataion", "inter-block", "content_page"] />
     </if>
     <else>
       <theme-gam-define-display-ad
@@ -99,8 +99,7 @@ $ const perPage = 10;
 
   <@section|{ aliases }|>
     <if(BAM && BAM.enable)>
-      <marko-web-broadstreet-zone zone-id=BAM.zones.rotation modifiers=["inter-block", "rotation"] />
-      <marko-web-broadstreet-zone alt-zone-id=BAM.zones.rotation modifiers=["inter-block", "rotation"] />
+      <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["inter-block", "rotation"] />
     </if>
     <else>
       <theme-gam-define-display-ad

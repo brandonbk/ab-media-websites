@@ -21,7 +21,7 @@ $ const { GAM, site, config } = out.global;
       <marko-web-page-wrapper>
         <@section|{ aliases }| modifiers=["first"]>
           <if(BAM && BAM.enable)>
-            <marko-web-broadstreet-zone zone-id=BAM.zones.rotation modifiers=["rotation", "section_page", "inter-block"] />
+            <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "section_page", "inter-block"] />
           </if>
           <else>
             <theme-gam-define-display-ad
