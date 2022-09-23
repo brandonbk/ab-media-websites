@@ -9,22 +9,22 @@ module.exports = ({
     billboard: {
       zoneIdSizeMapping: [
         ['(min-width: 980px)', 99650],
-        ['(min-width: 750px) and (max-width: 980px)', 99655],
-        ['(min-width: 300px) and (max-width: 750px)', 99655],
+        ['(min-width: 750px) and (max-width: 980px)', 99655], // aquaId
+        ['(min-width: 300px) and (max-width: 750px)', 99655], // aquaId
       ],
     },
     leaderboard: {
       zoneIdSizeMapping: [
         ['(min-width: 980px)', 99648],
-        ['(min-width: 750px) and (max-width: 980px)', 99656],
-        ['(min-width: 300px) and (max-width: 750px)', 99656],
+        ['(min-width: 750px) and (max-width: 980px)', 99656], // aquaId
+        ['(min-width: 300px) and (max-width: 750px)', 99656], // aquaId
       ],
     },
     rotation: {
       zoneIdSizeMapping: [
         ['(min-width: 980px)', 99649],
-        ['(min-width: 750px) and (max-width: 980px)', 99657],
-        ['(min-width: 300px) and (max-width: 750px)', 99657],
+        ['(min-width: 750px) and (max-width: 980px)', 99657], // aquaId
+        ['(min-width: 300px) and (max-width: 750px)', 99657], // aquaId
       ],
     },
     contentDesktopRotation: {
@@ -34,7 +34,7 @@ module.exports = ({
     },
     contentMobileRotation: {
       zoneIdSizeMapping: [
-        ['', 99657],
+        ['(max-width: 750px)', 99657], // aquaId
       ],
     },
   },

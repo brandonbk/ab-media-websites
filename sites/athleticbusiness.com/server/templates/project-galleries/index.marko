@@ -1,4 +1,4 @@
-$ const { req } = out.global;
+$ const { req, BAM } = out.global;
 $ const { galleries, primarySection } = input;
 
 $ const aliases = [primarySection.alias, primarySection.alias.split('/')[0]];
@@ -32,12 +32,17 @@ $ const aliases = [primarySection.alias, primarySection.alias.split('/')[0]];
       </@section>
 
       <@section>
-        <theme-gam-define-display-ad
-          name="rotation"
-          position="static_page"
-          modifiers=["inter-block"]
-          aliases=aliases
-        />
+        <if(BAM.enable === true)>
+          <marko-web-broadstreet-zone zone-alias="rotation" />
+        </if>
+        <else>
+          <theme-gam-define-display-ad
+            name="rotation"
+            position="static_page"
+            modifiers=["inter-block"]
+            aliases=aliases
+          />
+        </else>
       </@section>
     </marko-web-page-wrapper>
   </@page>

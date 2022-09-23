@@ -1,6 +1,7 @@
 import { getAsObject, getAsArray } from "@parameter1/base-cms-object-path";
 import slothLovesChunkArray from "@ab-media/package-global/utils/chunk-array";
 
+$ const { BAM } = out.global;
 $ const { gallery, entries } = input;
 
 $ const chunkedNodes = slothLovesChunkArray({
@@ -67,22 +68,32 @@ $ const aliases = [gallery.primarySection.alias, gallery.primarySection.alias.sp
         </@section>
         <if(!isLastChunk)>
           <@section|{ aliases }|>
-            <theme-gam-define-display-ad
-              name="rotation"
-              position="static_page"
-              modifiers=["inter-block"]
-            />
+            <if(BAM.enable === true)>
+              <marko-web-broadstreet-zone zone-alias="rotation" />
+            </if>
+            <else>
+              <theme-gam-define-display-ad
+                name="rotation"
+                position="static_page"
+                modifiers=["inter-block"]
+              />
+            </else>
           </@section>
         </if>
       </for>
 
       <@section>
-        <theme-gam-define-display-ad
-          name="rotation"
-          position="static_page"
-          modifiers=["inter-block"]
-          aliases=aliases
-        />
+        <if(BAM.enable === true)>
+          <marko-web-broadstreet-zone zone-alias="rotation" />
+        </if>
+        <else>
+          <theme-gam-define-display-ad
+            name="rotation"
+            position="static_page"
+            modifiers=["inter-block"]
+            aliases=aliases
+          />
+        </else>
       </@section>
     </marko-web-page-wrapper>
   </@page>

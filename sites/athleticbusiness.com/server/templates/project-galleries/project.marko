@@ -1,6 +1,6 @@
 import { get, getAsArray } from "@parameter1/base-cms-object-path";
 
-$ const { req } = out.global;
+$ const { req, BAM } = out.global;
 
 $ const {
   gallery,
@@ -84,12 +84,17 @@ $ const aliases = [gallery.primarySection.alias, gallery.primarySection.alias.sp
       </@section>
 
       <@section>
-        <theme-gam-define-display-ad
-          name="rotation"
-          position="static_page"
-          modifiers=["inter-block"]
-          aliases=aliases
-        />
+        <if(BAM.enable === true)>
+          <marko-web-broadstreet-zone zone-alias="rotation" />
+        </if>
+        <else>
+          <theme-gam-define-display-ad
+            name="rotation"
+            position="static_page"
+            modifiers=["inter-block"]
+            aliases=aliases
+          />
+        </else>
       </@section>
     </marko-web-page-wrapper>
   </@page>
