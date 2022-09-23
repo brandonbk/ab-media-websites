@@ -1,6 +1,7 @@
 const digitalEdition = require('./digital-edition');
 const navigation = require('./navigation');
 const gam = require('./gam');
+const broadstreet = require('./broadstreet');
 const nativeX = require('./native-x');
 const magazine = require('./magazine');
 const newsletter = require('./newsletter');
@@ -14,6 +15,7 @@ const leaders = require('./leaders');
 module.exports = {
   navigation,
   gam,
+  broadstreet,
   leaders,
   nativeX,
   magazine,
