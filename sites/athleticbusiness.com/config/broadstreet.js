@@ -1,9 +1,5 @@
-const BroadstreetConfiguration = require('@ab-media/base-cms-marko-web-broadstreet/config');
-
-const config = new BroadstreetConfiguration(7652);
-
 module.exports = ({
-  ...config,
+  networkId: 7652,
   enable: true,
   zones: {
     billboard: {
