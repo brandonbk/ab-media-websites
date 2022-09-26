@@ -12,9 +12,5 @@
     "@zone-alias": "number",
     "@alt-zone-id": "number",
     "@modifiers": "array"
-  },
-  "<marko-web-bam-targeting>": {
-    "template": "./targeting.marko",
-    "@keywords": "array"
   }
 }
