@@ -6,11 +6,8 @@
   "license": "MIT",
   "repository": "https://github.com/parameter1/ab-media-websites/tree/master/packages/base-cms-marko-web-broadstreet",
   "scripts": {
-    "lint": "yarn lint:js && yarn lint:css",
-    "lint:js": "eslint --ext .js --ext .vue --max-warnings 5 ./",
-    "lint:css": "stylelint ./**/*.scss --max-warnings 5",
-    "compile": "basecms-marko-compile compile --dir ./ --silent true",
-    "test": "yarn compile && yarn lint && mocha --reporter spec"
+    "lint": "eslint --ext .js --ext .vue --max-warnings 5 --ignore-path ../../.eslintignore ./",
+    "test": "yarn lint"
   },
   "dependencies": {
     "@parameter1/base-cms-marko-web-deferred-script-loader": "^3.0.0",
