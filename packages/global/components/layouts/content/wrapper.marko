@@ -20,10 +20,6 @@ $ const alias = get(input, "primarySection.alias");
   </@head>
   <@page>
     <marko-web-resolve-page|{ data: content }| node=pageNode>
-      <if(BAM && BAM.enable)>
-        $ const aliases = hierarchyAliases(content.primarySection);
-        <marko-web-bam-targeting keywords=[ id, type, ...aliases] />
-      </if>
       $ const aliases = hierarchyAliases(content.primarySection);
       $ const authors = getAsArray(content, "authors.edges").map((edge) => edge.node);
       <marko-web-page-wrapper>
