@@ -12,8 +12,7 @@ module.exports = ({
     leaderboard: {
       zoneIdSizeMapping: [
         ['(min-width: 980px)', 99648],
-        ['(min-width: 750px) and (max-width: 980px)', 147846],
-        ['(min-width: 300px) and (max-width: 750px)', 147846],
+        ['(max-width: 980px)', 147846],
       ],
     },
     rotation: {
@@ -34,7 +33,7 @@ module.exports = ({
     },
     contentMobileRotation: {
       zoneIdSizeMapping: [
-        ['(max-width: 980px)', 147422], // aquaId
+        ['(max-width: 980px)', 147422],
       ],
     },
   },

@@ -28,12 +28,12 @@ module.exports = ({
     },
     contentDesktopRotation: {
       zoneIdSizeMapping: [
-        ['(min-width: 750px)', 99657],
+        ['(min-width: 980px)', 99657],
       ],
     },
     contentMobileRotation: {
       zoneIdSizeMapping: [
-        ['(max-width: 750px)', 147847],
+        ['(max-width: 980px)', 147847],
       ],
     },
   },

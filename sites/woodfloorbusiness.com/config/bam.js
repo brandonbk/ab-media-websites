@@ -23,17 +23,17 @@ module.exports = ({
     },
     contentDesktopRotation: {
       zoneIdSizeMapping: [
-        ['(min-width: 980pxpx)', 99654],
+        ['(min-width: 980px)', 99654],
       ],
     },
     contentMobileLeaderboard: {
       zoneIdSizeMapping: [
-        ['(max-width: 980pxpx)', 147849],
+        ['(max-width: 980px)', 147849],
       ],
     },
     contentMobileRotation: {
       zoneIdSizeMapping: [
-        ['(max-width: 980pxpx)', 147850],
+        ['(max-width: 980px)', 147850],
       ],
     },
   },
