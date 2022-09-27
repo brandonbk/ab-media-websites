@@ -53,9 +53,8 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
   <if(BAM && BAM.enable)>
     <@inject
       at=250
-      pass="second"
       html=BAMZone.renderToString({
-        zoneAlias: "leaderboard",
+        zoneAlias: "contentMobileLeaderboard",
         modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile", "inline-leaderboard-mobile"],
         $global
       })
@@ -64,7 +63,6 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
   <else>
     <@inject
       at=250
-      pass="second"
       html=DefineDisplayAd.renderToString({
         name: "inline-leaderboard-mobile",
         aliases,
@@ -78,7 +76,6 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
     <if(BAM && BAM.enable)>
       <@inject
         at=char
-        pass="second"
         html=BAMZone.renderToString({
           zoneAlias: "contentMobileRotation",
           modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile"],
@@ -89,7 +86,6 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
     <else>
       <@inject
         at=char
-        pass="second"
         html=DefineDisplayAd.renderToString({
           name: "inline-leaderboard-mobile",
           aliases,
