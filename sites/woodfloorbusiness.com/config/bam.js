@@ -21,17 +21,17 @@ module.exports = ({
         ['(max-width: 980px)', 147850],
       ],
     },
-    contentDesktopRotation: {
+    desktopRotation: {
       zoneIdSizeMapping: [
         ['(min-width: 980px)', 99654],
       ],
     },
-    contentMobileLeaderboard: {
+    mobileLeaderboard: {
       zoneIdSizeMapping: [
         ['(max-width: 980px)', 147849],
       ],
     },
-    contentMobileRotation: {
+    mobileRotation: {
       zoneIdSizeMapping: [
         ['(max-width: 980px)', 147850],
       ],

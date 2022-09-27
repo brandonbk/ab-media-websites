@@ -1,4 +1,8 @@
+// This should match the mediaQuery breakpoints &
+// contentMobileRotation, contentMobileLeaderboard & contentDesktopRotation
+// within the bam site configs so the rotation
 $altZoneWidth: 980px !default;
+
 .broadstreet-zone {
   > div:only-child {
     padding-top: 30px !important;
@@ -31,6 +35,7 @@ $altZoneWidth: 980px !default;
     }
 
     &#{ $self }--inline-content-mobile,
+    &#{ $self }--inline-mobile-leaderboard,
     &#{ $self }--rotation-mobile {
       @media (min-width: $altZoneWidth) {
         display: none;
