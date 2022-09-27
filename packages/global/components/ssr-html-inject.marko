@@ -79,9 +79,9 @@ $ $children.each(function injectAds(index) {
             const r = $.parseHTML(contents);
             const [toInsert] = $.parseHTML(contents);
             if (!toInsert) return;
-            if (!$(toInsert).data().gamTemplateName || $(toInsert).data().gamTemplateName !== $next.data().gamTemplateName) {
-              $child.after(contents);
-            }
+            else if ($(toInsert).data().gamTemplateName && $(toInsert).data().gamTemplateName === $next.data().gamTemplateName) return;
+            else if ($(toInsert).data().bamZoneAlias && $(toInsert).data().bamZoneAlias === $next.data().bamZoneAlias) return;
+            $child.after(contents);
           }
         }
       }

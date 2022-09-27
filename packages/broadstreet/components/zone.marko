@@ -13,6 +13,7 @@ $ const containerId = randomElementId({ prefix: 'div-broadstreet-ad' });
 
 <div
   class=[blockName, ...BEM.applyModifiers(blockName, modifiers), input.class]
+  data-bam-zone-alias=zoneAlias
 >
   <div id=containerId class=`${blockName} ${blockName}__wrapper` />
   <script>
