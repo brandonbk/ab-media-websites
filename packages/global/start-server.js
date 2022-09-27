@@ -69,8 +69,8 @@ module.exports = (options = {}) => {
       const omedaIdentityXConfig = getAsObject(options, 'siteConfig.omedaIdentityX');
       omedaIdentityX(app, { ...omedaIdentityXConfig, idxRouteTemplates });
 
-      const broadstreetConfig = get(options, 'siteConfig.broadstreet');
-      set(app.locals, 'BAM', broadstreetConfig);
+      const bamConfig = get(options, 'siteConfig.bam');
+      set(app.locals, 'BAM', bamConfig);
 
       // Setup GAM.
       const gamConfig = get(options, 'siteConfig.gam');

@@ -10,11 +10,11 @@ const omeda = require('./omeda');
 const identityX = require('./identity-x');
 const omedaIdentityX = require('./omeda-identity-x');
 const leaders = require('./leaders');
-const broadstreet = require('./broadstreet');
+const bam = require('./bam');
 
 module.exports = {
   navigation,
-  broadstreet,
+  bam,
   gam,
   leaders,
   nativeX,

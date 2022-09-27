@@ -6,23 +6,24 @@ module.exports = ({
   zones: {
     billboard: {
       zoneIdSizeMapping: [
-        ['(min-width: 980px)', 99655],
-        ['(min-width: 750px) and (max-width: 980px)', 99650], // athId
-        ['(min-width: 300px) and (max-width: 750px)', 99650], // athId
+        ['', 99655],
       ],
     },
     leaderboard: {
       zoneIdSizeMapping: [
         ['(min-width: 980px)', 99656],
-        ['(min-width: 750px) and (max-width: 980px)', 99648], // athId
-        ['(min-width: 300px) and (max-width: 750px)', 99648],
+        ['(max-width: 980px)', 147848],
       ],
     },
     rotation: {
       zoneIdSizeMapping: [
         ['(min-width: 980px)', 99657],
-        ['(min-width: 750px) and (max-width: 980px)', 99649], // athId
-        ['(min-width: 300px) and (max-width: 750px)', 99649], // athId
+        ['(max-width: 980px)', 147847],
+      ],
+    },
+    contentMobileLeaderboard: {
+      zoneIdSizeMapping: [
+        ['(max-width: 980px)', 147848],
       ],
     },
     contentDesktopRotation: {
@@ -32,7 +33,7 @@ module.exports = ({
     },
     contentMobileRotation: {
       zoneIdSizeMapping: [
-        ['(max-width: 750px)', 99649], // athId
+        ['(max-width: 750px)', 147847],
       ],
     },
   },
