@@ -16,7 +16,10 @@ $ const { site, BAM } = out.global;
 
   <@section|{ aliases }|>
     <if(BAM.enable === true)>
-      <marko-web-broadstreet-zone zone-alias="leaderboard" />
+      <marko-web-broadstreet-zone
+        zone-alias="mobileLeaderboard"
+        modifiers=["inline-mobile-leaderboard"]
+      />
     </if>
     <else>
       <theme-gam-define-display-ad
