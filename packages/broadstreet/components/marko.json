@@ -10,7 +10,7 @@
   "<marko-web-broadstreet-zone>": {
     "template": "./zone.marko",
     "@zone-alias": "number",
-    "@alt-zone-id": "number",
+    "@zone-id-size-mapping": "number",
     "@modifiers": "array"
   }
 }
