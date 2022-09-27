@@ -1,42 +1,47 @@
-$altZoneWidth: 800px !default;
+$altZoneWidth: 970px !default;
 .broadstreet-zone {
   > div:only-child {
     padding-top: 30px !important;
   }
 }
+.broadstreet-zone-label {
+  display: block;
+}
 .ad-container {
   $self: &;
-  &#{ $self }--combined-leaderboard {
-    &#{ $self }--leaderboard {
-      min-height: 310px;
+  &--broadstreet {
+    padding-top: 10px;
+
+    &#{ $self }--combined-leaderboard {
+      &#{ $self }--leaderboard {
+        min-height: 310px;
+      }
+
+      &#{ $self }--billboard {
+        min-height: 605px;
+      }
+    }
+    &#{ $self }--rotation {
+      min-height: 150px;
     }
 
-    &#{ $self }--billboard {
-      min-height: 605px;
+    &#{ $self }--inline-content-desktop,
+    &#{ $self }--inline-content-mobile {
+      min-height: 150px;
+    }
+
+    &#{ $self }--inline-content-mobile,
+    &#{ $self }--rotation-mobile {
+      @media (min-width: $altZoneWidth) {
+        display: none;
+      }
+    }
+    &#{ $self }--content-leaderboard,
+    &#{ $self }--inline-content-desktop,
+    &#{ $self }--rotation-desktop {
+      @media (max-width: $altZoneWidth) {
+        display: none;
+      }
     }
   }
-  &--rotation {
-    min-height: 150px;
-  }
-
-  &--inline-content-desktop,
-  &--inline-content-mobile {
-    min-height: 150px;
-  }
-
-  &--rotation-alt,
-  &--inline-content-mobile,
-  &--rotation-mobile {
-    @media (min-width: $altZoneWidth) {
-      display: none;
-    }
-  }
-  &--content-leaderboard,
-  &--inline-content-desktop,
-  &--rotation-desktop {
-    @media (max-width: $altZoneWidth) {
-      display: none;
-    }
-  }
-
 }
