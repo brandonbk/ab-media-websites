@@ -6,6 +6,7 @@ import GlobalLeadersContextual from "../../../leaders/contextual";
 
 $ const { global: $global } = out;
 $ const { content } = input;
+$ const preventHTMLInjection = getAsArray(content, "labels").some( l => ["Sponsored", "Product Spotlight"].indexOf(l) >= 0);
 $ const blockName = defaultValue(input.blockName, 'page-contents');
 $ const aliases = getAsArray(input, 'aliases');
 $ const bodyId = `content-body-${content.id}`;
@@ -18,45 +19,47 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
   selector=`#${bodyId}`
 >
   <@component-input block-name=blockName obj=content attrs={ id: bodyId } />
-  <@inject
-    at=1500
-    html=GlobalLeadersContextual.renderToString({ contentId: content.id, $global, })
-  />
-
-  <for|char| of=desktopCounts>
+  <if(!preventHTMLInjection)>
     <@inject
-      at=char
+      at=1500
+      html=GlobalLeadersContextual.renderToString({ contentId: content.id, $global, })
+    />
+
+    <for|char| of=desktopCounts>
+      <@inject
+        at=char
+        html=DefineDisplayAd.renderToString({
+          name: 'inline-content-desktop',
+          aliases,
+          modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
+          position: 'content_body',
+          $global
+        })
+      />
+    </for>
+
+    <@inject
+      at=250
       html=DefineDisplayAd.renderToString({
-        name: 'inline-content-desktop',
+        name: "inline-leaderboard-mobile",
         aliases,
         modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
         position: 'content_body',
         $global
       })
     />
-  </for>
 
-  <@inject
-    at=250
-    html=DefineDisplayAd.renderToString({
-      name: "inline-leaderboard-mobile",
-      aliases,
-      modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
-      position: 'content_body',
-      $global
-    })
-  />
-
-  <for|char| of=mobileCounts>
-    <@inject
-      at=char
-      html=DefineDisplayAd.renderToString({
-        name: 'inline-content-mobile',
-        aliases,
-        modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
-        position: 'content_body',
-        $global
-      })
-    />
-  </for>
+    <for|char| of=mobileCounts>
+      <@inject
+        at=char
+        html=DefineDisplayAd.renderToString({
+          name: 'inline-content-mobile',
+          aliases,
+          modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
+          position: 'content_body',
+          $global
+        })
+      />
+    </for>
+  </if>
 </global-ssr-html-inject>
