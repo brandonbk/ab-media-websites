@@ -2,7 +2,7 @@ import { get } from "@parameter1/base-cms-object-path";
 
 $ const { id, alias, name, pageNode } = input;
 
-$ const { site, BAM } = out.global;
+$ const { site } = out.global;
 
 <global-website-section-home-layout
   id=id
@@ -15,20 +15,10 @@ $ const { site, BAM } = out.global;
   </@head> -->
 
   <@section|{ aliases }|>
-    <if(BAM.enable === true)>
-      <marko-web-broadstreet-zone
-        zone-alias="mobileLeaderboard"
-        modifiers=["inline-mobile-leaderboard"]
-      />
-    </if>
-    <else>
-      <theme-gam-define-display-ad
-        name="inline-leaderboard-mobile"
-        position="home_page"
-        aliases=aliases
-        modifiers=["inter-block"]
-      />
-    </else>
+    <marko-web-broadstreet-zone
+      zone-alias="mobileLeaderboard"
+      modifiers=["inline-mobile-leaderboard"]
+    />
   </@section>
 
   <@section|{ aliases }| modifiers=["break-container"]>
@@ -55,17 +45,7 @@ $ const { site, BAM } = out.global;
   </@section>
 
   <@section|{ aliases }|>
-    <if(BAM.enable === true)>
-      <marko-web-broadstreet-zone zone-alias="rotation" />
-    </if>
-    <else>
-      <theme-gam-define-display-ad
-        name="rotation"
-        position="home_page"
-        aliases=aliases
-        modifiers=["inter-block"]
-      />
-    </else>
+    <marko-web-broadstreet-zone zone-alias="rotation" />
   </@section>
 
   <if(site.get("leaders.enabled"))>

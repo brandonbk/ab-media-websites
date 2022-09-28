@@ -3,7 +3,7 @@ import { getAsArray } from "@parameter1/base-cms-object-path";
 $ const { id, alias, name, pageNode } = input;
 $ const sections = getAsArray(input, "sections");
 
-$ const { pagination: p, BAM } = out.global;
+$ const { pagination: p } = out.global;
 $ const perPage = 10;
 
 <global-website-section-default-layout

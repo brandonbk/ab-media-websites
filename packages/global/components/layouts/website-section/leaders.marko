@@ -3,7 +3,7 @@ import { getAsArray } from "@parameter1/base-cms-object-path";
 
 $ const { id, alias, name, pageNode } = input;
 $ const sections = getAsArray(input, "sections");
-$ const { GAM, site, config } = out.global;
+$ const { site, config } = out.global;
 
 <theme-website-section-page id=id alias=alias name=name>
   <@head>
@@ -20,17 +20,7 @@ $ const { GAM, site, config } = out.global;
       $ const aliases = hierarchyAliases(section);
       <marko-web-page-wrapper>
         <@section|{ aliases }| modifiers=["first"]>
-          <if(BAM && BAM.enable)>
-            <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "section_page", "inter-block"] />
-          </if>
-          <else>
-            <theme-gam-define-display-ad
-              name="leaderboard"
-              position="section_page"
-              aliases=aliases
-              modifiers=["inter-block"]
-            />
-          </else>
+          <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "section_page", "inter-block"] />
         </@section>
         <@section>
           <div class="leaders-index-page__header-wrapper">

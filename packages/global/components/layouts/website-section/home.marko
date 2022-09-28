@@ -1,7 +1,6 @@
 import { get, getAsArray } from "@parameter1/base-cms-object-path";
 
 $ const { id, alias, name, pageNode } = input;
-$ const { BAM } = out.global;
 $ const sections = getAsArray(input, "sections");
 
 <global-website-section-default-layout
@@ -34,16 +33,6 @@ $ const sections = getAsArray(input, "sections");
   </for>
 
   <@section|{ aliases }|>
-    <if(BAM && BAM.enable)>
-      <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "home_page", "section_page", "inter-block"] />
-    </if>
-    <else>
-      <theme-gam-define-display-ad
-        name="rotation"
-        position="home_page"
-        aliases=aliases
-        modifiers=["inter-block"]
-      />
-    </else>
+    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "home_page", "section_page", "inter-block"] />
   </@section>
 </global-website-section-default-layout>

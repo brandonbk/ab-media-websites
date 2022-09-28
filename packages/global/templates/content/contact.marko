@@ -3,7 +3,7 @@ import queryFragment from "@parameter1/base-cms-marko-web-theme-monorail/graphql
 
 $ const { id, type, pageNode } = data;
 
-$ const { pagination: p, req, BAM } = out.global;
+$ const { pagination: p, req } = out.global;
 $ const perPage = 10;
 
 <global-content-wrapper-layout
@@ -80,17 +80,7 @@ $ const perPage = 10;
   </@section>
 
   <@section|{ aliases }|>
-    <if(BAM && BAM.enable)>
-      <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["roataion", "inter-block", "content_page"] />
-    </if>
-    <else>
-      <theme-gam-define-display-ad
-        name="rotation"
-        position="content_page"
-        aliases=aliases
-        modifiers=["inter-block"]
-      />
-    </else>
+    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["roataion", "inter-block", "content_page"] />
   </@section>
 
   <@section>
@@ -98,17 +88,7 @@ $ const perPage = 10;
   </@section>
 
   <@section|{ aliases }|>
-    <if(BAM && BAM.enable)>
-      <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["inter-block", "rotation"] />
-    </if>
-    <else>
-      <theme-gam-define-display-ad
-        name="rotation"
-        position="content_page"
-        aliases=aliases
-        modifiers=["inter-block"]
-      />
-    </else>
+    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["inter-block", "rotation"] />
   </@section>
 
   <@section>
