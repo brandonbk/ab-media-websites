@@ -6,7 +6,7 @@ import GlobalLeadersContextual from "../../../leaders/contextual";
 
 $ const { global: $global } = out;
 $ const { content } = input;
-$ const preventHTMLInjection = getAsArray(content, "labels").includes("Sponsored", "Product Spotlight");
+$ const preventHTMLInjection = getAsArray(content, "labels").some( l => ["Sponsored", "Product Spotlight"].indexOf(l) >= 0);
 $ const blockName = defaultValue(input.blockName, 'page-contents');
 $ const aliases = getAsArray(input, 'aliases');
 $ const bodyId = `content-body-${content.id}`;
