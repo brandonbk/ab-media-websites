@@ -25,10 +25,7 @@
 $ const src = input.src || "https://cdn.broadstreetads.com/init-2.min.js";
 $ const { on, config } = input;
 
-$ const createContainerScript = `
-  window.broadstreet = window.broadstreet || { run: [] };
-  window.broadstreet.run.push(function() { broadstreet.watch(${ JSON.stringify(config) }); });
-`
+$ const createContainerScript = `window.broadstreet = window.broadstreet || { run: [] }; window.broadstreet.run.push(function() { broadstreet.watch(${ JSON.stringify(config) }); });`;
 <if(on)>
   <marko-web-deferred-script-loader-register
     name="broadstreettag"
