@@ -1,8 +1,5 @@
-const enable = (process.env.ENABLE_BROADSTREET === 'true' || process.env.ENABLE_BROADSTREET === true) || false;
-
 module.exports = ({
   networkId: 7652,
-  enable,
   zones: {
     billboard: {
       zoneIdSizeMapping: [

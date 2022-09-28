@@ -72,10 +72,6 @@ module.exports = (options = {}) => {
       const bamConfig = get(options, 'siteConfig.bam');
       set(app.locals, 'BAM', bamConfig);
 
-      // Setup GAM.
-      const gamConfig = get(options, 'siteConfig.gam');
-      set(app.locals, 'GAM', gamConfig);
-
       // Setup NativeX.
       const nativeXConfig = get(options, 'siteConfig.nativeX');
       set(app.locals, 'nativeX', nativeXConfig);

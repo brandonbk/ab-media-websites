@@ -28,23 +28,13 @@ $ const omedaConfig = site.get('omeda');
       identity-query-builder=createOmedaIdentityBuilder(omedaConfig.brandKey)
     />
 
-    <if(BAM && BAM.enable === true)>
-      <!-- init gam -->
-      <marko-web-broadstreet-init
-        on="load"
-        request-frame=true
-        target-tag="body"
-        config={ networkId: BAM.networkId, useAltZone: BAM.useAltZone }
-      />
-    </if>
-    <else>
-      <!-- init gam -->
-      <marko-web-gam-init
-        on="load"
-        request-frame=true
-        target-tag="body"
-      />
-    </else>
+    <!-- init gam -->
+    <marko-web-broadstreet-init
+      on="load"
+      request-frame=true
+      target-tag="body"
+      config={ networkId: BAM.networkId, useAltZone: BAM.useAltZone }
+    />
 
     <!-- init gtm -->
     <marko-web-gtm-init
@@ -81,13 +71,6 @@ $ const omedaConfig = site.get('omeda');
     <!-- start gtm -->
     <marko-web-gtm-start />
 
-    <if(!BAM || !BAM.enable)>
-      <!-- start gam -->
-      <marko-web-gam-enable>
-        <@lazy-load ...site.getAsObject("gam.lazyLoad") />
-      </marko-web-gam-enable>
-      <marko-web-gam-targeting key-values={ uri: req.path } />
-    </if>
   </@head>
   <@above-container>
     <marko-web-browser-component name="OmedaIdentityXRapidIdentify" />
