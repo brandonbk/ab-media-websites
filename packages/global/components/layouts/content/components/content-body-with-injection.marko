@@ -6,7 +6,7 @@ import GlobalLeadersContextual from "../../../leaders/contextual";
 
 $ const { global: $global } = out;
 $ const { content } = input;
-$ const isSponsored = getAsArray(content, "labels").includes("Sponsored");
+$ const preventHTMLInjection = getAsArray(content, "labels").includes("Sponsored", "Product Spotlight");
 $ const blockName = defaultValue(input.blockName, 'page-contents');
 $ const aliases = getAsArray(input, 'aliases');
 $ const bodyId = `content-body-${content.id}`;
@@ -19,7 +19,7 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
   selector=`#${bodyId}`
 >
   <@component-input block-name=blockName obj=content attrs={ id: bodyId } />
-  <if(!isSponsored)>
+  <if(!preventHTMLInjection)>
     <@inject
       at=1500
       html=GlobalLeadersContextual.renderToString({ contentId: content.id, $global, })
