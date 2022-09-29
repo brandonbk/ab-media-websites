@@ -1,6 +1,5 @@
 const digitalEdition = require('./digital-edition');
 const navigation = require('./navigation');
-const gam = require('./gam');
 const nativeX = require('./native-x');
 const magazine = require('./magazine');
 const newsletter = require('./newsletter');
@@ -10,10 +9,11 @@ const omeda = require('./omeda');
 const identityX = require('./identity-x');
 const omedaIdentityX = require('./omeda-identity-x');
 const leaders = require('./leaders');
+const bam = require('./bam');
 
 module.exports = {
   navigation,
-  gam,
+  bam,
   leaders,
   nativeX,
   magazine,

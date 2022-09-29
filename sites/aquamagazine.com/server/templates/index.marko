@@ -15,11 +15,9 @@ $ const { site } = out.global;
   </@head> -->
 
   <@section|{ aliases }|>
-    <theme-gam-define-display-ad
-      name="inline-leaderboard-mobile"
-      position="home_page"
-      aliases=aliases
-      modifiers=["inter-block"]
+    <marko-web-broadstreet-zone
+      zone-alias="mobileLeaderboard"
+      modifiers=["inline-mobile-leaderboard"]
     />
   </@section>
 
@@ -47,12 +45,7 @@ $ const { site } = out.global;
   </@section>
 
   <@section|{ aliases }|>
-    <theme-gam-define-display-ad
-      name="rotation"
-      position="home_page"
-      aliases=aliases
-      modifiers=["inter-block"]
-    />
+    <marko-web-broadstreet-zone zone-alias="rotation" />
   </@section>
 
   <if(site.get("leaders.enabled"))>

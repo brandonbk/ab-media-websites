@@ -67,22 +67,13 @@ $ const aliases = [gallery.primarySection.alias, gallery.primarySection.alias.sp
         </@section>
         <if(!isLastChunk)>
           <@section|{ aliases }|>
-            <theme-gam-define-display-ad
-              name="rotation"
-              position="static_page"
-              modifiers=["inter-block"]
-            />
+            <marko-web-broadstreet-zone zone-alias="rotation" />
           </@section>
         </if>
       </for>
 
       <@section>
-        <theme-gam-define-display-ad
-          name="rotation"
-          position="static_page"
-          modifiers=["inter-block"]
-          aliases=aliases
-        />
+        <marko-web-broadstreet-zone zone-alias="rotation" />
       </@section>
     </marko-web-page-wrapper>
   </@page>

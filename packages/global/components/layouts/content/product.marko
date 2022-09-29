@@ -60,26 +60,12 @@ $ const sections = getAsArray(input, "sections");
             content=content
           />
         </if>
-        <else>
-          <theme-gam-define-display-ad
-            name="rail-1"
-            position="content_page"
-            aliases=aliases
-            modifiers=["max-width-300", "center", "margin-auto-x", "rail"]
-            class="mb-block"
-          />
-        </else>
       </div>
     </div>
   </@section>
 
   <@section|{ aliases }|>
-    <theme-gam-define-display-ad
-      name="rotation"
-      position="content_page"
-      aliases=aliases
-      modifiers=["inter-block"]
-    />
+    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "inter-block", "content_page"] />
   </@section>
 
   <@section>

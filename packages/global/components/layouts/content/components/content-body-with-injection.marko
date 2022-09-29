@@ -1,7 +1,7 @@
 import { getAsArray } from "@parameter1/base-cms-object-path";
 import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
 import MarkoWebContentBody from "@parameter1/base-cms-marko-web/components/element/content/body";
-import DefineDisplayAd from "@parameter1/base-cms-marko-web-theme-monorail/components/gam/define-display-ad";
+import BAMZone from "@ab-media/base-cms-marko-web-broadstreet/components/zone";
 import GlobalLeadersContextual from "../../../leaders/contextual";
 
 $ const { global: $global } = out;
@@ -28,11 +28,9 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
     <for|char| of=desktopCounts>
       <@inject
         at=char
-        html=DefineDisplayAd.renderToString({
-          name: 'inline-content-desktop',
-          aliases,
-          modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
-          position: 'content_body',
+        html=BAMZone.renderToString({
+          zoneAlias: "desktopRotation",
+          modifiers: ["margin-auto-x",  "inline-content", "inline-content-desktop"],
           $global
         })
       />
@@ -40,11 +38,9 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
 
     <@inject
       at=250
-      html=DefineDisplayAd.renderToString({
-        name: "inline-leaderboard-mobile",
-        aliases,
-        modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
-        position: 'content_body',
+      html=BAMZone.renderToString({
+        zoneAlias: "mobileLeaderboard",
+        modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile", "inline-leaderboard-mobile"],
         $global
       })
     />
@@ -52,11 +48,9 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
     <for|char| of=mobileCounts>
       <@inject
         at=char
-        html=DefineDisplayAd.renderToString({
-          name: 'inline-content-mobile',
-          aliases,
-          modifiers: [ "max-width-970", "margin-auto-x", "inline-content" ],
-          position: 'content_body',
+        html=BAMZone.renderToString({
+          zoneAlias: "mobileRotation",
+          modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile"],
           $global
         })
       />
