@@ -7,6 +7,7 @@ import GlobalLeadersContextual from "../../../leaders/contextual";
 
 $ const { global: $global } = out;
 $ const { content } = input;
+$ const preventHTMLInjection = getAsArray(content, "labels").some( l => ["Sponsored", "Product Spotlight"].indexOf(l) >= 0);
 $ const blockName = defaultValue(input.blockName, 'page-contents');
 $ const aliases = getAsArray(input, 'aliases');
 $ const bodyId = `content-body-${content.id}`;
@@ -19,39 +20,41 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
   selector=`#${bodyId}`
 >
   <@component-input block-name=blockName obj=content attrs={ id: bodyId } />
-  <@inject
-    at=1500
-    html=GlobalLeadersContextual.renderToString({ contentId: content.id, $global, })
-  />
-
-  <for|char| of=desktopCounts>
+  <if(!preventHTMLInjection)>
     <@inject
-      at=char
+      at=1500
+      html=GlobalLeadersContextual.renderToString({ contentId: content.id, $global, })
+    />
+
+    <for|char| of=desktopCounts>
+      <@inject
+        at=char
+        html=BAMZone.renderToString({
+          zoneAlias: "desktopRotation",
+          modifiers: ["margin-auto-x",  "inline-content", "inline-content-desktop"],
+          $global
+        })
+      />
+    </for>
+
+    <@inject
+      at=250
       html=BAMZone.renderToString({
-        zoneAlias: "desktopRotation",
-        modifiers: ["margin-auto-x",  "inline-content", "inline-content-desktop"],
+        zoneAlias: "mobileLeaderboard",
+        modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile", "inline-leaderboard-mobile"],
         $global
       })
     />
-  </for>
 
-  <@inject
-    at=250
-    html=BAMZone.renderToString({
-      zoneAlias: "mobileLeaderboard",
-      modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile", "inline-leaderboard-mobile"],
-      $global
-    })
-  />
-
-  <for|char| of=mobileCounts>
-    <@inject
-      at=char
-      html=BAMZone.renderToString({
-        zoneAlias: "mobileRotation",
-        modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile"],
-        $global
-      })
-    />
-  </for>
+    <for|char| of=mobileCounts>
+      <@inject
+        at=char
+        html=BAMZone.renderToString({
+          zoneAlias: "mobileRotation",
+          modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile"],
+          $global
+        })
+      />
+    </for>
+  </if>
 </global-ssr-html-inject>
