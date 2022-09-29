@@ -79,7 +79,6 @@ $ $children.each(function injectAds(index) {
             const r = $.parseHTML(contents);
             const [toInsert] = $.parseHTML(contents);
             if (!toInsert) return;
-            else if ($(toInsert).data() && $(toInsert).data().gamTemplateName && $(toInsert).data().gamTemplateName === $next.data().gamTemplateName) return;
             else if ($(toInsert).data() && $(toInsert).data().bamZoneAlias && $(toInsert).data().bamZoneAlias === $next.data().bamZoneAlias) return;
             $child.after(contents);
           }
