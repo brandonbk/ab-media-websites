@@ -1,6 +1,6 @@
 import { warn } from "@parameter1/base-cms-utils";
 
-$ const { config, site, GAM } = out.global;
+$ const { config, site } = out.global;
 
 $ const type = "search";
 $ const title = "Search";
@@ -17,11 +17,10 @@ $ const apiKey = site.get("gcse.id");
   <@page>
     <marko-web-page-wrapper>
       <@section|{ aliases }| modifiers=["first"]>
-        <theme-gam-define-display-ad
-          name="rotation"
-          position="section_page"
+        <global-leaderboard-ad-block
+          position="content_page"
           aliases=aliases
-          modifiers=["inter-block"]
+          modifiers=["inter-block", "combined-leaderboard", "content-leaderboard"]
         />
       </@section>
       <@section>
