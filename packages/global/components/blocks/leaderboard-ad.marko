@@ -1,27 +1,24 @@
 import { get } from "@parameter1/base-cms-object-path";
 
-$ const { GAM } = out.global;
 $ const { hasCookie, cookieValue, cookieName } = get(out.global, "billboardState");
 $ const name = (hasCookie && cookieValue === "0") ? "billboard" : "leaderboard";
-$ const adUnit = GAM.getAdUnit({ name, aliases: input.aliases });
 $ const expires = 1/24; // Days
 
 <if(!hasCookie)>
   <marko-web-browser-component
     name="GlobalBillboardCookie"
-    props={ adUnitPath: adUnit.path, cookieName, cookieValue: "0", expires: 1 }
+    props={ cookieName, cookieValue: "0", expires: 1 }
   />
 </if>
 <else-if(hasCookie && cookieValue === "0")>
   <marko-web-browser-component
     name="GlobalBillboardCookie"
-    props={ adUnitPath: adUnit.path, cookieName, cookieValue: "1", expires }
+    props={ cookieName, cookieValue: "1", expires }
   />
 </else-if>
 
-<theme-gam-define-display-ad
-  name=name
-  position=input.position
-  aliases=input.aliases
-  modifiers=input.modifiers
+
+<marko-web-broadstreet-zone
+  zone-alias=name
+  modifiers=[...input.modifiers,  "break-container", name]
 />

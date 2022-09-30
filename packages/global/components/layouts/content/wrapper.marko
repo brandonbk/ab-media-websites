@@ -2,7 +2,6 @@ import hierarchyAliases from "@parameter1/base-cms-marko-web/utils/hierarchy-ali
 import { getAsArray, get } from "@parameter1/base-cms-object-path";
 
 $ const { id, type, pageNode } = input;
-$ const { GAM } = out.global;
 $ const sections = getAsArray(input, "sections");
 $ const alias = get(input, "primarySection.alias");
 
@@ -11,7 +10,6 @@ $ const alias = get(input, "primarySection.alias");
     <marko-web-gtm-content-context|{ context }| id=id>
       <marko-web-gtm-push data=context />
     </marko-web-gtm-content-context>
-    <marko-web-gam-targeting key-values={ content_id: id, content_type: type } />
     <marko-web-resolve-page|{ data: content }| node=pageNode>
       <marko-web-p1-events-track-content node=content />
     </marko-web-resolve-page>
@@ -33,12 +31,7 @@ $ const alias = get(input, "primarySection.alias");
         </for>
 
         <@section>
-          <theme-gam-define-display-ad
-            name="rotation"
-            position="content_page"
-            aliases=aliases
-            modifiers=["inter-block"]
-          />
+          <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "inter-block", "content_page"] />
         </@section>
       </marko-web-page-wrapper>
     </marko-web-resolve-page>

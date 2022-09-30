@@ -11,6 +11,9 @@
 @import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600,700&display=swap");
 @import "../../node_modules/@parameter1/base-cms-marko-web-leaders/scss/leaders";
 
+// boradstreet ads import
+@import "../../node_modules/@ab-media/base-cms-marko-web-broadstreet/scss/ads";
+
 // page wrapper
 .page-wrapper {
   &__content-name {

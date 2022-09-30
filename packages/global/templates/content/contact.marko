@@ -12,11 +12,10 @@ $ const perPage = 10;
   page-node=pageNode
 >
   <@section|{ aliases }| modifiers=["first-sm"]>
-    <theme-gam-define-display-ad
-      name="leaderboard"
+    <global-leaderboard-ad-block
       position="content_page"
       aliases=aliases
-      modifiers=["inter-block"]
+      modifiers=["inter-block", "combined-leaderboard", "content-leaderboard"]
     />
   </@section>
 
@@ -81,12 +80,7 @@ $ const perPage = 10;
   </@section>
 
   <@section|{ aliases }|>
-    <theme-gam-define-display-ad
-      name="rotation"
-      position="content_page"
-      aliases=aliases
-      modifiers=["inter-block"]
-    />
+    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "inter-block", "content_page"] />
   </@section>
 
   <@section>
@@ -94,12 +88,7 @@ $ const perPage = 10;
   </@section>
 
   <@section|{ aliases }|>
-    <theme-gam-define-display-ad
-      name="rotation"
-      position="content_page"
-      aliases=aliases
-      modifiers=["inter-block"]
-    />
+    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["inter-block", "rotation"] />
   </@section>
 
   <@section>

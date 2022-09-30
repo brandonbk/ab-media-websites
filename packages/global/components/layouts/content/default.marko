@@ -28,7 +28,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
     <global-leaderboard-ad-block
       position="content_page"
       aliases=aliases
-      modifiers=["inter-block", "combined-leaderboard"]
+      modifiers=["inter-block", "combined-leaderboard", "content-leaderboard"]
     />
   </@section>
 
@@ -167,12 +167,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
 
   <if(showBottomAdBlock)>
     <@section|{ aliases }|>
-      <theme-gam-define-display-ad
-        name="rotation"
-        position="content_page"
-        aliases=aliases
-        modifiers=["inter-block"]
-      />
+      <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "inter-block", "content_page"] />
     </@section>
   </if>
 
@@ -216,12 +211,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
       </@section>
 
       <@section|{ content, aliases, blockName }|>
-        <theme-gam-define-display-ad
-          name="rotation"
-          position="content_page"
-          aliases=aliases
-          modifiers=["inter-block"]
-        />
+        <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "content_page", "inter-block"] />
       </@section>
     </for>
   </if>
