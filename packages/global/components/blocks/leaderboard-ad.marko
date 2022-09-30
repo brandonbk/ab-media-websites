@@ -1,7 +1,8 @@
 import { get } from "@parameter1/base-cms-object-path";
-
+$ const leaderboardZoneAlias = input.leaderboardZoneAlias || 'leaderboard';
+$ const billboardZoneAlias = input.billboardZoneAlias || 'billboard';
 $ const { hasCookie, cookieValue, cookieName } = get(out.global, "billboardState");
-$ const name = (hasCookie && cookieValue === "0") ? "billboard" : "leaderboard";
+$ const name = (hasCookie && cookieValue === "0") ? billboardZoneAlias : leaderboardZoneAlias;
 $ const expires = 1/24; // Days
 
 <if(!hasCookie)>
@@ -16,7 +17,6 @@ $ const expires = 1/24; // Days
     props={ cookieName, cookieValue: "1", expires }
   />
 </else-if>
-
 
 <marko-web-broadstreet-zone
   zone-alias=name

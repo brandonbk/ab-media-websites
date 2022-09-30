@@ -26,8 +26,8 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
 >
   <@section|{ aliases }| modifiers=["break-container", "first-sm"]>
     <global-leaderboard-ad-block
-      position="content_page"
-      aliases=aliases
+      billboardZoneAlias="desktopBillboard"
+      leadboardZoneAlias="desktopLeaderboard"
       modifiers=["inter-block", "combined-leaderboard", "content-leaderboard"]
     />
   </@section>

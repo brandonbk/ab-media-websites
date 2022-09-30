@@ -18,6 +18,22 @@ module.exports = ({
         ['(max-width: 980px)', 147422],
       ],
     },
+    // for use in content pages when positions move
+    desktopBillboard: {
+      zoneIdSizeMapping: [
+        ['(min-width: 980px)', 99650],
+      ],
+    },
+    mobileBillboard: {
+      zoneIdSizeMapping: [
+        ['(max-width: 980px)', 99650],
+      ],
+    },
+    desktopLeaderboard: {
+      zoneIdSizeMapping: [
+        ['(min-width: 980px)', 99648],
+      ],
+    },
     desktopRotation: {
       zoneIdSizeMapping: [
         ['(min-width: 980px)', 99649],
