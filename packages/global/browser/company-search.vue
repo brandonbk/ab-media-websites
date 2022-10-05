@@ -55,7 +55,7 @@ export default {
         const res = await fetch(url);
         const json = await res.json();
         if (!res.ok) throw new Error(json.message || res.statusText);
-        return json.nodes;
+        return json.nodes.filter(node => !node.parentCompany);
       } catch (error) {
         const errorNodes = [{
           id: 'error',
