@@ -8,6 +8,11 @@ fragment CompanySearchFragment on Content {
   siteContext {
     path
   }
+  ... on ContentCompany {
+    parentCompany {
+      id
+    }
+  }
 }
 
 `;
