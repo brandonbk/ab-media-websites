@@ -110,6 +110,35 @@ fragment ContentPageFragment on Content {
         fullName
       }
     }
+    childCompanies(input: { pagination: { limit: 25 } }) {
+      edges {
+        node {
+          name(input: { mutation: null })
+          address1
+          address2
+          cityStateZip
+          country
+          phone
+          tollfree
+          fax
+          publicEmail
+          contacts: publicContacts {
+              edges {
+                node {
+                  id
+                  name
+                  title
+                  publicEmail
+                  primaryImage {
+                    id
+                    src(input: { options: { auto: "format,compress", q: 70, h: 100, w: 100, mask: "ellipse", fit: "facearea", facepad: 3 } })
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
   }
   ... on SocialLinkable {
     socialLinks {
