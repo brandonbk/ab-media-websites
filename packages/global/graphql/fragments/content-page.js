@@ -110,7 +110,7 @@ fragment ContentPageFragment on Content {
         fullName
       }
     }
-    childCompanies(input: { pagination: { limit: 25 } }) {
+    children(input: { pagination: { limit: 25 } }) {
       edges {
         node {
           name(input: { mutation: null })

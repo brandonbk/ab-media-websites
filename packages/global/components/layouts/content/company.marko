@@ -95,7 +95,7 @@ $ const lang = site.config.lang || "en";
             </default-theme-page-contents>
           </div>
 
-        $ const childCompanies = getAsArray(content.childCompanies.edges).map((edge) => edge.node);
+        $ const childCompanies = getAsArray(content.children.edges).map((edge) => edge.node);
         <if(childCompanies)>
           $ const slicedArrays = [];
           $ for (let i = 0; i <= childCompanies.length; i += 2) {
