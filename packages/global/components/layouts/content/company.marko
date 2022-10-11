@@ -97,35 +97,19 @@ $ const lang = site.config.lang || "en";
 
         $ const childCompanies = getAsArray(content.children.edges).map((edge) => edge.node);
         <if(childCompanies)>
-          $ const slicedArrays = [];
-          $ for (let i = 0; i <= childCompanies.length; i += 2) {
-            slicedArrays.push(childCompanies.slice(i, i + 2));
-          }
           <p><b>Branch Locations</b></p>
-          <for|slice| of=slicedArrays>
-            <if(slice.length)>
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="content-page-header">
-                  <marko-web-block name=detailsBlock>
-                    <p><marko-web-content-name tag="b" obj=slice[0] /></p>
-                    <global-content-company-details obj=slice[0] />
-                  </marko-web-block>
-                  </div>
+          <div class="row">
+            <for|childCompany| of=childCompanies>
+              <div class="col-lg-6">
+                <div class="content-page-header">
+                <marko-web-block name=detailsBlock>
+                  <p><marko-web-content-name tag="b" obj=childCompany /></p>
+                  <global-content-company-details obj=childCompany />
+                </marko-web-block>
                 </div>
-                <if(slice[1])>
-                  <div class="col-lg-6">
-                    <div class="content-page-header">
-                      <marko-web-block name=detailsBlock>
-                        <p><marko-web-content-name tag="b" obj=slice[1] /></p>
-                        <global-content-company-details obj=slice[1] />
-                      </marko-web-block>
-                    </div>
-                  </div>
-                </if>
               </div>
-            </if>
-          </for>
+            </for>
+          </div>
         </if>
 
           <marko-web-query|{ nodes }|
