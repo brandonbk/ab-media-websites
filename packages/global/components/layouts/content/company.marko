@@ -95,8 +95,8 @@ $ const lang = site.config.lang || "en";
             </default-theme-page-contents>
           </div>
 
-        $ const childCompanies = getAsArray(content.children.edges).map((edge) => edge.node);
-        <if(childCompanies)>
+        $ const childCompanies = content.children ? getAsArray(content.children.edges).map((edge) => edge.node) : [];
+        <if(childCompanies.length)>
           <p><b>Branch Locations</b></p>
           <div class="row">
             <for|childCompany| of=childCompanies>
