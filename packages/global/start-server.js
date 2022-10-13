@@ -54,7 +54,7 @@ module.exports = (options = {}) => {
       app.use(paginated());
 
       // i18n
-      i18n(app);
+      i18n(app, options.i18n);
 
       // Use paginated middleware
       app.use(htmlSitemapPagination());
