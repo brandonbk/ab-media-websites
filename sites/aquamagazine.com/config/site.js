@@ -41,12 +41,16 @@ module.exports = {
       srcset: [
         'https://img.aquamagazine.com/files/base/abmedia/all/image/static/aqua-site-logo.png?h=45&auto=format,compress&q=70&dpr=2 2x',
       ],
+      width: '110',
+      height: '35',
     },
     footer: {
       src: 'https://img.aquamagazine.com/files/base/abmedia/all/image/static/aqua-site-logo.png?h=60&auto=format,compress&q=70',
       srcset: [
         'https://img.aquamagazine.com/files/base/abmedia/all/image/static/aqua-site-logo.png?h=60&auto=format,compress&q=70&dpr=2 2x',
       ],
+      width: '110',
+      height: '35',
     },
     corporate: {
       alt: 'AB Media Logo',
@@ -55,6 +59,8 @@ module.exports = {
       srcset: [
         'https://img.aquamagazine.com/files/base/abmedia/all/image/static/abmedia-red-white.png?h=40&auto=format,compress&dpr=2 2x',
       ],
+      width: '120',
+      height: '40',
     },
   },
   premiumPartners: {
