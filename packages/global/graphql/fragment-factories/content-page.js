@@ -49,6 +49,10 @@ fragment LeadersContentPageFragment on Content {
   primaryImage {
     id
     src(input: { useCropRectangle: true, options: { auto: "format,compress", q: 70 } })
+    cropRectangle {
+      width
+      height
+    }
     alt
     caption
     credit
