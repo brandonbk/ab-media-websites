@@ -54,6 +54,13 @@
   }
 }
 
+.sponsor-logo {
+  $self: &;
+  &__logo {
+    height: 25px;
+  }
+}
+
 // sponsored native-x story
 // stylelint-disable selector-max-id
 #native-x-story-body {
