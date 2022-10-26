@@ -56,13 +56,8 @@
 
 .sponsor-logo {
   $self: &;
-  &__label {
-    font-size: 20px;
-  }
-
   &__logo {
-    max-width: 100%;
-    height: 100px;
+    height: 25px;
   }
 }
 
