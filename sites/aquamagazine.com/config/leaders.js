@@ -5,7 +5,7 @@ module.exports = {
   calloutValue: 'Leaders in Aqua',
   alias: process.env.LEADERS_ALIAS || 'leaders/2022',
   header: {
-    imgSrc: process.env.LEADERS_LOGO || 'https://img.athleticbusiness.com/files/base/abmedia/all/image/static/leaders-2022.png?auto=format,compress&h=90',
-    imgSrcset: process.env.LEADERS_LOGO || 'https://img.athleticbusiness.com/files/base/abmedia/all/image/static/leaders-2022.png?auto=format,compress&h=90&dpr=2 2x',
+    imgSrc: process.env.LEADERS_LOGO || 'https://img.aquamagazine.com/files/base/abmedia/all/image/static/Leaders_Header_Aqua.jpeg?auto=format,compress&h=90',
+    imgSrcset: process.env.LEADERS_LOGO || 'https://img.aquamagazine.com/files/base/abmedia/all/image/static/Leaders_Header_Aqua.jpeg?auto=format,compress&h=90&dpr=2 2x',
   },
 };
