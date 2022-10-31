@@ -22,11 +22,14 @@
 ** "zoneOptions": {}       // options for an individual zone (overrides global options)
 **
 */
+import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
+
 $ const src = input.src || "https://cdn.broadstreetads.com/init-2.min.js";
 $ const { on, config } = input;
 $ const { networkId } = config;
+$ const onlyVisible = defaultValue(config.onlyVisible, false)
 
-$ const createContainerScript = `window.broadstreet = window.broadstreet || { run: [] }; window.broadstreet.run.push(function() { broadstreet.loadNetworkJS(${ networkId }); });`;
+$ const createContainerScript = `window.broadstreet = window.broadstreet || { run: [] }; window.broadstreet.run.push(function() { broadstreet.watch({networkId: ${ networkId }, onlyVisible: ${JSON.stringify(onlyVisible)} }); }); window.broadstreet.run.push(function() { broadstreet.loadNetworkJS(${ networkId }); });`;
 <if(on)>
   <marko-web-deferred-script-loader-register
     name="broadstreettag"

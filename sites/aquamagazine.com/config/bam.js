@@ -1,5 +1,10 @@
+const onlyVisible = (process.env.BAM_ONLY_VISIBLE && (process.env.BAM_ONLY_VISIBLE === true || process.env.BAM_ONLY_VISIBLE === 'true'))
+  ? { mobileScaling: 2.0, renderMarginPercent: 200 }
+  : false;
+
 module.exports = ({
   networkId: 7652,
+  onlyVisible,
   zones: {
     billboard: {
       zoneIdSizeMapping: [
