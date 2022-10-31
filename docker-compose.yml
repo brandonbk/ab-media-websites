@@ -28,6 +28,7 @@ x-env-defaults: &env
   LEADERS_ENABLED: ${LEADERS_ENABLED-false}
   LEADERS_ALIAS: ${LEADERS_ALIAS-}
   LEADERS_LOGO: ${LEADERS_LOGO-}
+  BAM_ONLY_VISIBLE: ${BAM_ONLY_VISIBLE-false}
 
 x-env-virgon-dev: &env-virgon-dev
   GRAPHQL_URI: ${GRAPHQL_URI-http://host.docker.internal:10103}
