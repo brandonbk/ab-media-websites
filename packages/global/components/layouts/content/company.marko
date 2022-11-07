@@ -89,10 +89,10 @@ $ const lang = site.config.lang || "en";
             </marko-web-block>
           </div>
           <div class="content-page-body">
-            <default-theme-page-contents|{ blockName }| attrs={ "data-gallery-id": id }>
+            <theme-page-contents|{ blockName }| attrs={ "data-gallery-id": id }>
               $ const bodyId = `content-body-${content.id}`;
               <marko-web-content-body block-name=blockName obj=content attrs={ id: bodyId } />
-            </default-theme-page-contents>
+            </theme-page-contents>
           </div>
 
         $ const childCompanies = content.children ? getAsArray(content.children.edges).map((edge) => edge.node) : [];
@@ -203,7 +203,7 @@ $ const lang = site.config.lang || "en";
 
                 <label class="content-section-header content-section-header--border">${i18n("Contact")}</label>
                 $ const { socialLinks, ...contentSansSocial } = content;
-                <default-theme-content-contact-details
+                <theme-content-contact-details
                   obj=contentSansSocial
                   website-link-attrs=eventLinkAttrs({
                     category: "Company Profile Page",
@@ -233,7 +233,7 @@ $ const lang = site.config.lang || "en";
                   ${i18n("Featured Products")}
                 </@header>
                 <@nodes|{ nodes: items }| nodes=nodes>
-                  <default-theme-card-deck-flow cols=4 nodes=items modifiers=["featured-products"]>
+                  <theme-card-deck-flow cols=4 nodes=items modifiers=["featured-products"]>
                     <@slot|{ node, index }|>
                       <theme-featured-products-card-node
                         company-id=id
@@ -241,7 +241,7 @@ $ const lang = site.config.lang || "en";
                         node=node
                       />
                     </@slot>
-                  </default-theme-card-deck-flow>
+                  </theme-card-deck-flow>
                 </@nodes>
               </marko-web-node-list>
             </marko-web-query>
@@ -252,7 +252,7 @@ $ const lang = site.config.lang || "en";
               ${i18n("Featured Videos")}
             </@header>
             <@nodes|{ nodes }| nodes=videos>
-              <default-theme-card-deck-flow cols=3 nodes=nodes modifiers=["featured-videos"]>
+              <theme-card-deck-flow cols=3 nodes=nodes modifiers=["featured-videos"]>
                 <@slot|{ node, index }|>
                   <div class="node-list__node">
                     <theme-youtube-card-node
@@ -266,7 +266,7 @@ $ const lang = site.config.lang || "en";
                     />
                   </div>
                 </@slot>
-              </default-theme-card-deck-flow>
+              </theme-card-deck-flow>
             </@nodes>
             <@footer>
               $ const url = get(content, "youtube.url");
