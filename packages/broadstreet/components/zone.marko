@@ -22,13 +22,18 @@ $ const offset = lazyload.offset || "10%";
   <if(lazyload.enabled)>
     <script>
       (function() {
-        var lazyloadObserver = new IntersectionObserver((entries) => {
-          if (entries[0].isIntersecting) {
-            defineBroadstreetZone('${containerId}', ${JSON.stringify(sizeMapping)});
-            lazyloadObserver.unobserve(document.getElementById('${containerId}'));
-          }
-        }, { rootMargin: '0px 0px ${offset} 0px' });
-        lazyloadObserver.observe(document.getElementById('${containerId}'));
+        // Make sure IntersectionObservers are available.
+        if ('IntersectionObserver' in window) {
+          var lazyloadObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+              defineBroadstreetZone('${containerId}', ${JSON.stringify(sizeMapping)});
+              lazyloadObserver.unobserve(document.getElementById('${containerId}'));
+            }
+          }, { rootMargin: '0px 0px ${offset} 0px' });
+          lazyloadObserver.observe(document.getElementById('${containerId}'));
+        } else {
+          defineBroadstreetZone('${containerId}', ${JSON.stringify(sizeMapping)});
+        }
       })();
     </script>
   </if>
