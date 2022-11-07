@@ -26,8 +26,8 @@ import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
 
 $ const src = input.src || "https://cdn.broadstreetads.com/init-2.min.js";
 $ const { on, config } = input;
-$ const { networkId } = config;
-$ const onlyVisible = defaultValue(config.onlyVisible, { mobileScaling: 2.0, renderMarginPercent: 200 });
+$ const { networkId, lazyload } = config;
+$ const onlyVisible = (lazyload && lazyload.enabled) ? false : defaultValue(config.onlyVisible, { mobileScaling: 2.0, renderMarginPercent: 200 });
 $ const uriKeywords = defaultValue(config.uriKeywords, true);
 $ const bamConfig = {
   networkId,
