@@ -17,7 +17,7 @@ $ const navigation = {
   attrs=input.attrs
 >
   <${input.aboveNav} />
-  <default-theme-site-navbar modifiers=["secondary"] attrs={ "aria-label": "Secondary Navigation" }>
+  <theme-site-navbar modifiers=["secondary"] attrs={ "aria-label": "Secondary Navigation" }>
     <theme-menu-toggle-button
       class="site-navbar__toggler"
       targets=[".site-menu", "body"]
@@ -26,17 +26,17 @@ $ const navigation = {
       icon-name="three-bars"
     />
 
-    <default-theme-site-navbar-brand title=`${config.website("name")} Homepage`>
-      <default-theme-site-navbar-logo
+    <theme-site-navbar-brand title=`${config.website("name")} Homepage`>
+      <theme-site-navbar-logo
         alt=config.website("name")
         src=site.get("logos.navbar.src")
         srcset=site.getAsArray("logos.navbar.srcset").join(",")
         width=site.get("logos.navbar.width")
         height=site.get("logos.navbar.height")
       />
-    </default-theme-site-navbar-brand>
+    </theme-site-navbar-brand>
 
-    <default-theme-site-navbar-items
+    <theme-site-navbar-items
       items=navigation.secondary
       modifiers=["secondary"]
       reg-enabled=input.regEnabled
@@ -45,16 +45,16 @@ $ const navigation = {
     <if(showIdxNewsletterSignup)>
       <marko-web-browser-component name="IdentityXNewsletterToggleButton" ssr=true />
     </if>
-  </default-theme-site-navbar>
+  </theme-site-navbar>
 
-  <default-theme-site-navbar modifiers=["primary"] attrs={ "aria-label": "Primary Navigation" }>
-    <default-theme-site-navbar-items
+  <theme-site-navbar modifiers=["primary"] attrs={ "aria-label": "Primary Navigation" }>
+    <theme-site-navbar-items
       items=navigation.primary
       modifiers=["primary"]
       reg-enabled=input.regEnabled
       has-user=input.hasUser
     />
-  </default-theme-site-navbar>
+  </theme-site-navbar>
   <${input.belowNav} />
 </marko-web-block>
 <if(showIdxNewsletterSignup)>

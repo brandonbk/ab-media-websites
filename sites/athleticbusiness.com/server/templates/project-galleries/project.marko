@@ -48,7 +48,7 @@ $ const aliases = [gallery.primarySection.alias, gallery.primarySection.alias.sp
 
       <@section>
         <div class="content-page-body">
-          <default-theme-page-contents|{ blockName }| attrs={ "data-gallery-id": entry.id }>
+          <theme-page-contents|{ blockName }| attrs={ "data-gallery-id": entry.id }>
             <global-image-slider
               modifiers=["project-gallery"]
               images=getAsArray(entry, "imagesConnection.edges").map(edge => edge.node)
@@ -79,7 +79,7 @@ $ const aliases = [gallery.primarySection.alias, gallery.primarySection.alias.sp
               prev-project=prevProject
               alias=gallery.primarySection.alias
             />
-          </default-theme-page-contents>
+          </theme-page-contents>
         </div>
       </@section>
 
