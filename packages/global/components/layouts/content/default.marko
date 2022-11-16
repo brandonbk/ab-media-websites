@@ -84,6 +84,12 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
           />
         </else-if>
 
+        <if(content.transcript)>
+          <marko-web-link href=`#transcript-${id}` class="btn btn-transcript mt-block mb-2" title="Transcript">
+            <marko-web-icon name="file" modifiers=["lg"] /> Transcript
+          </marko-web-link>
+        </if>
+
         $ const requiresRegistration = get(content, "userRegistration.isCurrentlyRequired");
         $ const accessLevels = getAsArray(content, "userRegistration.accessLevels");
         <marko-web-identity-x-access|context|
@@ -119,7 +125,16 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
 
             $ const sidebars = getAsArray(content, "sidebars").map((sidebar) => sidebar.body);
             <marko-web-content-sidebars block-name=blockName obj={ sidebars } />
+            <if(content.transcript)>
+              <div id=`transcript-${id}` class="page-contents__content-transcript">
+                <marko-web-element block-name="page-contents" name="content-transcript-title">
+                  <marko-web-icon name="file" modifiers=["lg"] /> Transcript
+                </marko-web-element>
+                <content-body-with-injection content={ id: `transcript-${content.id}`, body: content.transcript } with-mobile-leaderboard=false with-leaders-block=false aliases=aliases block-name=blockName />
+              </div>
+            </if>
           </else>
+
         </marko-web-identity-x-access>
 
         <if(type === "document" || type === "whitepaper")>
