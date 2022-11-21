@@ -1,4 +1,5 @@
 import { getAsArray } from "@parameter1/base-cms-object-path";
+import queryFragment from "@parameter1/base-cms-marko-web-theme-monorail/graphql/fragments/latest-products-feed-block"
 
 $ const { id, alias, name, pageNode } = input;
 $ const sections = getAsArray(input, "sections");
@@ -44,9 +45,27 @@ $ const perPage = 10;
           <marko-web-website-section-name tag="h1" block-name=blockName obj=section />
         </else>
 
-        <theme-latest-products-feed-block alias=alias>
-          <@query-params limit=perPage skip=p.skip({ perPage }) />
-        </theme-latest-products-feed-block>
+        $ const queryParams = {
+          limit: perPage,
+          skip: p.skip({ perPage }),
+          sectionAlias: alias,
+          queryFragment,
+        };
+        <marko-web-query|{ nodes }| name="website-scheduled-content" params=queryParams>
+          <marko-web-node-list
+            inner-justified=false
+            flush-x=true
+            flush-y=false
+            modifiers=["latest-products-feed"]
+          >
+            <@nodes nodes=nodes>
+              <@slot|{ node }|>
+                <theme-product-feed-content-node node=node />
+              </@slot>
+            </@nodes>
+          </marko-web-node-list>
+        </marko-web-query>
+
         <theme-latest-products-feed-block|{ totalCount }| alias=alias count-only=true>
           <theme-pagination-controls
             per-page=perPage
