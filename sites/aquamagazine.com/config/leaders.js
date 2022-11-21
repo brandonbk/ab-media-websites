@@ -8,4 +8,5 @@ module.exports = {
     imgSrc: process.env.LEADERS_LOGO || 'https://img.aquamagazine.com/files/base/abmedia/all/image/static/Leaders_Header_Aqua.jpeg?auto=format,compress&h=90',
     imgSrcset: process.env.LEADERS_LOGO || 'https://img.aquamagazine.com/files/base/abmedia/all/image/static/Leaders_Header_Aqua.jpeg?auto=format,compress&h=90&dpr=2 2x',
   },
+  displayCallout: false,
 };
