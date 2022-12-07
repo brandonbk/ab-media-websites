@@ -8,8 +8,25 @@ $theme-site-header-breakpoints: (
 
 // Colors
 $primary: #103a57;
+$leaders-primary-color: #7cc343;
+$leaders-nav-link-color: #000;
 
 @import "../../node_modules/@ab-media/package-global/scss/core";
+
+.leaders {
+  &__header-image {
+    img {
+      width: 100%;
+      max-width: 512px;
+      max-height: 180px;
+    }
+  }
+  &__footer {
+    .btn-primary {
+      background-color: $leaders-primary-color;
+    }
+  }
+}
 
 .pinterest-block {
   margin-bottom: 29px;

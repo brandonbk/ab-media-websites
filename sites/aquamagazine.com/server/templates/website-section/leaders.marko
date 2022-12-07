@@ -1,0 +1,19 @@
+import { get } from "@parameter1/base-cms-object-path";
+
+$ const { id, alias, name, pageNode } = input;
+
+$ const { site, config } = out.global;
+
+<global-website-section-leaders-layout
+  id=id
+  alias=alias
+  name=name
+  page-node=pageNode
+>
+  <@page-description>
+    <p>Welcome to <em>${config.siteName()}'s</em> ${site.get("leaders.title")} program.</p>
+  </@page-description>
+  <@page-body>
+    <p>You'll be pleased to know that our annual Leaders in ...</p>
+  </@page-body>
+</global-website-section-leaders-layout>

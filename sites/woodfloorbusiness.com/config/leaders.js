@@ -5,7 +5,7 @@ module.exports = {
   calloutValue: 'Leaders in Wood Floor Business',
   alias: process.env.LEADERS_ALIAS || 'leaders/2022',
   header: {
-    imgSrc: process.env.LEADERS_LOGO || 'https://img.athleticbusiness.com/files/base/abmedia/all/image/static/leaders-2022.png?auto=format,compress&h=90',
-    imgSrcset: process.env.LEADERS_LOGO || 'https://img.athleticbusiness.com/files/base/abmedia/all/image/static/leaders-2022.png?auto=format,compress&h=90&dpr=2 2x',
+    imgSrc: process.env.LEADERS_LOGO || 'https://img.woodfloorbusiness.com/files/base/abmedia/all/image/static/wfb-leaders.jpg?auto=format,compress&h=180',
+    imgSrcset: process.env.LEADERS_LOGO || 'https://img.woodfloorbusiness.com/files/base/abmedia/all/image/static/wfb-leaders.jpg?auto=format,compress&h=180&dpr=2 2x',
   },
 };
