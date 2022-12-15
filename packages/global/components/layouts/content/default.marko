@@ -112,7 +112,6 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
           </if>
           <else>
             <content-body-with-injection content=content aliases=aliases block-name=blockName />
-            <global-leaders-contextual content-id=id skip-when-exists=true />
 
             <!-- needs input -->
             <if(input.afterBody)>
@@ -143,6 +142,9 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
             <@link class="btn btn-primary" />
           </theme-content-download>
         </if>
+
+        <global-leaders-contextual content-id=id skip-when-exists=true />
+
         <if(type !== "contact")>
           <for|author| of=authors>
             <if(getAsArray(author, "labels").includes("Contributor"))>
