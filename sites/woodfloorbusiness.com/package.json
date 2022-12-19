@@ -1,6 +1,6 @@
 {
   "name": "@ab-media/woodfloorbusiness.com",
-  "version": "1.46.12",
+  "version": "1.46.13",
   "author": "Brandon Krigbaum <brandon@parameter1.com>",
   "repository": "https://github.com/parameter1/ab-media-websites/tree/master/sites/woodfloorbusiness.com",
   "license": "MIT",
@@ -15,8 +15,8 @@
     "test": "yarn lint && yarn compile && yarn build"
   },
   "dependencies": {
-    "@ab-media/base-cms-marko-web-broadstreet": "^1.46.9",
-    "@ab-media/package-global": "^1.46.12",
+    "@ab-media/base-cms-marko-web-broadstreet": "^1.46.13",
+    "@ab-media/package-global": "^1.46.13",
     "@parameter1/base-cms-marko-core": "^3.17.3",
     "@parameter1/base-cms-marko-web": "^3.17.3",
     "@parameter1/base-cms-marko-web-gtm": "^3.17.0",
