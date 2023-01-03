@@ -15,6 +15,9 @@ $ const blockName = defaultValue(input.blockName, "pib-page-card");
       <marko-web-element block-name=blockName name="description">
         ${node.teaser}
       </marko-web-element>
+      <marko-web-element block-name=blockName name="date">
+        ${node.date}
+      </marko-web-element>
 
       <marko-web-link
         class=`btn btn-primary ${blockName}__download-btn`
