@@ -2,7 +2,7 @@ import { buildImgixUrl } from "@parameter1/base-cms-image";
 import { get } from "@parameter1/base-cms-object-path";
 
 $ const { advertiser } = input;
-$ const imgDefaults = { auto: "format,compress", h: 25, q: 70 };
+$ const imgDefaults = { auto: "format,compress", h: 150, w: 150, q: 70, fit: 'fill' };
 $ const imgSrc = get(advertiser, "logo.src");
 
 <if(imgSrc)>
@@ -12,11 +12,13 @@ $ const imgSrc = get(advertiser, "logo.src");
     <marko-web-element block-name="sponsor-logo" name="label">
       Presented by
     </marko-web-element>
-    <marko-web-img
-      class="sponsor-logo__logo"
-      src=src
-      srcset=srcset
-      alt="Sponsor Logo"
-    />
+    <marko-web-element block-name="sponsor-logo" name="logo">
+      <marko-web-img
+        class="sponsor-logo__logo"
+        src=src
+        srcset=srcset
+        alt="Sponsor Logo"
+      />
+    </marko-web-element>
   </marko-web-block>
 </if>
