@@ -53,11 +53,14 @@
     }
   }
 }
-
-.sponsor-logo {
-  $self: &;
-  &__logo {
-    height: 25px;
+.page-wrapper__section--nativex-story-header {
+  .sponsor-logo {
+    $self: &;
+    flex-direction: column;
+    align-items: initial;
+    &__logo {
+      height: initial;
+    }
   }
 }
 
