@@ -1,6 +1,6 @@
 {
   "name": "@ab-media/athleticbusiness.com",
-  "version": "1.46.14",
+  "version": "1.46.15",
   "author": "Brandon Krigbaum <brandon@parameter1.com>",
   "repository": "https://github.com/parameter1/ab-media-websites/tree/master/sites/athleticbusiness.com",
   "license": "MIT",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@ab-media/base-cms-marko-web-broadstreet": "^1.46.13",
-    "@ab-media/package-global": "^1.46.14",
+    "@ab-media/package-global": "^1.46.15",
     "@parameter1/base-cms-apollo-ssr": "^3.0.0",
     "@parameter1/base-cms-marko-core": "^3.17.3",
     "@parameter1/base-cms-marko-web": "^3.17.3",
