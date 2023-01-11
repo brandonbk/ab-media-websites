@@ -64,12 +64,11 @@ $ const countQueryParams = {
   </@head>
 
   <@section|{ aliases }| modifiers=["break-container", "first"]>
-    <!-- <theme-gam-define-display-ad
-      name="leaderboard"
+    <global-leaderboard-ad-block
       position="section_page"
       aliases=aliases
-      modifiers=["inter-block"]
-    /> -->
+      modifiers=["inter-block", "combined-leaderboard"]
+    />
   </@section>
 
   <@section|{ blockName, section, aliases }|>
@@ -102,12 +101,7 @@ $ const countQueryParams = {
         </@header>
         <@query-params ...upcomingQueryParams />
         <@after>
-          <!-- <theme-gam-define-display-ad
-            name="rotation"
-            position="section_page"
-            aliases=aliases
-            modifiers=["inter-block"]
-          /> -->
+          <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "section_page", "inter-block"] />
         </@after>
       </theme-section-feed-block>
     </if>
