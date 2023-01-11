@@ -126,7 +126,20 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
                 content=content
               />
             </if>
-
+            <if(type === "webinar")>
+              $ const isUpcoming = content.startDate > Date.now();
+              $ const btnLabel = (isUpcoming ? "Register for Webinar" : "View Webinar")
+              <if(content.linkUrl && isUpcoming)>
+                <marko-web-link
+                  class="my-block btn btn-primary btn-lg"
+                  href=content.linkUrl
+                  title=`Register for ${content.name}`
+                  target="_blank"
+                >
+                  ${btnLabel}
+                </marko-web-link>
+              </if>
+            </if>
             $ const sidebars = getAsArray(content, "sidebars").map((sidebar) => sidebar.body);
             <marko-web-content-sidebars block-name=blockName obj={ sidebars } />
             <if(content.transcript)>
@@ -140,21 +153,6 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
           </else>
 
         </marko-web-identity-x-access>
-
-        <if(type === "webinar")>
-          $ const isUpcoming = content.startDate > Date.now();
-          $ const btnLabel = (isUpcoming ? "Register for Webinar" : "View Webinar")
-          <if(content.linkUrl && isUpcoming)>
-            <marko-web-link
-              class="my-block btn btn-primary btn-lg"
-              href=content.linkUrl
-              title=`Register for ${content.name}`
-              target="_blank"
-            >
-              ${btnLabel}
-            </marko-web-link>
-          </if>
-        </if>
 
         <if(type === "document" || type === "whitepaper")>
           <theme-content-download obj=content>
