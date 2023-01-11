@@ -1,0 +1,143 @@
+import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
+import { getAsArray } from "@parameter1/base-cms-object-path";
+
+$ const { id, alias, name, pageNode } = input;
+$ const sections = getAsArray(input, "sections");
+
+$ const { site, pagination: p, i18n } = out.global;
+$ const continueLabel = i18n("Sign Me Up!");
+$ const loginEmailLabel = i18n("Work Email");
+$ const buttonLabels = { continue: continueLabel };
+$ const perPage = 12;
+$ const now = Date.now();
+
+$ const queryParams = {
+  requiresImage: false,
+  sectionBubbling: false,
+  includeContentTypes: ["Webinar"],
+
+};
+$ const upcomingQueryParams = {
+  ...queryParams,
+  beginningAfter: now,
+  limit: 25,
+  sort: {
+    field: "startDate",
+    order: "asc",
+  },
+};
+$ const archiveQueryParams = {
+  ...queryParams,
+  beginningBefore: now,
+  sort: {
+    field: "startDate",
+    order: "desc",
+  },
+  limit: perPage,
+  skip: p.skip({ perPage })
+};
+
+<!-- Correct queryParams format to send to pagination controls -->
+$ const countQueryParams = {
+  ...queryParams,
+  beginning: {
+    before: now,
+  },
+};
+
+<global-website-section-default-layout
+  id=id
+  alias=alias
+  name=name
+  page-node=pageNode
+>
+  <@head>
+    <theme-section-feed-block|{ totalCount }| alias=alias count-only=true>
+      <@query-params ...countQueryParams />
+      <theme-pagination-controls
+        per-page=perPage
+        total-count=totalCount
+        path=alias
+        as-rels=true
+      />
+    </theme-section-feed-block>
+  </@head>
+
+  <@section|{ aliases }| modifiers=["break-container", "first"]>
+    <!-- <theme-gam-define-display-ad
+      name="leaderboard"
+      position="section_page"
+      aliases=aliases
+      modifiers=["inter-block"]
+    /> -->
+  </@section>
+
+  <@section|{ blockName, section, aliases }|>
+    <if(input.beforeName)>
+      <${input.beforeName}
+        aliases=aliases
+        block-name=blockName
+        section=section
+      />
+    </if>
+  </@section>
+  <@section|{ blockName, section, aliases }| modifiers=["webinars"]>
+    <marko-web-website-section-name|{ value }| tag="h1" block-name=blockName obj=section>
+      <if(p.page > 1)>${value}: Page ${p.page}</if>
+      <else>${value}</else>
+    </marko-web-website-section-name>
+    <marko-web-website-section-description obj=section />
+
+    <if(input.afterName)>
+      <${input.afterName}
+        aliases=aliases
+        block-name=blockName
+        section=section
+      />
+    </if>
+    <if(p.page === 1)>
+      <theme-section-feed-block alias=alias modifiers=["upcoming"]>
+        <@header>
+          Upcoming
+        </@header>
+        <@query-params ...upcomingQueryParams />
+        <@after>
+          <!-- <theme-gam-define-display-ad
+            name="rotation"
+            position="section_page"
+            aliases=aliases
+            modifiers=["inter-block"]
+          /> -->
+        </@after>
+      </theme-section-feed-block>
+    </if>
+    <theme-section-feed-block alias=alias lazyload=false modifiers=["archives"]>
+      <@header>
+        On Demand
+      </@header>
+      <@query-params ...archiveQueryParams />
+    </theme-section-feed-block>
+    <theme-section-feed-block|{ totalCount }| alias=alias count-only=true>
+      <@query-params ...countQueryParams />
+      <theme-pagination-controls
+        per-page=perPage
+        total-count=totalCount
+        path=alias
+      />
+    </theme-section-feed-block>
+  </@section>
+
+  <@section>
+    <theme-top-stories-block query-params={ optionName: "Pinned" } />
+  </@section>
+
+  <for|s| of=sections>
+    <@section|{ blockName, section, aliases }| modifiers=s.modifiers>
+      <${s.renderBody}
+        block-name=blockName
+        section=section
+        aliases=aliases
+      />
+    </@section>
+  </for>
+</global-website-section-default-layout>
