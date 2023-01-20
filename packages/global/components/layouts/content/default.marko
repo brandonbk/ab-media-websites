@@ -111,8 +111,13 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
             />
           </if>
           <else>
-            <content-body-with-injection content=content aliases=aliases block-name=blockName />
 
+            <if(shouldInjectAds)>
+              <content-body-with-injection content=content aliases=aliases block-name=blockName />
+            </if>
+            <else>
+              <marko-web-content-body block-name=blockName obj=content />
+            </else>
             <!-- needs input -->
             <if(input.afterBody)>
               <${input.afterBody}
@@ -121,7 +126,20 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
                 content=content
               />
             </if>
-
+            <if(type === "webinar")>
+              $ const isUpcoming = content.startDate > Date.now();
+              $ const btnLabel = (isUpcoming ? "Register for Webinar" : "View Webinar")
+              <if(content.linkUrl && isUpcoming)>
+                <marko-web-link
+                  class="my-block btn btn-primary btn-lg"
+                  href=content.linkUrl
+                  title=`Register for ${content.name}`
+                  target="_blank"
+                >
+                  ${btnLabel}
+                </marko-web-link>
+              </if>
+            </if>
             $ const sidebars = getAsArray(content, "sidebars").map((sidebar) => sidebar.body);
             <marko-web-content-sidebars block-name=blockName obj={ sidebars } />
             <if(content.transcript)>
@@ -196,7 +214,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
     />
   </@section>
 
-  <if(showMoreSection)>
+  <if(showMoreSection && type !== 'webinar')>
     $ const perPage = 12;
     $ const moreSectionLimit = 3;
     $ const moreSectionCount = perPage / moreSectionLimit;
