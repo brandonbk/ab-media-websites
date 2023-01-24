@@ -79,6 +79,7 @@ module.exports = {
       ...topics.primary,
       { href: '/directory', label: 'Buyer\'s Guide' },
       { href: 'https://www.abshow.com', label: 'AB Show', target: '_blank' },
+      { href: '/project-galleries/architectural-showcase', label: 'Showcase' },
     ],
   },
   tertiary: {
