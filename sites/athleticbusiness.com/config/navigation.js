@@ -89,7 +89,7 @@ module.exports = {
     items: [
       { href: '/page/about-us', label: 'About Us' },
       { href: '/page/contact-us', label: 'Contact Us' },
-      { href: 'https://athleticbusiness.dragonforms.com/loading.do?omedasite=ab_land', label: 'Subscribe', target: '_blank' },
+      subscribe,
       { href: '/page/privacy-policy', label: 'Privacy Policy' },
       { href: '/site-map', label: 'Site Map' },
     ],
