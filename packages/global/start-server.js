@@ -18,6 +18,7 @@ const billboardState = require('./middleware/billboard-state');
 const oembedHandler = require('./oembed-handler');
 const idxRouteTemplates = require('./templates/user');
 const redirectHandler = require('./redirect-handler');
+const idxNavItems = require('./config/identity-x-nav');
 
 const routes = (siteRoutes, siteConfig) => (app) => {
   // Handle submissions on /__inquiry
@@ -68,6 +69,7 @@ module.exports = (options = {}) => {
       // Setup IdentityX + Omeda
       const omedaIdentityXConfig = getAsObject(options, 'siteConfig.omedaIdentityX');
       omedaIdentityX(app, { ...omedaIdentityXConfig, idxRouteTemplates });
+      idxNavItems({ site: app.locals.site });
 
       const bamConfig = get(options, 'siteConfig.bam');
       set(app.locals, 'BAM', bamConfig);

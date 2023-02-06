@@ -62,6 +62,9 @@ module.exports = {
   tertiary: {
     items: [],
   },
+  user: {
+    items: [],
+  },
   desktopMenu,
   mobileMenu,
   footer: {
