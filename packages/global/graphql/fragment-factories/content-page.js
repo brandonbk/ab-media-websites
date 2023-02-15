@@ -168,6 +168,11 @@ fragment LeadersContentPageFragment on Content {
           siteContext {
             path
           }
+          primaryImage {
+            id
+            src(input: { options: { auto: "format,compress" } })
+            alt(input: { append: "Headshot" })
+          }
         }
       }
     }
