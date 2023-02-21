@@ -1,6 +1,5 @@
 FROM node:14.21 as build
 WORKDIR /root
-ENV NODE_ENV production
 ARG SITE
 
 ADD package.json yarn.lock /root/
