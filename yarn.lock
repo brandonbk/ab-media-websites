@@ -1841,10 +1841,10 @@
   dependencies:
     "@parameter1/base-cms-utils" "^4.0.0"
 
-"@parameter1/base-cms-marko-web-theme-monorail-magazine@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@parameter1/base-cms-marko-web-theme-monorail-magazine/-/base-cms-marko-web-theme-monorail-magazine-4.0.0.tgz#29e80c8226715fafdd9c3bb787617caae1b86fea"
-  integrity sha512-EH+WmidR9KHD/UKuLF/KdLbbzN6PlXIS5y5Rfm/Auemirv9JNlmI5V4bhhsJLK/3h3a3qoJ2fw7veOGmQg7qSw==
+"@parameter1/base-cms-marko-web-theme-monorail-magazine@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@parameter1/base-cms-marko-web-theme-monorail-magazine/-/base-cms-marko-web-theme-monorail-magazine-4.0.1.tgz#9f00bb6595858aacdc0c4a36a58cdebb72341e0e"
+  integrity sha512-OAnLWF1gORzn17T37EYOJigtleSIYinhg3l8ZzMcHmisyvce6U3B0wSwnnbPiaTRoyUBkSBy4OoWTI+LdW1RlA==
   dependencies:
     "@parameter1/base-cms-marko-core" "^4.0.0"
     "@parameter1/base-cms-marko-web" "^4.0.0"
