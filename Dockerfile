@@ -6,8 +6,7 @@ ARG SITE
 ADD package.json yarn.lock /root/
 ADD packages /root/packages
 ADD sites/$SITE /root/sites/$SITE
-RUN yarn --production --pure-lockfile
-
+RUN yarn --pure-lockfile
 RUN yarn build
 
 FROM node:14.21-alpine
