@@ -6,6 +6,7 @@ ADD package.json yarn.lock lerna.json /root/
 ADD packages /root/packages
 ADD sites/$SITE /root/sites/$SITE
 RUN yarn --pure-lockfile
+ENV NODE_ENV production
 RUN yarn build
 
 FROM node:14.21-alpine
