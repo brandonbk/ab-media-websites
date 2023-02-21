@@ -1,0 +1,70 @@
+import gql from "graphql-tag";
+import { getAsArray, get } from "@parameter1/base-cms-object-path";
+
+$ const  { i18n } = out.global;
+
+$ const { graphqlClient } = input;
+$ const limit = input.limit || 5;
+$ const shortIds = (input.shortIds || "").split(",").map(v => v.trim()).filter(v => v);
+
+$ const blockName = "read-next";
+$ const convertEntry = (entry) => {
+  const primaryImage = get(entry, "primaryImageEdge.node");
+  return {
+    type: "project-gallery",
+    shortName: entry.title,
+    published: new Date(entry.publishedAt),
+    siteContext: { path: `/project-galleries/${entry.type.slug}/${entry.shortId}/${entry.slug}` },
+    primarySection: { name: `${entry.city}, ${entry.region}` },
+    primaryImage,
+  };
+};
+
+<if(shortIds.length)>
+  $ const query = gql`
+    query DirectoryFeaturedProjectsBlock($shortIds: [String!]!) {
+      entries(input: {
+        includeIdentifiers: { shortIds: $shortIds }
+        pagination: { limit: ${limit} }
+        sort: { field: PUBLISHED_AT, order: DESC }
+      }) {
+        edges {
+          node {
+            id
+            shortId
+            type {
+              id
+              slug
+            }
+            slug
+            title
+            city
+            region
+            publishedAt
+            primaryImageEdge {
+              node {
+                id
+                src
+                alt
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+  $ const variables = { shortIds };
+
+  <marko-web-resolve|{ resolved }| promise=graphqlClient.query({ query, variables })>
+    $ const nodes = getAsArray(resolved, "data.entries.edges").map(edge => convertEntry(edge.node));
+    <theme-latest-content-list-block
+      nodes=nodes
+      with-native-x-section=false
+      flush-x=false
+      title=`${i18n("Projects Featured in the Architectural Showcase")}`
+      class="mt-block"
+    >
+      <@node with-dates=false />
+    </theme-latest-content-list-block>
+  </marko-web-resolve>
+</if>

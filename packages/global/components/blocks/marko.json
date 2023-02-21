@@ -21,6 +21,11 @@
     "@graphql-client": "object",
     "@short-ids": "string"
   },
+  "<global-leaders-featured-projects-block>": {
+    "template": "./leaders-featured-projects.marko",
+    "@graphql-client": "object",
+    "@short-ids": "string"
+  },
   "<global-directory-sections-block>": {
     "template": "./directory-sections.marko",
     "@schedules": "array"

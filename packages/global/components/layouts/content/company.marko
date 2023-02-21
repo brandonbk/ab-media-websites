@@ -277,6 +277,28 @@ $ const lang = site.config.lang || "en";
           </marko-web-node-list>
 
           <theme-latest-content-list-block
+              query-name="all-company-content"
+              query-params={
+                companyId: content.id,
+                includeContentTypes: ["MediaGallery"],
+                includeLabels: "Buyers Guide Project Gallery",
+                limit: 10,
+                queryFragment,
+              }
+              title=`${i18n("Project Gallery")}`
+              with-native-x-section=false
+              flush-x=false
+              class="mt-block"
+            >
+              <@node with-dates=false />
+            </theme-latest-content-list-block>
+
+            <global-leaders-featured-projects-block
+              graphql-client=$projectsGraphQL
+              short-ids=content.projectShortIds
+            />
+
+          <theme-latest-content-list-block
             query-name="all-company-content"
             query-params={ companyId: id, includeContentTypes: ["Article"], limit: 3, withSite: false }
             title=`${i18n("Case Studies")}`
