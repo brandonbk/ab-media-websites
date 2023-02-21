@@ -6,7 +6,6 @@ const index = require('../templates/magazine/index');
 const publication = require('../templates/magazine/publication');
 const issue = require('../templates/magazine/issue');
 
-
 module.exports = (app) => {
   app.get('/magazine', (req, res) => {
     res.marko(index);

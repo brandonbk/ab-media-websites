@@ -16,7 +16,7 @@ const getFileRedirect = ({ from, app }) => {
 };
 
 const getContactRedirect = ({ from }) => {
-  const found = contactRedirects.find(pair => (new RegExp(`${pair.from}`)).test(from));
+  const found = contactRedirects.find((pair) => (new RegExp(`${pair.from}`)).test(from));
   if (found) return found;
   return null;
 };
