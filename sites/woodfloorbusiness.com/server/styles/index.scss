@@ -11,7 +11,7 @@ $primary: #103a57;
 $leaders-primary-color: #7cc343;
 $leaders-nav-link-color: #000;
 
-@import "../../node_modules/@ab-media/package-global/scss/core";
+@import "@ab-media/package-global/scss/core";
 
 .leaders {
   &__header-image {

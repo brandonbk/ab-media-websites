@@ -80,7 +80,7 @@ module.exports = (options = {}) => {
 
       app.use(stripOlyticsParam());
     },
-    onAsyncBlockError: e => newrelic.noticeError(e),
+    onAsyncBlockError: (e) => newrelic.noticeError(e),
 
     redirectHandler,
 

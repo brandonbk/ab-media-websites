@@ -3,7 +3,7 @@ version: '3.7'
 x-node-defaults: &node
   tty: true
   init: true
-  image: node:10.24
+  image: node:14.21
   entrypoint: ["node"]
   working_dir: /root
   volumes:
@@ -51,8 +51,8 @@ x-env-virgon: &env-virgon
 
 x-site-command: &site-cmd
   <<: *node
-  entrypoint: ["node_modules/.bin/basecms-website"]
-  command: ["dev", "index.js"]
+  entrypoint: ["yarn"]
+  command: ["dev"]
 
 volumes:
   yarn-cache: {}

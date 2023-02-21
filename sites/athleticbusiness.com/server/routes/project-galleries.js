@@ -55,7 +55,7 @@ const galleries = [
     teaser: '',
     description: '',
   },
-].map(gallery => ({
+].map((gallery) => ({
   ...gallery,
   type: gallery.slug.replace(/-/g, '_').toUpperCase(),
   primarySection: {
@@ -84,7 +84,7 @@ module.exports = (app) => {
   router.get(`/:alias(${galleryAliases.join('|')})`, asyncRoute(async (req, res) => {
     const { alias } = req.params;
     const { direction, cursor } = req.query;
-    const gallery = galleries.find(g => g.alias === alias);
+    const gallery = galleries.find((g) => g.alias === alias);
 
     const input = createInput({
       limit: 30,
@@ -104,7 +104,7 @@ module.exports = (app) => {
 
   router.get(`/:alias(${galleryAliases.join('|')})/:shortId([a-zA-Z0-9]{10})/:slug(*)`, asyncRoute(async (req, res) => {
     const { alias, shortId, slug } = req.params;
-    const gallery = galleries.find(g => g.alias === alias);
+    const gallery = galleries.find((g) => g.alias === alias);
     const input = { shortId };
 
     const { data } = await req.$projectsGraphQL.query({ query: VIEW_QUERY, variables: { input } });
@@ -152,12 +152,12 @@ module.exports = (app) => {
   });
 
   redirects.get('/facilities-of-merit.html', (_, res) => {
-    const gallery = galleries.find(g => g.alias === 'facilities-of-merit');
+    const gallery = galleries.find((g) => g.alias === 'facilities-of-merit');
     res.redirect(301, `/${gallery.primarySection.alias}`);
   });
 
   redirects.get('/showcase.html', (_, res) => {
-    const gallery = galleries.find(g => g.alias === 'architectural-showcase');
+    const gallery = galleries.find((g) => g.alias === 'architectural-showcase');
     res.redirect(301, `/${gallery.primarySection.alias}`);
   });
 
@@ -168,7 +168,7 @@ module.exports = (app) => {
   }));
 
   redirects.get('/adp/showcase.html', (_, res) => {
-    const gallery = galleries.find(g => g.alias === 'aquatic-design-portfolio');
+    const gallery = galleries.find((g) => g.alias === 'aquatic-design-portfolio');
     res.redirect(301, `/${gallery.primarySection.alias}`);
   });
 

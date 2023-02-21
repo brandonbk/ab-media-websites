@@ -12,5 +12,5 @@ module.exports = startServer({
   coreConfig,
   siteConfig,
   routes,
-  i18n: v => i18n[`${v}`.toLowerCase()] || v,
-}).then(() => log('Website started!')).catch(e => setImmediate(() => { throw e; }));
+  i18n: (v) => i18n[`${v}`.toLowerCase()] || v,
+}).then(() => log('Website started!')).catch((e) => setImmediate(() => { throw e; }));

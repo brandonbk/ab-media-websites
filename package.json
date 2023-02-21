@@ -11,15 +11,19 @@
     "sites/*"
   ],
   "scripts": {
+    "build": "lerna run build",
     "compile": "lerna run compile",
     "lint": "lerna run lint",
-    "lint:css": "lerna run lint:css",
-    "lint:js": "lerna run lint:js",
+    "lint:fix": "lerna run lint:fix",
     "test": "lerna run test"
   },
   "devDependencies": {
-    "@parameter1/base-cms-marko-compiler": "^3.0.0",
-    "babel-eslint": "^10.1.0",
-    "lerna": "^3.16.4"
+    "@babel/eslint-parser": "^7.19.1",
+    "@parameter1/base-cms-marko-compiler": "^4.0.0",
+    "eslint": "^8.34.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-vue": "^9.9.0",
+    "lerna": "^6.5.1"
   }
 }

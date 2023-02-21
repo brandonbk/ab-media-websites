@@ -1,4 +1,4 @@
-FROM node:10.24 as build
+FROM node:14.21 as build
 WORKDIR /root
 ENV NODE_ENV production
 ARG SITE
@@ -8,10 +8,9 @@ ADD packages /root/packages
 ADD sites/$SITE /root/sites/$SITE
 RUN yarn --production --pure-lockfile
 
-WORKDIR /root/sites/$SITE
-RUN node_modules/.bin/basecms-website build
+RUN yarn build
 
-FROM node:10.15-alpine
+FROM node:14.21-alpine
 ENV NODE_ENV production
 ENV PORT 80
 ARG SITE

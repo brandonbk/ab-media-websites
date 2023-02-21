@@ -19,8 +19,8 @@ import Autocomplete from '@trevoreyre/autocomplete-vue';
 const path = '/__company-search?searchQuery=';
 
 export default {
-  inject: ['EventBus'],
   components: { Autocomplete },
+  inject: ['EventBus'],
 
   data: () => ({
     errorClass: '',
@@ -55,7 +55,7 @@ export default {
         const res = await fetch(url);
         const json = await res.json();
         if (!res.ok) throw new Error(json.message || res.statusText);
-        return json.nodes.filter(node => !node.parentCompany);
+        return json.nodes.filter((node) => !node.parentCompany);
       } catch (error) {
         const errorNodes = [{
           id: 'error',

@@ -6,15 +6,18 @@
   "license": "MIT",
   "repository": "https://github.com/parameter1/ab-media-websites/tree/master/packages/base-cms-marko-web-broadstreet",
   "scripts": {
+    "compile": "basecms-marko-compile compile",
+    "build": "yarn compile",
     "lint": "eslint --ext .js --ext .vue --max-warnings 5 --ignore-path ../../.eslintignore ./",
-    "test": "yarn lint"
+    "lint:fix": "yarn lint --fix",
+    "test": "yarn lint && yarn compile --no-clean"
   },
   "dependencies": {
-    "@parameter1/base-cms-marko-core": "^3.17.3",
-    "@parameter1/base-cms-marko-web": "^3.17.3",
-    "@parameter1/base-cms-marko-web-deferred-script-loader": "^3.17.0",
-    "@parameter1/base-cms-object-path": "^3.0.0",
-    "@parameter1/base-cms-utils": "^3.0.0"
+    "@parameter1/base-cms-marko-core": "^4.0.0",
+    "@parameter1/base-cms-marko-web": "^4.0.0",
+    "@parameter1/base-cms-marko-web-deferred-script-loader": "^4.0.0",
+    "@parameter1/base-cms-object-path": "^4.0.0",
+    "@parameter1/base-cms-utils": "^4.0.0"
   },
   "publishConfig": {
     "access": "public"
