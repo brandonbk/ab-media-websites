@@ -213,8 +213,17 @@ label {
 }
 
 .node-list {
+  $self: &;
   &__header {
     padding-bottom: 0;
+  }
+  &--company-related-feed,
+  &--company-categories-feed {
+    #{ $self } {
+      &__header {
+        border-bottom: 0;
+      }
+    }
   }
 }
 
