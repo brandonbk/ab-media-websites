@@ -2,17 +2,17 @@
 @import "variables";
 
 // import theme css
-@import "../../node_modules/@parameter1/base-cms-marko-web-theme-monorail/scss/core";
+@import "@parameter1/base-cms-marko-web-theme-monorail/scss/core";
 
 // import theme magazine css
-@import "../../node_modules/@parameter1/base-cms-marko-web-theme-monorail-magazine/scss/index";
+@import "@parameter1/base-cms-marko-web-theme-monorail-magazine/scss/index";
 
 // Leaders css import
 @import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600,700&display=swap");
-@import "../../node_modules/@parameter1/base-cms-marko-web-leaders/scss/leaders";
+@import "@parameter1/base-cms-marko-web-leaders/scss/leaders";
 
 // boradstreet ads import
-@import "../../node_modules/@ab-media/base-cms-marko-web-broadstreet/scss/ads";
+@import "@ab-media/base-cms-marko-web-broadstreet/scss/ads";
 
 // page wrapper
 .page-wrapper {
