@@ -26,9 +26,13 @@
     "@graphql-client": "object",
     "@short-ids": "string"
   },
-  "<global-directory-sections-block>": {
-    "template": "./directory-sections.marko",
-    "@schedules": "array"
+  "<global-sections-listed-in-block>": {
+    "template": "./sections-listed-in.marko",
+    "@schedules": "array",
+    "@root-alias": "string",
+    "@full-name-find": "string",
+    "@full-name-replace": "string",
+    "@title": "string"
   },
   "<global-premium-partners-block>": {
     "template": "./premium-partners.marko"

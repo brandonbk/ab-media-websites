@@ -175,8 +175,12 @@ $ const lang = site.config.lang || "en";
             </theme-content-directory-section-flow>
           </marko-web-query>
 
-          <global-directory-sections-block schedules=content.websiteSchedules />
-
+          <global-sections-listed-in-block
+            schedules=content.websiteSchedules
+            root-alias="directory"
+            title="Categories Listed In"
+            full-name-find="Directory > "
+          />
         </if>
         <else>
           <div class="content-page-body">
@@ -217,35 +221,42 @@ $ const lang = site.config.lang || "en";
                 <global-content-body-with-tracking block-name="leaders-more-info" content=content />
               </@body>
             </marko-web-node-list>
-
-            <marko-web-query|{ nodes }|
-              name="all-company-content"
-              params={
-                companyId: id,
-                includeContentTypes: ["Promotion"],
-                queryFragment,
-                limit: 4,
-                withSite: false,
-              }
-            >
-              <marko-web-node-list class="mt-block">
-                <@header>
-                  ${i18n("Featured Products")}
-                </@header>
-                <@nodes|{ nodes: items }| nodes=nodes>
-                  <theme-card-deck-flow cols=4 nodes=items modifiers=["featured-products"]>
-                    <@slot|{ node, index }|>
-                      <theme-featured-products-card-node
-                        company-id=id
-                        image-width=340
-                        node=node
-                      />
-                    </@slot>
-                  </theme-card-deck-flow>
-                </@nodes>
-              </marko-web-node-list>
-            </marko-web-query>
           </div>
+          <global-sections-listed-in-block
+            schedules=content.websiteSchedules
+            root-alias=site.get('leaders.alias')
+            title=site.get('leaders.calloutValue')
+            full-name-find=site.get('leaders.listedInFind')
+            full-name-replace=site.get('leaders.listedInReplace')
+          />
+
+          <marko-web-query|{ nodes }|
+            name="all-company-content"
+            params={
+              companyId: id,
+              includeContentTypes: ["Promotion"],
+              queryFragment,
+              limit: 4,
+              withSite: false,
+            }
+          >
+            <marko-web-node-list class="mt-block">
+              <@header>
+                ${i18n("Featured Products")}
+              </@header>
+              <@nodes|{ nodes: items }| nodes=nodes>
+                <theme-card-deck-flow cols=4 nodes=items modifiers=["featured-products"]>
+                  <@slot|{ node, index }|>
+                    <theme-featured-products-card-node
+                      company-id=id
+                      image-width=340
+                      node=node
+                    />
+                  </@slot>
+                </theme-card-deck-flow>
+              </@nodes>
+            </marko-web-node-list>
+          </marko-web-query>
           $ const videos = getAsArray(content, "videos.edges").map(({ node }) => node);
           <marko-web-node-list class="mt-block">
             <@header>
