@@ -47,7 +47,7 @@ jobs:
       - name: Boot docker image
         run: |
           docker run -p 80:80 \
-            --name ${{ inputs.docker_image }} \
+            --name website-${{ inputs.site_host }} \
             -e TENANT_KEY=abmedia_all \
             -e SITE_ID=${{ inputs.site_id }} \
             -e GRAPHQL_URI=https://graphql.${{ inputs.infra_stack }}.base.parameter1.com \
@@ -70,4 +70,4 @@ jobs:
         timeout-minutes: 1
 
       - name: Stop docker image
-        run: docker stop ${{ inputs.docker_image }}
+        run: docker stop website-${{ inputs.site_host }}
