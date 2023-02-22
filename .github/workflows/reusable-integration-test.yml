@@ -15,9 +15,12 @@ on:
       infra_stack:
         type: string
         required: true
-      # push:
-      #   type: boolean
-      #   default: false
+      push:
+        type: boolean
+        default: false
+      ecr_registry:
+        type: string
+        default: 598984531759.dkr.ecr.us-east-2.amazonaws.com
 
 jobs:
   test:
@@ -25,10 +28,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Log in to ECR
+        if: inputs.push
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ inputs.ecr_registry }}
+          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
       - uses: docker/build-push-action@v3
         with:
           context: .
-          push: false
+          push: ${{ inputs.push }}
           build-args: |
             SITE=${{ inputs.site_host }}
           tags: ${{ inputs.docker_image }}
