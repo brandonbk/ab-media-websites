@@ -10,11 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - id: tag_version
-      # @todo update this to not use set-output
       run: |
         REF=$(echo $GITHUB_REF | cut -d / -f 3)
         [[ "$GITHUB_REF" =~ ^refs/tags.*$ ]] && VERSION="$REF" || VERSION="${REF}-${GITHUB_SHA::7}"
-        echo ::set-output name=version::$(echo "$VERSION")
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
     outputs:
       version: ${{ steps.tag_version.outputs.version }}
 
