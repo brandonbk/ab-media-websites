@@ -5,10 +5,6 @@ on:
     tags:
       - '*'
 
-env:
-  ECR_REGISTRY: 598984531759.dkr.ecr.us-east-2.amazonaws.com
-  IMG_PREFIX: ab-media
-
 jobs:
   vars:
     runs-on: ubuntu-latest
@@ -84,16 +80,27 @@ jobs:
     uses: ./.github/workflows/reusable-integration-test.yml
     strategy:
       matrix:
+        ###############################################
+        #v# Make sure this matches the site matrix! #v#
+        ###############################################
+        tenant_key:
+        - abmedia_all
+        image_prefix:
+        - ab-media
         site:
-        - { id: 60f6ec0bd28860bc3384daa1, host: athleticbusiness.com }
-        - { id: 60f6ec3bd28860bc3384e784, host: woodfloorbusiness.com }
-        - { id: 60f6ec34d28860bc3384e447, host: aquamagazine.com }
+        - { id: 60f6ec0bd28860bc3384daa1, stack: virgon, host: athleticbusiness.com }
+        - { id: 60f6ec3bd28860bc3384e784, stack: virgon, host: woodfloorbusiness.com }
+        - { id: 60f6ec34d28860bc3384e447, stack: virgon, host: aquamagazine.com }
+        ###############################################
+        #^# Make sure this matches the site matrix! #^#
+        ###############################################
     with:
-      docker_image: 598984531759.dkr.ecr.us-east-2.amazonaws.com/ab-media-${{ matrix.site.host }}:${{ needs.vars.outputs.version }}
-      ecr_registry: 598984531759.dkr.ecr.us-east-2.amazonaws.com
+      ecr_registry: ${{ vars.AWS_ECR_REGISTRY }}
+      docker_image: ${{ vars.AWS_ECR_REGISTRY }}/${{ matrix.image_prefix }}-${{ matrix.site.host }}:${{ needs.vars.outputs.version }}
       site_id: ${{ matrix.site.id }}
       site_host: ${{ matrix.site.host }}
-      infra_stack: virgon
+      infra_stack: ${{ matrix.site.stack }}
+      tenant_key: ${{ matrix.tenant_key }}
       push: true
     secrets: inherit
 
@@ -102,19 +109,27 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        namespace:
-          - staging-websites-virgon
+        ###############################################
+        #v# Make sure this matches the site matrix! #v#
+        ###############################################
+        tenant_key:
+        - abmedia_all
+        image_prefix:
+        - ab-media
         site:
-          - aquamagazine.com
-          - athleticbusiness.com
-          - woodfloorbusiness.com
+        - { id: 60f6ec0bd28860bc3384daa1, stack: virgon, host: athleticbusiness.com }
+        - { id: 60f6ec3bd28860bc3384e784, stack: virgon, host: woodfloorbusiness.com }
+        - { id: 60f6ec34d28860bc3384e447, stack: virgon, host: aquamagazine.com }
+        ###############################################
+        #^# Make sure this matches the site matrix! #^#
+        ###############################################
     steps:
       - name: Deploy to Kubernetes
         run: |
           npx @parameter1/rancher2cli dl \
-            --wait --namespace ${{ matrix.namespace }} \
-            basecms-website ${{ env.IMG_PREFIX }}-${{ matrix.site }} \
-            ${{ env.ECR_REGISTRY }}/${{ env.IMG_PREFIX }}-${{ matrix.site }}:${{ needs.vars.outputs.version }}
+            --wait --namespace staging-websites-${{ matrix.site.stack }} \
+            basecms-website ${{ matrix.image_prefix }}-${{ matrix.site.host }} \
+            ${{ vars.AWS_ECR_REGISTRY }}/${{ matrix.image_prefix }}-${{ matrix.site.host }}:${{ needs.vars.outputs.version }}
         env:
           RANCHER_CLUSTERID: ${{ secrets.RANCHER_CLUSTERID_BASECMS }}
           RANCHER_TOKEN: ${{ secrets.RANCHER_TOKEN }}

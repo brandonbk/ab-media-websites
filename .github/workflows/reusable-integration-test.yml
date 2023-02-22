@@ -20,7 +20,10 @@ on:
         default: false
       ecr_registry:
         type: string
-        default: 598984531759.dkr.ecr.us-east-2.amazonaws.com
+        required: true
+      tenant_key:
+        type: string
+        required: true
 
 jobs:
   test:
@@ -48,7 +51,7 @@ jobs:
         run: |
           docker run -p 80:80 \
             --name website-${{ inputs.site_host }} \
-            -e TENANT_KEY=abmedia_all \
+            -e TENANT_KEY=${{ inputs.tenant_key }} \
             -e SITE_ID=${{ inputs.site_id }} \
             -e GRAPHQL_URI=https://graphql.${{ inputs.infra_stack }}.base.parameter1.com \
             -e OEMBED_URI=https://oembed.${{ inputs.infra_stack }}.base.parameter1.com \

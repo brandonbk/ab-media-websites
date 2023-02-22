@@ -3,9 +3,6 @@
 
 name: Integration Tests
 
-env:
-  ab: fromJson(vars.SITE_AB)
-
 on:
   push:
     branches: ["*"]
@@ -17,12 +14,23 @@ jobs:
     uses: ./.github/workflows/reusable-integration-test.yml
     strategy:
       matrix:
-        site: ${{ fromJSON(vars.SITES_CONFIG) }}
-          # - { id: "${{ fromJson(vars.SITE_AB).id }}", host: "${{ fromJson(vars.SITE_AB).host }}" }
-        # - fromJson(${{ vars.SITE_AQUA }})
-        # - fromJson(${{ vars.SITE_WFB }})
+        ###############################################
+        #v# Make sure this matches the site matrix! #v#
+        ###############################################
+        tenant_key:
+        - abmedia_all
+        image_prefix:
+        - ab-media
+        site:
+        - { id: 60f6ec0bd28860bc3384daa1, stack: virgon, host: athleticbusiness.com }
+        - { id: 60f6ec3bd28860bc3384e784, stack: virgon, host: woodfloorbusiness.com }
+        - { id: 60f6ec34d28860bc3384e447, stack: virgon, host: aquamagazine.com }
+        ###############################################
+        #^# Make sure this matches the site matrix! #^#
+        ###############################################
     with:
       docker_image: website-${{ matrix.site.host }}
       site_id: ${{ matrix.site.id }}
       site_host: ${{ matrix.site.host }}
-      infra_stack: virgon
+      infra_stack: ${{ matrix.site.stack }}
+      tenant_key: ${{ matrix.tenant_key }}
