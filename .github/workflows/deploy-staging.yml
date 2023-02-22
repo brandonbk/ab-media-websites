@@ -89,8 +89,8 @@ jobs:
         - { id: 60f6ec3bd28860bc3384e784, host: woodfloorbusiness.com }
         - { id: 60f6ec34d28860bc3384e447, host: aquamagazine.com }
     with:
-      docker_image: "${{ env.ECR_REGISTRY }}/${{ env.IMG_PREFIX }}-${{ matrix.site.host }}:${{ needs.vars.outputs.version }}"
-      ecr_registry: ${{ env.ECR_REGISTRY }}
+      docker_image: 598984531759.dkr.ecr.us-east-2.amazonaws.com/ab-media-${{ matrix.site.host }}:${{ needs.vars.outputs.version }}
+      ecr_registry: 598984531759.dkr.ecr.us-east-2.amazonaws.com
       site_id: ${{ matrix.site.id }}
       site_host: ${{ matrix.site.host }}
       infra_stack: virgon
