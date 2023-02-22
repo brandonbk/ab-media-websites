@@ -6,97 +6,65 @@ on:
       - '*'
 
 jobs:
-  vars:
+  version:
     runs-on: ubuntu-latest
     steps:
     - id: tag_version
+      # @todo update this to not use set-output
       run: |
         REF=$(echo $GITHUB_REF | cut -d / -f 3)
         [[ "$GITHUB_REF" =~ ^refs/tags.*$ ]] && VERSION="$REF" || VERSION="${REF}-${GITHUB_SHA::7}"
         echo ::set-output name=version::$(echo "$VERSION")
-    - id: send-message
-      uses: archive/github-actions-slack@master
-      with:
-        slack-function: send-message
-        slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-        slack-channel: deployments
-        slack-text: Deployment of ${{ github.repository }} has begun.
-      env:
-        INPUT_SLACK-OPTIONAL-blocks: |
-          [
-            { type: 'section', text: { type: 'mrkdwn', text: 'A deployment for *${{ github.repository }}* has begun.' } },
-            { type: 'divider' },
-            { type: 'section', fields: [
-                { type: 'mrkdwn', text: '*Version:*\n${{ steps.tag_version.outputs.version }}' },
-                { type: 'mrkdwn', text: '*Author:*\n${{ github.triggering_actor }}' },
-            ]},
-            { type: 'divider' },
-            {
-              type: 'section',
-              text: { type: 'mrkdwn', text: '${{ github.workflow}} #${{ github.run_id }}' },
-              accessory: { type: 'button', text: { type: 'plain_text', text: 'View Deployment' }, url: 'https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id}}' },
-            },
-          ]
     outputs:
       version: ${{ steps.tag_version.outputs.version }}
-      slack-channel: ${{ fromJson(steps.send-message.outputs.slack-result).response.channel }}
-      slack-thread: ${{ fromJson(steps.send-message.outputs.slack-result).response.message.ts }}
+
+  notify-start:
+    needs: [version]
+    uses: parameter1/actions/.github/workflows/notify-start.yml
+    secrets: inherit
+    with:
+      version: ${{ needs.version.outputs.version }}
 
   post-deploy-failure:
     if: failure()
-    needs: [vars, deploy-sites]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Notify failure
-      uses: archive/github-actions-slack@master
-      with:
-        slack-function: send-message
-        slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-        slack-channel: ${{ needs.vars.outputs.slack-channel }}
-        slack-text: Deployment failed!
-        slack-optional-thread_ts: ${{ needs.vars.outputs.slack-thread }}
-        slack-optional-reply_broadcast: true
+    needs: [notify-start, deploy-sites]
+    uses: parameter1/actions/.github/workflows/notify-fail.yml
+    secrets: inherit
+    with:
+      slack-thread: ${{ needs.notify-start.outputs.slack-thread }}
 
-  post-deploy-success:
+  post-deploy-complete:
     if: success()
-    needs: [vars, deploy-sites]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Notify success
-      uses: archive/github-actions-slack@master
-      with:
-        slack-function: send-message
-        slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-        slack-channel: ${{ needs.vars.outputs.slack-channel }}
-        slack-text: Deployment complete.
-        slack-optional-thread_ts: ${{ needs.vars.outputs.slack-thread }}
+    needs: [notify-start, deploy-sites]
+    uses: parameter1/actions/.github/workflows/notify-complete.yml
+    secrets: inherit
+    with:
+      slack-thread: ${{ needs.notify-start.outputs.slack-thread }}
 
   ######################
   # Add websites here! #
   ######################
 
   build-sites:
-    needs: [vars]
-    uses: ./.github/workflows/reusable-integration-test.yml
+    needs: [version]
+    uses: parameter1/actions/.github/workflows/website-build-push-test.yml
     strategy:
       matrix:
         ###############################################
         #v# Make sure this matches the site matrix! #v#
         ###############################################
-        tenant_key:
-        - abmedia_all
-        image_prefix:
-        - ab-media
+        tenant_key: [abmedia_all]
+        image_prefix: [ab-media]
         site:
-        - { id: 60f6ec0bd28860bc3384daa1, stack: virgon, host: athleticbusiness.com }
-        - { id: 60f6ec3bd28860bc3384e784, stack: virgon, host: woodfloorbusiness.com }
-        - { id: 60f6ec34d28860bc3384e447, stack: virgon, host: aquamagazine.com }
+          - { id: 60f6ec0bd28860bc3384daa1, stack: virgon, host: athleticbusiness.com }
+          - { id: 60f6ec3bd28860bc3384e784, stack: virgon, host: woodfloorbusiness.com }
+          - { id: 60f6ec34d28860bc3384e447, stack: virgon, host: aquamagazine.com }
         ###############################################
         #^# Make sure this matches the site matrix! #^#
         ###############################################
     with:
       ecr_registry: ${{ vars.AWS_ECR_REGISTRY }}
-      docker_image: ${{ vars.AWS_ECR_REGISTRY }}/${{ matrix.image_prefix }}-${{ matrix.site.host }}:${{ needs.vars.outputs.version }}
+      docker_image: ${{ vars.AWS_ECR_REGISTRY }}/${{ matrix.image_prefix }}-${{ matrix.site.host }}:${{ needs.version.outputs.version }}
       site_id: ${{ matrix.site.id }}
       site_host: ${{ matrix.site.host }}
       infra_stack: ${{ matrix.site.stack }}
@@ -105,32 +73,25 @@ jobs:
     secrets: inherit
 
   deploy-sites:
-    needs: [vars, build-sites]
-    runs-on: ubuntu-latest
+    needs: [version, build-sites]
+    uses: parameter1/actions/.github/workflows/website-deploy-staging.yml
     strategy:
       matrix:
         ###############################################
         #v# Make sure this matches the site matrix! #v#
         ###############################################
-        tenant_key:
-        - abmedia_all
-        image_prefix:
-        - ab-media
+        tenant_key: [abmedia_all]
+        image_prefix: [ab-media]
         site:
-        - { id: 60f6ec0bd28860bc3384daa1, stack: virgon, host: athleticbusiness.com }
-        - { id: 60f6ec3bd28860bc3384e784, stack: virgon, host: woodfloorbusiness.com }
-        - { id: 60f6ec34d28860bc3384e447, stack: virgon, host: aquamagazine.com }
+          - { id: 60f6ec0bd28860bc3384daa1, stack: virgon, host: athleticbusiness.com }
+          - { id: 60f6ec3bd28860bc3384e784, stack: virgon, host: woodfloorbusiness.com }
+          - { id: 60f6ec34d28860bc3384e447, stack: virgon, host: aquamagazine.com }
         ###############################################
         #^# Make sure this matches the site matrix! #^#
         ###############################################
-    steps:
-      - name: Deploy to Kubernetes
-        run: |
-          npx @parameter1/rancher2cli dl \
-            --wait --namespace staging-websites-${{ matrix.site.stack }} \
-            basecms-website ${{ matrix.image_prefix }}-${{ matrix.site.host }} \
-            ${{ vars.AWS_ECR_REGISTRY }}/${{ matrix.image_prefix }}-${{ matrix.site.host }}:${{ needs.vars.outputs.version }}
-        env:
-          RANCHER_CLUSTERID: ${{ secrets.RANCHER_CLUSTERID_BASECMS }}
-          RANCHER_TOKEN: ${{ secrets.RANCHER_TOKEN }}
-          RANCHER_URL: ${{ secrets.RANCHER_URL }}
+    with:
+      docker_image: ${{ vars.AWS_ECR_REGISTRY }}/${{ matrix.image_prefix }}-${{ matrix.site.host }}:${{ needs.version.outputs.version }}
+      infra_stack: ${{ matrix.site.stack }}
+      rancher_label_key: basecms-website
+      rancher_label_val: ${{ matrix.image_prefix }}-${{ matrix.site.host }}
+    secrets: inherit

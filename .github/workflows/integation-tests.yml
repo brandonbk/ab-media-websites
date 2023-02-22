@@ -11,20 +11,18 @@ on:
 
 jobs:
   build-and-test-image:
-    uses: ./.github/workflows/reusable-integration-test.yml
+    uses: parameter1/actions/.github/workflows/website-build-push-test.yml
     strategy:
       matrix:
         ###############################################
         #v# Make sure this matches the site matrix! #v#
         ###############################################
-        tenant_key:
-        - abmedia_all
-        image_prefix:
-        - ab-media
+        tenant_key: [abmedia_all]
+        image_prefix: [ab-media]
         site:
-        - { id: 60f6ec0bd28860bc3384daa1, stack: virgon, host: athleticbusiness.com }
-        - { id: 60f6ec3bd28860bc3384e784, stack: virgon, host: woodfloorbusiness.com }
-        - { id: 60f6ec34d28860bc3384e447, stack: virgon, host: aquamagazine.com }
+          - { id: 60f6ec0bd28860bc3384daa1, stack: virgon, host: athleticbusiness.com }
+          - { id: 60f6ec3bd28860bc3384e784, stack: virgon, host: woodfloorbusiness.com }
+          - { id: 60f6ec34d28860bc3384e447, stack: virgon, host: aquamagazine.com }
         ###############################################
         #^# Make sure this matches the site matrix! #^#
         ###############################################
