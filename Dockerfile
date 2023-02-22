@@ -5,8 +5,7 @@ ARG SITE
 ADD package.json yarn.lock lerna.json /repo/
 ADD packages /repo/packages
 ADD sites/$SITE /repo/sites/$SITE
-RUN --mount=type=cache,target=/repo/.yarn YARN_CACHE_FOLDER=/repo/.yarn yarn install --pure-lockfile
-# RUN yarn --pure-lockfile
+RUN --mount=type=cache,target=/repo/.yarn YARN_CACHE_FOLDER=/repo/.yarn yarn install --frozen-lockfile
 ENV NODE_ENV production
 RUN yarn build
 
