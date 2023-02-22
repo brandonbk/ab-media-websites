@@ -1,22 +1,22 @@
 /* eslint-disable no-await-in-loop */
-(async () => {
-  while (true) {
-    try {
-      console.log('start req');
-      const res = await fetch('http://localhost:80', { method: 'get' });
-      console.log('end req');
-      if (!res.ok) {
-        console.log('response not okay!');
-      } else {
-        console.log('start html');
-        const html = await res.text();
-        console.log('end html');
-        const found = /.*<\/head>.*<\/body>.*<\/html>.*/is.test(html);
-        console.log({ found });
-        process.exit(0);
+const { error } = console;
+
+setInterval(async () => {
+  try {
+    const res = await fetch('http://localhost:80', { method: 'get' });
+    if (!res.ok) {
+      error('Response not ok!', res.status, res.statusText);
+      process.exit(1);
+    } else {
+      const html = await res.text();
+      const found = /.*<\/head>.*<\/body>.*<\/html>.*/is.test(html);
+      if (!found) {
+        error('Unable to find closing HTML tags!');
+        process.exit(1);
       }
-    } catch (e) {
-      console.log('catch error');
+      process.exit(0);
     }
+  } catch (e) {
+    // noop
   }
-})().catch((e) => setImmediate(() => { throw e; }));
+}, 100);
