@@ -57,7 +57,7 @@ jobs:
         docker run -p 80:80 \
           --name website-${{ matrix.site.host }} \
           -e TENANT_KEY=abmedia_all \
-          -e SITE_ID=${{ matrix.id }} \
+          -e SITE_ID=${{ matrix.site.id }} \
           -e GRAPHQL_URI=https://graphql.virgon.base.parameter1.com \
           -e OEMBED_URI=https://oembed.virgon.base.parameter1.com \
           -e RSS_URI=https://rss.virgon.base.parameter1.com \
