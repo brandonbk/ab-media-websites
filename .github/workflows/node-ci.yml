@@ -38,9 +38,9 @@ jobs:
     strategy:
       matrix:
         site:
-        - { id: 60f6ec0bd28860bc3384daa1, host: www-abmedia-ab.test.parameter1.com }
-        - { id: 60f6ec3bd28860bc3384e784, host: www-abmedia-wfb.test.parameter1.com }
-        - { id: 60f6ec34d28860bc3384e447, host: www-abmedia-aqua.test.parameter1.com }
+        - { id: 60f6ec0bd28860bc3384daa1, host: athleticbusiness.com }
+        - { id: 60f6ec3bd28860bc3384e784, host: woodfloorbusiness.com }
+        - { id: 60f6ec34d28860bc3384e447, host: aquamagazine.com }
 
     steps:
     - uses: actions/checkout@v2
