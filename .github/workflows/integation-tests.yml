@@ -14,10 +14,7 @@ jobs:
     uses: ./.github/workflows/reusable-integration-test.yml
     strategy:
       matrix:
-        site:
-        - { id: 60f6ec0bd28860bc3384daa1, host: athleticbusiness.com }
-        - { id: 60f6ec3bd28860bc3384e784, host: woodfloorbusiness.com }
-        - { id: 60f6ec34d28860bc3384e447, host: aquamagazine.com }
+        site: fromJson(${{ env.SITES_CONFIG }})
     with:
       docker_image: website-${{ matrix.site.host }}
       site_id: ${{ matrix.site.id }}
