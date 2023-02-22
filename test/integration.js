@@ -1,5 +1,5 @@
 /* eslint-disable no-await-in-loop */
-const { error } = console;
+const { error, log } = console;
 
 setInterval(async () => {
   try {
@@ -14,6 +14,7 @@ setInterval(async () => {
         error('Unable to find closing HTML tags!');
         process.exit(1);
       }
+      log('Integration tests passed!');
       process.exit(0);
     }
   } catch (e) {
