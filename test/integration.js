@@ -1,3 +1,21 @@
+/* eslint-disable no-await-in-loop */
 (async () => {
-  throw new Error('FAIL');
+  while (true) {
+    try {
+      console.log('start req');
+      const res = await fetch('http://localhost:80', { method: 'get' });
+      console.log('end req');
+      if (!res.ok) {
+        console.log('response not okay!');
+      } else {
+        console.log('start html');
+        const html = await res.text();
+        console.log('end html');
+        console.log(html);
+        process.exit(0);
+      }
+    } catch (e) {
+      console.log('catch error');
+    }
+  }
 })().catch((e) => setImmediate(() => { throw e; }));

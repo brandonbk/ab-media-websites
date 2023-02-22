@@ -69,11 +69,11 @@ jobs:
 
     - uses: actions/setup-node@v1
       with:
-        node-version: 14.21
+        node-version: 18
 
     - name: Run integration tests
       run: node ./test/integration.js
-      timeout-minutes: 3
+      timeout-minutes: 1
 
     - name: Stop docker image
       run: docker stop website-${{ matrix.site.host }}
