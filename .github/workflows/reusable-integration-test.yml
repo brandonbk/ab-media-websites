@@ -6,6 +6,9 @@ on:
       docker_image:
         type: string
         required: true
+      site_id:
+        type: string
+        required: true
       infra_stack:
         type: string
         required: true
@@ -20,7 +23,7 @@ jobs:
           docker run -p 80:80 \
             --name ${{ inputs.docker_image }} \
             -e TENANT_KEY=abmedia_all \
-            -e SITE_ID=${{ matrix.site.id }} \
+            -e SITE_ID=${{ inputs.site_id }} \
             -e GRAPHQL_URI=https://graphql.${{ inputs.infra_stack }}.base.parameter1.com \
             -e OEMBED_URI=https://oembed.${{ inputs.infra_stack }}.base.parameter1.com \
             -e RSS_URI=https://rss.${{ inputs.infra_stack }}.base.parameter1.com \

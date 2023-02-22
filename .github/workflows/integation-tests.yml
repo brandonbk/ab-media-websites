@@ -10,7 +10,7 @@ on:
     branches: ["*"]
 
 jobs:
-  integration-tests:
+  build-image:
     runs-on: ubuntu-latest
 
     strategy:
@@ -30,7 +30,15 @@ jobs:
           SITE=${{ matrix.site.host }}
         tags: website-${{ matrix.site.host }}
 
-    - uses: ./.github/workflows/reusable-integration-test.yml
-      with:
-        docker_image: website-${{ matrix.site.host }}
-        infra_stack: virgon
+  test-image:
+    uses: ./.github/workflows/reusable-integration-test.yml
+    strategy:
+      matrix:
+        site:
+        - { id: 60f6ec0bd28860bc3384daa1, host: athleticbusiness.com }
+        - { id: 60f6ec3bd28860bc3384e784, host: woodfloorbusiness.com }
+        - { id: 60f6ec34d28860bc3384e447, host: aquamagazine.com }
+    with:
+      docker_image: website-${{ matrix.site.host }}
+      site_id: ${{ matrix.site.id }}
+      infra_stack: virgon
