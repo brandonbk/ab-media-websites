@@ -10,27 +10,7 @@ on:
     branches: ["*"]
 
 jobs:
-  build-image:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        site:
-        - { id: 60f6ec0bd28860bc3384daa1, host: athleticbusiness.com }
-        - { id: 60f6ec3bd28860bc3384e784, host: woodfloorbusiness.com }
-        - { id: 60f6ec34d28860bc3384e447, host: aquamagazine.com }
-
-    steps:
-    - uses: actions/checkout@v2
-    - uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: false
-        build-args: |
-          SITE=${{ matrix.site.host }}
-        tags: website-${{ matrix.site.host }}
-
-  test-image:
+  build-and-test-image:
     uses: ./.github/workflows/reusable-integration-test.yml
     strategy:
       matrix:
@@ -41,4 +21,5 @@ jobs:
     with:
       docker_image: website-${{ matrix.site.host }}
       site_id: ${{ matrix.site.id }}
+      site_host: ${{ matrix.site.host }}
       infra_stack: virgon
