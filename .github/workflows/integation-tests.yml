@@ -1,0 +1,35 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Integration Tests
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  build-and-test-image:
+    uses: parameter1/actions/.github/workflows/website-build-push-test.yml@main
+    strategy:
+      matrix:
+        ###############################################
+        #v# Make sure this matches the site matrix! #v#
+        ###############################################
+        tenant_key: [abmedia_all]
+        image_prefix: [ab-media]
+        site:
+          - { id: 60f6ec0bd28860bc3384daa1, stack: virgon, host: athleticbusiness.com }
+          - { id: 60f6ec3bd28860bc3384e784, stack: virgon, host: woodfloorbusiness.com }
+          - { id: 60f6ec34d28860bc3384e447, stack: virgon, host: aquamagazine.com }
+        ###############################################
+        #^# Make sure this matches the site matrix! #^#
+        ###############################################
+    with:
+      docker_image: website-${{ matrix.site.host }}
+      site_id: ${{ matrix.site.id }}
+      site_host: ${{ matrix.site.host }}
+      infra_stack: ${{ matrix.site.stack }}
+      tenant_key: ${{ matrix.tenant_key }}
+      ecr_registry: ${{ vars.AWS_ECR_REGISTRY }}
