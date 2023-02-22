@@ -14,7 +14,10 @@ jobs:
     uses: ./.github/workflows/reusable-integration-test.yml
     strategy:
       matrix:
-        site: fromJson(${{ vars.SITES_CONFIG }})
+        site:
+        - fromJson(${{ vars.SITE_AB }})
+        # - fromJson(${{ vars.SITE_AQUA }})
+        # - fromJson(${{ vars.SITE_WFB }})
     with:
       docker_image: website-${{ matrix.site.host }}
       site_id: ${{ matrix.site.id }}
