@@ -11,7 +11,8 @@
         console.log('start html');
         const html = await res.text();
         console.log('end html');
-        console.log(html);
+        const found = /.*<\/head>.*<\/body>.*<\/html>.*/.test(html);
+        console.log({ found });
         process.exit(0);
       }
     } catch (e) {
