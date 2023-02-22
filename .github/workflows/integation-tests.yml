@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         site:
-          - ${{ fromJson(vars.SITE_AB) }},
+          - { id: "${{ fromJson(vars.SITE_AB).id }}", host: "${{ fromJson(vars.SITE_AB).host }}" }
         # - fromJson(${{ vars.SITE_AQUA }})
         # - fromJson(${{ vars.SITE_WFB }})
     with:
