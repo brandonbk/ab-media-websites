@@ -34,3 +34,4 @@ jobs:
       site_host: ${{ matrix.site.host }}
       infra_stack: ${{ matrix.site.stack }}
       tenant_key: ${{ matrix.tenant_key }}
+      ecr_registry: ${{ vars.AWS_ECR_REGISTRY }}
