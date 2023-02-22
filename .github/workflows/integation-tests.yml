@@ -11,7 +11,7 @@ on:
 
 jobs:
   build-and-test-image:
-    uses: parameter1/actions/.github/workflows/website-build-push-test.yml
+    uses: parameter1/actions/.github/workflows/website-build-push-test.yml@main
     strategy:
       matrix:
         ###############################################
