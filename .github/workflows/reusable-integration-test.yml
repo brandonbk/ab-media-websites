@@ -1,0 +1,43 @@
+name: Integration test
+
+on:
+  workflow_call:
+    inputs:
+      docker_image:
+        type: string
+        required: true
+      infra_stack:
+        type: string
+        required: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Boot docker image
+        run: |
+          docker run -p 80:80 \
+            --name ${{ inputs.docker_image }} \
+            -e TENANT_KEY=abmedia_all \
+            -e SITE_ID=${{ matrix.site.id }} \
+            -e GRAPHQL_URI=https://graphql.${{ inputs.infra_stack }}.base.parameter1.com \
+            -e OEMBED_URI=https://oembed.${{ inputs.infra_stack }}.base.parameter1.com \
+            -e RSS_URI=https://rss.${{ inputs.infra_stack }}.base.parameter1.com \
+            -e SITEMAPS_URI=https://sitemaps.${{ inputs.infra_stack }}.base.parameter1.com \
+            -e RECAPTCHA_V3_SITE_KEY=not-set \
+            -e RECAPTCHA_V3_SECRET_KEY=not-set \
+            -e SENDGRID_API_KEY=not-set \
+            -e OMEDA_APP_ID=not-set \
+            -e OMEDA_INPUT_ID=not-set \
+            ${{ inputs.docker_image }} &
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 18
+
+      - name: Run integration tests
+        run: node ./test/integration.js
+        timeout-minutes: 1
+
+      - name: Stop docker image
+        run: docker stop ${{ inputs.docker_image }}

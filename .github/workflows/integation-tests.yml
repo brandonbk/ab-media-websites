@@ -30,30 +30,7 @@ jobs:
           SITE=${{ matrix.site.host }}
         tags: website-${{ matrix.site.host }}
 
-    - name: Boot docker image
-      run: |
-        docker run -p 80:80 \
-          --name website-${{ matrix.site.host }} \
-          -e TENANT_KEY=abmedia_all \
-          -e SITE_ID=${{ matrix.site.id }} \
-          -e GRAPHQL_URI=https://graphql.virgon.base.parameter1.com \
-          -e OEMBED_URI=https://oembed.virgon.base.parameter1.com \
-          -e RSS_URI=https://rss.virgon.base.parameter1.com \
-          -e SITEMAPS_URI=https://sitemaps.virgon.base.parameter1.com \
-          -e RECAPTCHA_V3_SITE_KEY=not-set \
-          -e RECAPTCHA_V3_SECRET_KEY=not-set \
-          -e SENDGRID_API_KEY=not-set \
-          -e OMEDA_APP_ID=not-set \
-          -e OMEDA_INPUT_ID=not-set \
-          website-${{ matrix.site.host }} &
-
-    - uses: actions/setup-node@v1
+    - uses: ./.github/workflows/reusable-integration-test.yml
       with:
-        node-version: 18
-
-    - name: Run integration tests
-      run: node ./test/integration.js
-      timeout-minutes: 1
-
-    - name: Stop docker image
-      run: docker stop website-${{ matrix.site.host }}
+        docker_image: website-${{ matrix.site.host }}
+        infra_stack: virgon
