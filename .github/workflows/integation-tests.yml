@@ -9,6 +9,7 @@ on:
   pull_request:
     branches: ["*"]
 
+
 jobs:
   build-and-test-image:
     uses: parameter1/actions/.github/workflows/website-build-push-test.yml@main
