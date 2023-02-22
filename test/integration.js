@@ -12,7 +12,6 @@
         const html = await res.text();
         console.log('end html');
         const found = /.*<\/head>.*<\/body>.*<\/html>.*/is.test(html);
-        console.log(html);
         console.log({ found });
         process.exit(0);
       }
