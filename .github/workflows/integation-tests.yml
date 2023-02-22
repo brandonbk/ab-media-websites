@@ -3,6 +3,9 @@
 
 name: Integration Tests
 
+env:
+  ab: fromJson(vars.SITE_AB)
+
 on:
   push:
     branches: ["*"]
@@ -14,8 +17,8 @@ jobs:
     uses: ./.github/workflows/reusable-integration-test.yml
     strategy:
       matrix:
-        site:
-          - { id: "${{ fromJson(vars.SITE_AB).id }}", host: "${{ fromJson(vars.SITE_AB).host }}" }
+        site: ${{ fromJSON(vars.SITES_CONFIG) }}
+          # - { id: "${{ fromJson(vars.SITE_AB).id }}", host: "${{ fromJson(vars.SITE_AB).host }}" }
         # - fromJson(${{ vars.SITE_AQUA }})
         # - fromJson(${{ vars.SITE_WFB }})
     with:
