@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: ["*"]
   pull_request:
-    branches: [ master ]
+    branches: ["*"]
 
 jobs:
   build:
@@ -31,3 +31,49 @@ jobs:
       run: yarn install --pure-lockfile
 
     - run: yarn test
+
+  container:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        site:
+        - { id: 60f6ec0bd28860bc3384daa1, host: www-abmedia-ab.test.parameter1.com }
+        - { id: 60f6ec3bd28860bc3384e784, host: www-abmedia-wfb.test.parameter1.com }
+        - { id: 60f6ec34d28860bc3384e447, host: www-abmedia-aqua.test.parameter1.com }
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: false
+        build-args: |
+          SITE=${{ matrix.site.host }}
+        tags: website-${{ matrix.site.host }}
+
+    - name: Boot docker image
+      run: |
+        docker run -p 80:80 \
+          --name website-${{ matrix.site.host }} \
+          -e TENANT_KEY=abmedia_all \
+          -e SITE_ID=${{ matrix.id }} \
+          -e GRAPHQL_URI=https://graphql.virgon.base.parameter1.com \
+          -e OEMBED_URI=https://oembed.virgon.base.parameter1.com \
+          -e RSS_URI=https://rss.virgon.base.parameter1.com \
+          -e SITEMAPS_URI=https://sitemaps.virgon.base.parameter1.com \
+          -e RECAPTCHA_V3_SITE_KEY=not-set \
+          -e RECAPTCHA_V3_SECRET_KEY=not-set \
+          -e SENDGRID_API_KEY=not-set \
+          website-${{ matrix.site.host }} &
+
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14.21
+
+    - name: Run integration tests
+      run: node ./test/integration.js
+      timeout-minutes: 3
+
+    - name: Stop docker image
+      run: docker stop website-${{ matrix.site.host }}
