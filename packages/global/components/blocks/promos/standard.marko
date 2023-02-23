@@ -28,11 +28,15 @@ $ const blockName = defaultValue(input.blockName, "pib-page-card");
       </marko-web-link>
     </div>
     <if(node.primaryImage)>
+      $ const { width, height } = node.primaryImage;
       <marko-web-img
         class=`${blockName}__issue-cover`
         src=node.primaryImage.src
         srcset=[`${node.primaryImage.src}&dpr=2 2x`]
         alt=node.primaryImage.alt
+        attrs={ width, height }
+        width=width
+        height=height
       />
     </if>
   </marko-web-element>
