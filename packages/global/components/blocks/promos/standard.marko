@@ -4,6 +4,7 @@ import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
 $ const { node } = input;
 
 $ const linkText = get(node, "linkText") || "Read More";
+$ const linkTitle = get(node, "linkTitle") || linkText;
 $ const blockName = defaultValue(input.blockName, "pib-page-card");
 
 <marko-web-block name=blockName attrs={ role: "region", "aria-label": `${node.shortName} Promo Card`}>
@@ -22,7 +23,7 @@ $ const blockName = defaultValue(input.blockName, "pib-page-card");
       <marko-web-link
         class=`btn btn-primary ${blockName}__download-btn`
         href=node.siteContext.path
-        title=linkText
+        title=linkTitle
       >
         ${linkText}
       </marko-web-link>
