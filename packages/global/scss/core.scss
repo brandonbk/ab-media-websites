@@ -147,7 +147,7 @@ label {
   &--project-gallery {
     margin-bottom: 1.5rem;
     @media (min-width: 900px) {
-      $margin: ($skin-content-primary-image-max-width - $skin-content-body-max-width) / 2 * -1;
+      $margin: ($skin-content-primary-image-max-width - $skin-content-body-max-width) * 0.5 * -1;
       position: relative;
       width: $skin-content-primary-image-max-width;
       margin-left: $margin;
