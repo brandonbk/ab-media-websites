@@ -8,7 +8,7 @@
       Premium Partners
     </div>
     <div class="partners">
-      <div>
+      <div style="min-height: 30px;">
         <vue-slick-carousel v-bind="SlickCarouselSettings">
           <a
             v-for="(partner) in partnersToDisplay"

@@ -45,7 +45,7 @@ $ const queryParams = {
     >
       <div class="partners-label">Premium Partners</div>
       <marko-web-block name="partners">
-        <div class="card-deck-flow">
+        <div class="card-deck-flow" style="min-height: 30px;">
           <for|partner| of=shuffledPartners>
             <div class="card-deck-flow__node">
               $ const imageSrc = partner.primaryImage.src ? buildImgixUrl(partner.primaryImage.src, logoOptions) : null;
