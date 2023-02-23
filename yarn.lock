@@ -974,10 +974,10 @@
   dependencies:
     inflected "^2.1.0"
 
-"@parameter1/base-cms-leaders-program@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@parameter1/base-cms-leaders-program/-/base-cms-leaders-program-4.1.2.tgz#dfdc091d9569c5af4fe6461e3df316a0f1255146"
-  integrity sha512-LYPqZlcI7LNGv74EcmPmQ36rkM/QNTo5y3KIsvpu/JhMSmV2ruCmAeba1HVY0CxDpYHM5X2+fPDk1jYGbLtSZA==
+"@parameter1/base-cms-leaders-program@^4.1.3":
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@parameter1/base-cms-leaders-program/-/base-cms-leaders-program-4.1.3.tgz#7c66ec4d878ea6c2bfe8ea2d21cc5a82038a6a41"
+  integrity sha512-oLpI8u46X0rJJ0lOukEaLJsRMgXsrrJt72IkgsUICTTVg09MkNe5rfmTbTq8/h8FtnOaUudarK2E3u4UYg6UWg==
   dependencies:
     object-path "^0.11.8"
     portal-vue "^2.1.7"
@@ -1110,12 +1110,12 @@
     graphql "^14.7.0"
     graphql-tag "^2.12.6"
 
-"@parameter1/base-cms-marko-web-leaders@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@parameter1/base-cms-marko-web-leaders/-/base-cms-marko-web-leaders-4.1.2.tgz#b7f4e510ac3436cc0066ee0658b6eb527b6bdf17"
-  integrity sha512-X5wrTIeB3B2PzF1T3SwTuBcK1hPOvAFoEs5HgACWP3G+dAvMLageNpqUKauE+b+8lcnXiHYm+nfbh2vhU2QEaA==
+"@parameter1/base-cms-marko-web-leaders@^4.1.3":
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@parameter1/base-cms-marko-web-leaders/-/base-cms-marko-web-leaders-4.1.3.tgz#81ffed9672343a7c8e26d6f4026755b9b49a9cfc"
+  integrity sha512-5llyRLC3yy+gu8Pz0IKu9dWlFF+sIm1QPen3DLrAy/GQptGxlpfrXT2wvdbkjSb2wxqRdbUlKUNLkJ3KqNWmgw==
   dependencies:
-    "@parameter1/base-cms-leaders-program" "^4.1.2"
+    "@parameter1/base-cms-leaders-program" "^4.1.3"
     "@parameter1/base-cms-marko-web-icons" "^4.1.0"
     "@parameter1/base-cms-object-path" "^4.0.2"
     object-path "^0.11.8"
