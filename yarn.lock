@@ -1344,6 +1344,11 @@
     graphql-tag "^2.12.6"
     http-errors "^1.8.1"
 
+"@parameter1/browserslist-config-base-cms@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@parameter1/browserslist-config-base-cms/-/browserslist-config-base-cms-4.1.0.tgz#84b5f6c6c6571eeeefdfacfbafcebbb5dbab48ec"
+  integrity sha512-yRqa9p2KGEiN4t4AlRSliUwC4d2ht4QW5LvpSW0CT7hGoEshqT4f5hCPlMbxnqvnkRTl1usk5wdvvPzWT+ysXQ==
+
 "@parameter1/joi@^1.2.10":
   version "1.2.10"
   resolved "https://registry.yarnpkg.com/@parameter1/joi/-/joi-1.2.10.tgz#d5ea00deffa8c48fd1d707eb39858b69aa5bfdb4"
