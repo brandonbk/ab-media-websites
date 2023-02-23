@@ -17,9 +17,6 @@
     "lint:fix": "lerna run lint:fix",
     "test": "lerna run test"
   },
-  "dependencies": {
-    "@parameter1/base-cms-marko-web": "^4.1.1"
-  },
   "devDependencies": {
     "@parameter1/base-cms-eslint": "^4.1.0",
     "@parameter1/base-cms-marko-compiler": "^4.0.2",
