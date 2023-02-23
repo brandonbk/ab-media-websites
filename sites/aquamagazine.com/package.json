@@ -16,8 +16,8 @@
   "dependencies": {
     "@ab-media/base-cms-marko-web-broadstreet": "^2.2.0",
     "@ab-media/package-global": "^2.2.0",
-    "@parameter1/base-cms-marko-core": "^4.1.1",
-    "@parameter1/base-cms-marko-web": "^4.1.8",
+    "@parameter1/base-cms-marko-core": "^4.2.0",
+    "@parameter1/base-cms-marko-web": "^4.2.0",
     "@parameter1/base-cms-marko-web-gtm": "^4.1.0",
     "@parameter1/base-cms-marko-web-identity-x": "^4.1.0",
     "@parameter1/base-cms-marko-web-leaders": "^4.1.7",
