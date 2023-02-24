@@ -75,7 +75,7 @@ services:
       <<: *env
 
   ab:
-    <<: [*node, *site-cmd]
+    <<: *site-cmd
     working_dir: /root/sites/athleticbusiness.com
     environment:
       <<: [*env, *env-virgon]
@@ -92,7 +92,7 @@ services:
       - "19801:19801"
 
   wfb:
-    <<: [*node, *site-cmd]
+    <<: *site-cmd
     working_dir: /root/sites/woodfloorbusiness.com
     environment:
       <<: [*env, *env-virgon]
@@ -108,7 +108,7 @@ services:
       - "19802:19802"
 
   aqua:
-    <<: [*node,  *site-cmd]
+    <<: *site-cmd
     working_dir: /root/sites/aquamagazine.com
     environment:
       <<: [*env, *env-virgon]

@@ -8,7 +8,7 @@
   "scripts": {
     "compile": "basecms-marko-compile compile",
     "build": "yarn compile",
-    "lint": "eslint --ext .js --ext .vue --max-warnings 5 --ignore-path ../../.eslintignore  --config ../../.eslintrc.js ./",
+    "lint": "eslint --ext .js --ext .vue --max-warnings 5 --config ../../.eslintrc.js --ignore-path ../../.eslintignore ./",
     "lint:fix": "yarn lint --fix",
     "test": "yarn lint && yarn compile --no-clean"
   },
@@ -49,10 +49,18 @@
     "html-entities": "^2.1.0",
     "http-errors": "^1.7.3",
     "js-cookie": "^2.2.1",
-    "newrelic": "^9.10.1",
+    "newrelic": "^9.10.2",
     "node-fetch": "^2.6.1",
     "object-path": "^0.11.5",
     "slug": "^4.0.2",
     "vue-slick-carousel": "^1.0.6"
-  }
+  },
+  "engines": {
+    "node": ">=14.15"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
 }

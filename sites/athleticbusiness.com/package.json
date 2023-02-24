@@ -9,7 +9,7 @@
     "dev": "basecms-website dev --compile-dir ../../packages --watch-dir ../../packages",
     "build": "basecms-website build",
     "compile": "basecms-marko-compile compile",
-    "lint": "eslint --ext .js --ext .vue --max-warnings 5 --ignore-path ../../.eslintignore  --config ../../.eslintrc.js ./",
+    "lint": "eslint --ext .js --ext .vue --max-warnings 5 --config ../../.eslintrc.js --ignore-path ../../.eslintignore ./",
     "lint:fix": "yarn lint --fix",
     "test": "yarn lint && yarn compile --no-clean"
   },
@@ -34,5 +34,13 @@
     "graphql-tag": "^2.10.1",
     "http-errors": "^1.8.0",
     "object-path": "^0.11.5"
-  }
+  },
+  "engines": {
+    "node": ">=14.15"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
 }

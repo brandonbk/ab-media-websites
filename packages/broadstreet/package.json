@@ -8,7 +8,7 @@
   "scripts": {
     "compile": "basecms-marko-compile compile",
     "build": "yarn compile",
-    "lint": "eslint --ext .js --ext .vue --max-warnings 5 --ignore-path ../../.eslintignore  --config ../../.eslintrc.js ./",
+    "lint": "eslint --ext .js --ext .vue --max-warnings 5 --config ../../.eslintrc.js --ignore-path ../../.eslintignore ./",
     "lint:fix": "yarn lint --fix",
     "test": "yarn lint && yarn compile --no-clean"
   },
@@ -21,5 +21,13 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "engines": {
+    "node": ">=14.15"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
 }

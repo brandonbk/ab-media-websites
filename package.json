@@ -25,5 +25,14 @@
   },
   "browserslist": [
     "extends @parameter1/browserslist-config-base-cms"
-  ]
+  ],
+  "engines": {
+    "node": ">=14.15"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "dependencies": {}
 }
