@@ -52,22 +52,20 @@ jobs:
         ###############################################
         #v# Make sure this matches the site matrix! #v#
         ###############################################
-        tenant_key: [abmedia_all]
-        image_prefix: [ab-media]
         site:
-          - { id: 60f6ec0bd28860bc3384daa1, stack: virgon, host: athleticbusiness.com }
-          - { id: 60f6ec3bd28860bc3384e784, stack: virgon, host: woodfloorbusiness.com }
-          - { id: 60f6ec34d28860bc3384e447, stack: virgon, host: aquamagazine.com }
+          - { id: 60f6ec34d28860bc3384e447, dir: aquamagazine.com, stack: virgon, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-aquamagazine.com }
+          - { id: 60f6ec0bd28860bc3384daa1, dir: athleticbusiness.com, stack: virgon, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-athleticbusiness.com }
+          - { id: 60f6ec3bd28860bc3384e784, dir: woodfloorbusiness.com, stack: virgon, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-woodfloorbusiness.com }
         ###############################################
         #^# Make sure this matches the site matrix! #^#
         ###############################################
     with:
       ecr_registry: ${{ vars.AWS_ECR_REGISTRY }}
-      docker_image: ${{ vars.AWS_ECR_REGISTRY }}/${{ matrix.image_prefix }}-${{ matrix.site.host }}:${{ needs.version.outputs.version }}
+      docker_image: ${{ vars.AWS_ECR_REGISTRY }}/base-cms-websites:${{ matrix.site.account }}-${{ matrix.site.dir }}-${{ needs.version.outputs.version }}
       site_id: ${{ matrix.site.id }}
-      site_host: ${{ matrix.site.host }}
+      site_host: ${{ matrix.site.dir }}
       infra_stack: ${{ matrix.site.stack }}
-      tenant_key: ${{ matrix.tenant_key }}
+      tenant_key: ${{ matrix.tenant }}
       push: true
     secrets: inherit
 
@@ -79,18 +77,16 @@ jobs:
         ###############################################
         #v# Make sure this matches the site matrix! #v#
         ###############################################
-        tenant_key: [abmedia_all]
-        image_prefix: [ab-media]
         site:
-          - { id: 60f6ec0bd28860bc3384daa1, stack: virgon, host: athleticbusiness.com }
-          - { id: 60f6ec3bd28860bc3384e784, stack: virgon, host: woodfloorbusiness.com }
-          - { id: 60f6ec34d28860bc3384e447, stack: virgon, host: aquamagazine.com }
+          - { id: 60f6ec34d28860bc3384e447, dir: aquamagazine.com, stack: virgon, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-aquamagazine.com }
+          - { id: 60f6ec0bd28860bc3384daa1, dir: athleticbusiness.com, stack: virgon, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-athleticbusiness.com }
+          - { id: 60f6ec3bd28860bc3384e784, dir: woodfloorbusiness.com, stack: virgon, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-woodfloorbusiness.com }
         ###############################################
         #^# Make sure this matches the site matrix! #^#
         ###############################################
     with:
-      docker_image: ${{ vars.AWS_ECR_REGISTRY }}/${{ matrix.image_prefix }}-${{ matrix.site.host }}:${{ needs.version.outputs.version }}
+      docker_image: ${{ vars.AWS_ECR_REGISTRY }}/base-cms-websites:${{ matrix.site.account }}-${{ matrix.site.dir }}-${{ needs.version.outputs.version }}
       infra_stack: ${{ matrix.site.stack }}
       rancher_label_key: basecms-website
-      rancher_label_val: ${{ matrix.image_prefix }}-${{ matrix.site.host }}
+      rancher_label_val: ${{ matrix.site.rancher_label }}
     secrets: inherit
