@@ -78,14 +78,12 @@ services:
     <<: *site-cmd
     working_dir: /root/sites/athleticbusiness.com
     environment:
-      <<: [*env, *env-virgon]
+      <<: *env
       AB_PROJECTS_GRAPHQL_URL: ${AB_PROJECTS_GRAPHQL_URL-https://graphql.ab-projects.parameter1.com}
       HOST: www-abmedia-ab.dev.parameter1.com
       PORT: 80
       EXPOSED_PORT: 9801
       LIVERELOAD_PORT: 19801
-      TENANT_KEY: abmedia_all
-      SITE_ID: 60f6ec0bd28860bc3384daa1
     hostname: www-abmedia-ab.dev.parameter1.com
     ports:
       - "9801:80"
@@ -95,13 +93,11 @@ services:
     <<: *site-cmd
     working_dir: /root/sites/woodfloorbusiness.com
     environment:
-      <<: [*env, *env-virgon]
+      <<: *env
       HOST: www-abmedia-wfb.dev.parameter1.com
       PORT: 80
       EXPOSED_PORT: 9802
       LIVERELOAD_PORT: 19802
-      TENANT_KEY: abmedia_all
-      SITE_ID: 60f6ec3bd28860bc3384e784
     hostname: www-abmedia-wfb.dev.parameter1.com
     ports:
       - "9802:80"
@@ -111,13 +107,11 @@ services:
     <<: *site-cmd
     working_dir: /root/sites/aquamagazine.com
     environment:
-      <<: [*env, *env-virgon]
+      <<: *env
       HOST: www-abmedia-aqua.dev.parameter1.com
       PORT: 80
       EXPOSED_PORT: 9803
       LIVERELOAD_PORT: 19803
-      TENANT_KEY: abmedia_all
-      SITE_ID: 60f6ec34d28860bc3384e447
     hostname: www-abmedia-aqua.dev.parameter1.com
     ports:
       - "9803:80"
