@@ -5,6 +5,14 @@
   "repository": "https://github.com/parameter1/ab-media-websites/tree/master/sites/aquamagazine.com",
   "license": "MIT",
   "private": true,
+  "website": {
+    "id": "60f6ec34d28860bc3384e447",
+    "tenant": "abmedia_all",
+    "account": "abmedia",
+    "stack": "virgon",
+    "key": "aqua",
+    "deploy": true
+  },
   "scripts": {
     "dev": "basecms-website dev --compile-dir ../../packages --watch-dir ../../packages",
     "build": "basecms-website build",
@@ -13,6 +21,14 @@
     "lint:fix": "yarn lint --fix",
     "test": "yarn lint && yarn compile --no-clean"
   },
+  "engines": {
+    "node": ">=14.15"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
   "dependencies": {
     "@ab-media/base-cms-marko-web-broadstreet": "^2.2.1",
     "@ab-media/package-global": "^2.2.1",
@@ -31,13 +47,5 @@
     "graphql": "^14.5.4",
     "graphql-tag": "^2.10.1",
     "object-path": "^0.11.5"
-  },
-  "engines": {
-    "node": ">=14.15"
-  },
-  "os": [
-    "darwin",
-    "linux",
-    "win32"
-  ]
+  }
 }

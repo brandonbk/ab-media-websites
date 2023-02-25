@@ -5,6 +5,14 @@
   "repository": "https://github.com/parameter1/ab-media-websites/tree/master/sites/athleticbusiness.com",
   "license": "MIT",
   "private": true,
+  "website": {
+    "id": "60f6ec0bd28860bc3384daa1",
+    "tenant": "abmedia_all",
+    "account": "abmedia",
+    "stack": "virgon",
+    "key": "ab",
+    "deploy": true
+  },
   "scripts": {
     "dev": "basecms-website dev --compile-dir ../../packages --watch-dir ../../packages",
     "build": "basecms-website build",
@@ -13,6 +21,14 @@
     "lint:fix": "yarn lint --fix",
     "test": "yarn lint && yarn compile --no-clean"
   },
+  "engines": {
+    "node": ">=14.15"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
   "dependencies": {
     "@ab-media/base-cms-marko-web-broadstreet": "^2.2.1",
     "@ab-media/package-global": "^2.2.1",
@@ -34,13 +50,5 @@
     "graphql-tag": "^2.10.1",
     "http-errors": "^1.8.0",
     "object-path": "^0.11.5"
-  },
-  "engines": {
-    "node": ">=14.15"
-  },
-  "os": [
-    "darwin",
-    "linux",
-    "win32"
-  ]
+  }
 }
