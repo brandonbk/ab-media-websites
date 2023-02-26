@@ -8,18 +8,26 @@
   "scripts": {
     "compile": "basecms-marko-compile compile",
     "build": "yarn compile",
-    "lint": "eslint --ext .js --ext .vue --max-warnings 5 --ignore-path ../../.eslintignore  --config ../../.eslintrc.js ./",
+    "lint": "eslint --ext .js --ext .vue --max-warnings 5 --config ../../.eslintrc.js --ignore-path ../../.eslintignore ./",
     "lint:fix": "yarn lint --fix",
     "test": "yarn lint && yarn compile --no-clean"
   },
   "dependencies": {
     "@parameter1/base-cms-marko-core": "^4.2.0",
-    "@parameter1/base-cms-marko-web": "^4.2.1",
+    "@parameter1/base-cms-marko-web": "^4.5.2",
     "@parameter1/base-cms-marko-web-deferred-script-loader": "^4.1.0",
     "@parameter1/base-cms-object-path": "^4.0.2",
     "@parameter1/base-cms-utils": "^4.0.2"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "engines": {
+    "node": ">=14.15"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
 }

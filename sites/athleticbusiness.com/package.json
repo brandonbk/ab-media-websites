@@ -5,28 +5,44 @@
   "repository": "https://github.com/parameter1/ab-media-websites/tree/master/sites/athleticbusiness.com",
   "license": "MIT",
   "private": true,
+  "website": {
+    "id": "60f6ec0bd28860bc3384daa1",
+    "tenant": "abmedia_all",
+    "account": "abmedia",
+    "stack": "virgon",
+    "key": "ab",
+    "deploy": true
+  },
   "scripts": {
     "dev": "basecms-website dev --compile-dir ../../packages --watch-dir ../../packages",
     "build": "basecms-website build",
     "compile": "basecms-marko-compile compile",
-    "lint": "eslint --ext .js --ext .vue --max-warnings 5 --ignore-path ../../.eslintignore  --config ../../.eslintrc.js ./",
+    "lint": "eslint --ext .js --ext .vue --max-warnings 5 --config ../../.eslintrc.js --ignore-path ../../.eslintignore ./",
     "lint:fix": "yarn lint --fix",
     "test": "yarn lint && yarn compile --no-clean"
   },
+  "engines": {
+    "node": ">=14.15"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
   "dependencies": {
     "@ab-media/base-cms-marko-web-broadstreet": "^2.2.1",
     "@ab-media/package-global": "^2.2.1",
     "@parameter1/base-cms-apollo-ssr": "^4.0.2",
     "@parameter1/base-cms-marko-core": "^4.2.0",
-    "@parameter1/base-cms-marko-web": "^4.2.1",
+    "@parameter1/base-cms-marko-web": "^4.5.2",
     "@parameter1/base-cms-marko-web-gtm": "^4.1.0",
     "@parameter1/base-cms-marko-web-identity-x": "^4.1.0",
     "@parameter1/base-cms-marko-web-leaders": "^4.1.7",
-    "@parameter1/base-cms-marko-web-theme-monorail": "^4.1.1",
+    "@parameter1/base-cms-marko-web-theme-monorail": "^4.3.3",
     "@parameter1/base-cms-marko-web-theme-monorail-magazine": "^4.1.1",
     "@parameter1/base-cms-object-path": "^4.0.2",
     "@parameter1/base-cms-utils": "^4.0.2",
-    "@parameter1/base-cms-web-cli": "^4.1.1",
+    "@parameter1/base-cms-web-cli": "^4.3.4",
     "csvtojson": "^2.0.10",
     "debounce": "^1.2.0",
     "express": "^4.17.1",

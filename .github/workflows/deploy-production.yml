@@ -53,9 +53,9 @@ jobs:
         #v# Make sure this matches the site matrix! #v#
         ###############################################
         site:
-          - { id: 60f6ec34d28860bc3384e447, dir: aquamagazine.com, stack: virgon, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-aquamagazine.com }
-          - { id: 60f6ec0bd28860bc3384daa1, dir: athleticbusiness.com, stack: virgon, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-athleticbusiness.com }
-          - { id: 60f6ec3bd28860bc3384e784, dir: woodfloorbusiness.com, stack: virgon, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-woodfloorbusiness.com }
+          - { dir: aquamagazine.com, stack: virgon, id: 60f6ec34d28860bc3384e447, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-aquamagazine.com }
+          - { dir: athleticbusiness.com, stack: virgon, id: 60f6ec0bd28860bc3384daa1, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-athleticbusiness.com }
+          - { dir: woodfloorbusiness.com, stack: virgon, id: 60f6ec3bd28860bc3384e784, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-woodfloorbusiness.com }
         ###############################################
         #^# Make sure this matches the site matrix! #^#
         ###############################################
@@ -78,9 +78,9 @@ jobs:
         #v# Make sure this matches the site matrix! #v#
         ###############################################
         site:
-          - { id: 60f6ec34d28860bc3384e447, dir: aquamagazine.com, stack: virgon, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-aquamagazine.com }
-          - { id: 60f6ec0bd28860bc3384daa1, dir: athleticbusiness.com, stack: virgon, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-athleticbusiness.com }
-          - { id: 60f6ec3bd28860bc3384e784, dir: woodfloorbusiness.com, stack: virgon, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-woodfloorbusiness.com }
+          - { dir: aquamagazine.com, stack: virgon, id: 60f6ec34d28860bc3384e447, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-aquamagazine.com }
+          - { dir: athleticbusiness.com, stack: virgon, id: 60f6ec0bd28860bc3384daa1, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-athleticbusiness.com }
+          - { dir: woodfloorbusiness.com, stack: virgon, id: 60f6ec3bd28860bc3384e784, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-woodfloorbusiness.com }
         ###############################################
         #^# Make sure this matches the site matrix! #^#
         ###############################################
