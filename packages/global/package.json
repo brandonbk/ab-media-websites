@@ -37,7 +37,7 @@
     "@parameter1/base-cms-marko-web-theme-monorail-magazine": "^4.1.1",
     "@parameter1/base-cms-object-path": "^4.0.2",
     "@parameter1/base-cms-utils": "^4.0.2",
-    "@parameter1/base-cms-web-cli": "^4.5.3",
+    "@parameter1/base-cms-web-cli": "^4.5.10",
     "@parameter1/base-cms-web-common": "^4.0.2",
     "@parameter1/omeda-graphql-client-express": "^0.4.2",
     "@trevoreyre/autocomplete-vue": "^2.2.0",
