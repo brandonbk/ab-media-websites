@@ -79,16 +79,20 @@ module.exports = {
       ...topics.primary,
       { href: '/directory', label: 'Buyer\'s Guide' },
       { href: 'https://www.abshow.com', label: 'AB Show', target: '_blank' },
+      { href: '/project-galleries/architectural-showcase', label: 'Showcase' },
     ],
   },
   tertiary: {
+    items: [],
+  },
+  user: {
     items: [],
   },
   footer: {
     items: [
       { href: '/page/about-us', label: 'About Us' },
       { href: '/page/contact-us', label: 'Contact Us' },
-      { href: 'https://athleticbusiness.dragonforms.com/loading.do?omedasite=ab_land', label: 'Subscribe', target: '_blank' },
+      subscribe,
       { href: '/page/privacy-policy', label: 'Privacy Policy' },
       { href: '/site-map', label: 'Site Map' },
     ],

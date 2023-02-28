@@ -8,11 +8,11 @@
       Premium Partners
     </div>
     <div class="partners">
-      <div>
+      <div style="min-height: 30px;">
         <vue-slick-carousel v-bind="SlickCarouselSettings">
           <a
             v-for="(partner) in partnersToDisplay"
-            :key="partner.name"
+            :key="partner.id"
             :href="partner.linkUrl"
             :title="partner.shortName"
             target="_blank"
@@ -21,7 +21,6 @@
             <img
               class="premium-partners__logo lazyload"
               src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-              srcset=""
               :data-src="getImgSrc(partner.primaryImage.src)"
               :data-srcset="[getImgSrcSet(partner.primaryImage.src)]"
               :alt="partner.shortName"
@@ -47,6 +46,7 @@ export default {
   },
 
   data: () => ({
+    imageParams: 'auto=format,compress&q=70&bg=fff&fill=solid&fit=fillmax&h=30',
     partnersToDisplay: [],
     SlickCarouselSettings: {
       autoplay: true,
@@ -79,10 +79,10 @@ export default {
 
   methods: {
     getImgSrc(imagePath) {
-      return `${imagePath}?auto=format,compress&q=70&bg=fff&fill=solid&fit=fillmax&h=30`;
+      return `${imagePath}?${this.imageParams}`;
     },
     getImgSrcSet(imagePath) {
-      return `${imagePath}?auto=format,compress&q=70&bg=fff&fill=solid&fit=fillmax&h=30&dpr=2 2x`;
+      return `${imagePath}?${this.imageParams}&dpr=2 2x`;
     },
     shuffleArray(a) {
       const shuffled = [...a];

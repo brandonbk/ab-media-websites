@@ -2,6 +2,7 @@ import { getAsArray } from "@parameter1/base-cms-object-path";
 import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
 import MarkoWebContentBody from "@parameter1/base-cms-marko-web/components/element/content/body";
 import BAMZone from "@ab-media/base-cms-marko-web-broadstreet/components/zone";
+import LeaderboardAd from "../../../blocks/leaderboard-ad";
 import GlobalLeadersContextual from "../../../leaders/contextual";
 
 $ const { global: $global } = out;
@@ -10,20 +11,23 @@ $ const preventHTMLInjection = getAsArray(content, "labels").some( l => ["Sponso
 $ const blockName = defaultValue(input.blockName, 'page-contents');
 $ const aliases = getAsArray(input, 'aliases');
 $ const bodyId = `content-body-${content.id}`;
+$ const withLeadersBlock = defaultValue(input.withLeadersBlock, true);
+$ const withMobileLeaderBoard = defaultValue(input.withLeadersBlock, true);
 
 $ const desktopCounts = [1000, 2750, 4500, 6250, 8000, 9750, 11500, 13250, 15000, 16750, 18500];
-$ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12050, 13350, 14650, 15950, 17250];
-
+$ const mobileCounts = (withMobileLeaderBoard) ? [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12050, 13350, 14650, 15950, 17250] : [250, 900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12050, 13350, 14650, 15950, 17250];
 <global-ssr-html-inject
   to-render=MarkoWebContentBody
   selector=`#${bodyId}`
 >
   <@component-input block-name=blockName obj=content attrs={ id: bodyId } />
   <if(!preventHTMLInjection)>
-    <@inject
-      at=1500
-      html=GlobalLeadersContextual.renderToString({ contentId: content.id, $global, })
-    />
+    <if(withLeadersBlock)>
+      <@inject
+        at=1500
+        html=GlobalLeadersContextual.renderToString({ contentId: content.id, $global, })
+      />
+    </if>
 
     <for|char| of=desktopCounts>
       <@inject
@@ -35,15 +39,17 @@ $ const mobileCounts = [900, 1650, 2950, 4250, 5550, 6850, 8150, 9450, 10750, 12
         })
       />
     </for>
-
-    <@inject
-      at=250
-      html=BAMZone.renderToString({
-        zoneAlias: "mobileLeaderboard",
-        modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile", "inline-leaderboard-mobile"],
-        $global
-      })
-    />
+    <if(withMobileLeaderBoard)>
+      <@inject
+        at=250
+        html=LeaderboardAd.renderToString({
+          billboardZoneAlias: "mobileBillboard",
+          leaderboardZoneAlias: "mobileLeaderboard",
+          modifiers: ["margin-auto-x",  "inline-content", "inline-content-mobile", "inline-leaderboard-mobile"],
+          $global
+        })
+      />
+    </if>
 
     <for|char| of=mobileCounts>
       <@inject

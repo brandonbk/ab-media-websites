@@ -42,8 +42,5 @@
   },
   "<global-site-header>": {
     "template": "./site-header.marko"
-  },
-  "<global-site-header-2>": {
-    "template": "./site-header-2.marko"
   }
 }

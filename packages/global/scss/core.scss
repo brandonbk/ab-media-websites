@@ -2,17 +2,17 @@
 @import "variables";
 
 // import theme css
-@import "../../node_modules/@parameter1/base-cms-marko-web-theme-monorail/scss/core";
+@import "@parameter1/base-cms-marko-web-theme-monorail/scss/core";
 
 // import theme magazine css
-@import "../../node_modules/@parameter1/base-cms-marko-web-theme-monorail-magazine/scss/index";
+@import "@parameter1/base-cms-marko-web-theme-monorail-magazine/scss/index";
 
 // Leaders css import
 @import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600,700&display=swap");
-@import "../../node_modules/@parameter1/base-cms-marko-web-leaders/scss/leaders";
+@import "@parameter1/base-cms-marko-web-leaders/scss/leaders";
 
 // boradstreet ads import
-@import "../../node_modules/@ab-media/base-cms-marko-web-broadstreet/scss/ads";
+@import "@ab-media/base-cms-marko-web-broadstreet/scss/ads";
 
 // page wrapper
 .page-wrapper {
@@ -50,6 +50,16 @@
       @include media-breakpoint-up(md) {
         text-align: left;
       }
+    }
+  }
+}
+.page-wrapper__section--nativex-story-header {
+  .sponsor-logo {
+    $self: &;
+    flex-direction: column;
+    align-items: initial;
+    &__logo {
+      height: initial;
     }
   }
 }
@@ -137,7 +147,7 @@ label {
   &--project-gallery {
     margin-bottom: 1.5rem;
     @media (min-width: 900px) {
-      $margin: ($skin-content-primary-image-max-width - $skin-content-body-max-width) / 2 * -1;
+      $margin: ($skin-content-primary-image-max-width - $skin-content-body-max-width) * 0.5 * -1;
       position: relative;
       width: $skin-content-primary-image-max-width;
       margin-left: $margin;
@@ -203,8 +213,17 @@ label {
 }
 
 .node-list {
+  $self: &;
   &__header {
     padding-bottom: 0;
+  }
+  &--company-related-feed,
+  &--company-categories-feed {
+    #{ $self } {
+      &__header {
+        border-bottom: 0;
+      }
+    }
   }
 }
 
@@ -326,5 +345,15 @@ label {
 .social-follow {
   &__section {
     line-height: 45px;
+  }
+}
+
+.pib-page-card {
+  &__description {
+    margin-bottom: 0px;
+  }
+  &__date {
+    font-weight: 600;
+    margin-bottom: 16px;
   }
 }

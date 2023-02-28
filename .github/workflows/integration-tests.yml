@@ -1,0 +1,30 @@
+name: Integration Tests
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  build-and-test-image:
+    uses: parameter1/actions/.github/workflows/website-build-push-test.yml@main
+    strategy:
+      matrix:
+        ###############################################
+        #v# Make sure this matches the site matrix! #v#
+        ###############################################
+        site:
+          - { dir: aquamagazine.com, stack: virgon, id: 60f6ec34d28860bc3384e447, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-aquamagazine.com }
+          - { dir: athleticbusiness.com, stack: virgon, id: 60f6ec0bd28860bc3384daa1, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-athleticbusiness.com }
+          - { dir: woodfloorbusiness.com, stack: virgon, id: 60f6ec3bd28860bc3384e784, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-woodfloorbusiness.com }
+        ###############################################
+        #^# Make sure this matches the site matrix! #^#
+        ###############################################
+    with:
+      docker_image: website-${{ matrix.site.dir }}
+      site_id: ${{ matrix.site.id }}
+      site_host: ${{ matrix.site.dir }}
+      infra_stack: ${{ matrix.site.stack }}
+      tenant_key: ${{ matrix.site.tenant }}
+      ecr_registry: ${{ vars.AWS_ECR_REGISTRY }}

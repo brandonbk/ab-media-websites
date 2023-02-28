@@ -46,5 +46,15 @@
     "@alias": "string",
     "@name": "string",
     "@page-node": "object"
+  },
+  "<global-website-section-webinars-feed-layout>": {
+    "template": "./webinars-feed.marko",
+    "@sections <section>[]": {},
+    "<before-name>": {},
+    "<after-name>": {},
+    "@id": "number",
+    "@alias": "string",
+    "@name": "string",
+    "@page-node": "object"
   }
 }

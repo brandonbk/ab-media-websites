@@ -17,10 +17,14 @@ module.exports = ({
   ],
   defaultCountryCode = 'US',
   requiredServerFields = [
+    'givenName',
+    'familyName',
     'organization',
     'countryCode',
   ],
   requiredClientFields = [
+    'givenName',
+    'familyName',
     'organization',
     'countryCode',
     'postalCode',

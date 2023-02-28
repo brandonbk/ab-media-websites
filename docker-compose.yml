@@ -3,7 +3,7 @@ version: '3.7'
 x-node-defaults: &node
   tty: true
   init: true
-  image: node:10.24
+  image: node:14.21
   entrypoint: ["node"]
   working_dir: /root
   volumes:
@@ -27,7 +27,11 @@ x-env-defaults: &env
   RECAPTCHA_V3_SECRET_KEY: ${RECAPTCHA_V3_SECRET_KEY-}
   LEADERS_ENABLED: ${LEADERS_ENABLED-false}
   LEADERS_ALIAS: ${LEADERS_ALIAS-}
+  LEADERS_LISTED_IN_FULLNAME_FIND: ${LEADERS_LISTED_IN_FULLNAME_FIND-Leaders > 2022 > }
+  LEADERS_LISTED_IN_FULLNAME_REPLACE: ${LEADERS_LISTED_IN_FULLNAME_REPLACE-}
   LEADERS_LOGO: ${LEADERS_LOGO-}
+  BAM_ONLY_VISIBLE: ${BAM_ONLY_VISIBLE-false}
+  BAM_LAZYLOAD_ENABLED: ${BAM_LAZYLOAD_ENABLED-true}
 
 x-env-virgon-dev: &env-virgon-dev
   GRAPHQL_URI: ${GRAPHQL_URI-http://host.docker.internal:10103}
@@ -49,8 +53,8 @@ x-env-virgon: &env-virgon
 
 x-site-command: &site-cmd
   <<: *node
-  entrypoint: ["node_modules/.bin/basecms-website"]
-  command: ["dev", "index.js"]
+  entrypoint: ["yarn"]
+  command: ["dev"]
 
 volumes:
   yarn-cache: {}
@@ -71,55 +75,43 @@ services:
       <<: *env
 
   ab:
-    <<: *node
     <<: *site-cmd
     working_dir: /root/sites/athleticbusiness.com
     environment:
       <<: *env
-      <<: *env-virgon
       AB_PROJECTS_GRAPHQL_URL: ${AB_PROJECTS_GRAPHQL_URL-https://graphql.ab-projects.parameter1.com}
       HOST: www-abmedia-ab.dev.parameter1.com
       PORT: 80
       EXPOSED_PORT: 9801
       LIVERELOAD_PORT: 19801
-      TENANT_KEY: abmedia_all
-      SITE_ID: 60f6ec0bd28860bc3384daa1
     hostname: www-abmedia-ab.dev.parameter1.com
     ports:
       - "9801:80"
       - "19801:19801"
 
   wfb:
-    <<: *node
     <<: *site-cmd
     working_dir: /root/sites/woodfloorbusiness.com
     environment:
       <<: *env
-      <<: *env-virgon
       HOST: www-abmedia-wfb.dev.parameter1.com
       PORT: 80
       EXPOSED_PORT: 9802
       LIVERELOAD_PORT: 19802
-      TENANT_KEY: abmedia_all
-      SITE_ID: 60f6ec3bd28860bc3384e784
     hostname: www-abmedia-wfb.dev.parameter1.com
     ports:
       - "9802:80"
       - "19802:19802"
 
   aqua:
-    <<: *node
     <<: *site-cmd
     working_dir: /root/sites/aquamagazine.com
     environment:
       <<: *env
-      <<: *env-virgon
       HOST: www-abmedia-aqua.dev.parameter1.com
       PORT: 80
       EXPOSED_PORT: 9803
       LIVERELOAD_PORT: 19803
-      TENANT_KEY: abmedia_all
-      SITE_ID: 60f6ec34d28860bc3384e447
     hostname: www-abmedia-aqua.dev.parameter1.com
     ports:
       - "9803:80"

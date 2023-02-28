@@ -46,7 +46,7 @@ $ const imageOptions = {
         </marko-web-element>
         <marko-web-element block-name=blockName name="title">
           <marko-web-link href=href>
-            ${node.title}
+            $!{node.title}
           </marko-web-link>
         </marko-web-element>
         <if(node.city && node.region)>

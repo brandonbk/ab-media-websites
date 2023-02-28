@@ -17,7 +17,7 @@ $leaders-section-contextual-title-color: $leaders-primary-color;
 $leaders-section-contextual-title-font-weight: normal;
 $leaders-section-contextual-title-transform: none;
 
-@import "../../node_modules/@ab-media/package-global/scss/core";
+@import "@ab-media/package-global/scss/core";
 
 .project-gallery-architects,
 .project-gallery-vendors {
