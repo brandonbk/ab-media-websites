@@ -21,10 +21,23 @@ $ const hasUser = defaultValue(input.hasUser, false);
       <div class="col-6 col-md-4 col-lg-3">
         <!-- search box -->
         <search block-name=blockName />
+        <if(site.getAsArray("navigation.user.items"))>
+          <!-- user section -->
+          <theme-site-menu-section
+            tag="nav"
+            block-name=blockName
+            label="Account"
+            items=site.getAsArray("navigation.user.items")
+            modifiers=["user"]
+            reg-enabled=regEnabled
+            has-user=hasUser
+            attrs={ "aria-label": "Account Management Menu (Desktop)" }
+          />
+        </if>
         <!-- social -->
         <social-icons block-name=blockName />
         <!-- about section -->
-        <default-theme-site-menu-section
+        <theme-site-menu-section
           tag="nav"
           block-name=blockName
           label="About"
@@ -36,7 +49,7 @@ $ const hasUser = defaultValue(input.hasUser, false);
       </div>
       <div class="col-6 col-md-4 col-lg-3">
         <!-- sections -->
-        <default-theme-site-menu-section
+        <theme-site-menu-section
           tag="nav"
           block-name=blockName
           label="Topics"
@@ -49,7 +62,7 @@ $ const hasUser = defaultValue(input.hasUser, false);
       <div class="d-none d-md-flex col-md-4">
         $ const resourcesItems = site.getAsArray("navigation.desktopMenu.resources");
         <if(resourcesItems.length)>
-          <default-theme-site-menu-section
+          <theme-site-menu-section
             tag="nav"
             block-name=blockName
             label="Resources"
@@ -73,7 +86,7 @@ $ const hasUser = defaultValue(input.hasUser, false);
     <!-- social -->
     <social-icons block-name=blockName />
     <!-- primary section -->
-    <default-theme-site-menu-section
+    <theme-site-menu-section
       tag="nav"
       block-name=blockName
       items=site.getAsArray("navigation.mobileMenu.primary")
@@ -82,7 +95,7 @@ $ const hasUser = defaultValue(input.hasUser, false);
       has-user=hasUser
     />
     <!-- secondary section -->
-    <default-theme-site-menu-section
+    <theme-site-menu-section
       tag="nav"
       block-name=blockName
       items=site.getAsArray("navigation.mobileMenu.secondary")

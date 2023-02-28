@@ -1,6 +1,6 @@
 const gql = require('graphql-tag');
 
-module.exports = leadersAlias => gql`
+module.exports = (leadersAlias) => gql`
 
 fragment LeadersWebsiteContentCompanyFragment on Content {
   id
@@ -51,10 +51,23 @@ fragment LeadersWebsiteContentCompanyFragment on Content {
     warrantyInformation
 
     # circle image
-    primaryImage {
+    leadersLogo: primaryImage {
       id
       src(input: { options: { auto: "format,compress", q: 70, fillColor: "fff", fit: "fill", h: 125, w: 125, pad: 5, mask: "ellipse" } })
       alt
+    }
+
+    primaryImage {
+      id
+      src(input: { useCropRectangle: true, options: { auto: "format,compress", q: 70 } })
+      alt
+      caption
+      credit
+      isLogo
+      cropDimensions {
+        aspectRatio
+      }
+      primaryImageDisplay
     }
 
     isLeader: hasWebsiteSchedule(input: { sectionAlias: "${leadersAlias}" })

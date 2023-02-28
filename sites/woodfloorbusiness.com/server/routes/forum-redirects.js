@@ -8,5 +8,5 @@ module.exports = (app) => {
     '/floormasters*',
     '/component/com_kunena/*',
     '/viewforum.php',
-  ].forEach(url => app.get(url, (_, res) => res.redirect(302, to)));
+  ].forEach((url) => app.get(url, (_, res) => res.redirect(302, to)));
 };

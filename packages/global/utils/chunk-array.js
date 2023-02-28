@@ -1,4 +1,3 @@
-
 /**
  * @param {object} params
  * @param {array} params.array

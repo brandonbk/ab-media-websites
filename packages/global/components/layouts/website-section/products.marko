@@ -1,4 +1,5 @@
 import { getAsArray } from "@parameter1/base-cms-object-path";
+import queryFragment from "@parameter1/base-cms-marko-web-theme-monorail/graphql/fragments/latest-products-feed-block"
 
 $ const { id, alias, name, pageNode } = input;
 $ const sections = getAsArray(input, "sections");
@@ -33,20 +34,38 @@ $ const perPage = 10;
 
   <@section|{ blockName, section, aliases }|>
     <div class="row">
-      <div class="col-lg-8">
-        <if(alias === 'gear')>
-          <div class="row">
-            <global-sponsored-section-name-logo section=section modifiers=["section-page"] class="col-lg-5" />
-            <global-sponsored-label-logo logo-label="Sponsored by RoadPro" prefix="Presented By" modifiers=["section-page"] class="col-lg-7" />
-          </div>
-        </if>
-        <else>
-          <marko-web-website-section-name tag="h1" block-name=blockName obj=section />
-        </else>
+      <div class="col">
+        <marko-web-website-section-name tag="h1" block-name=blockName obj=section />
+        $ const queryParams = {
+          limit: perPage,
+          skip: p.skip({ perPage }),
+          sectionAlias: alias,
+          queryFragment,
+        };
+        <marko-web-query|{ nodes }| name="website-scheduled-content" params=queryParams>
+          <marko-web-node-list
+            inner-justified=false
+            flush-x=true
+            flush-y=false
+            modifiers=["latest-products-feed"]
+          >
+            <@nodes nodes=nodes>
+              <@slot|{ node }|>
+                <theme-product-feed-content-node node=node />
+              </@slot>
+            <@slot position="after" index=2 modifiers=["ad"]>
+              <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "section_page", "inter-block"]  />
+            </@slot>
+            <@slot position="after" index=5 modifiers=["ad"]>
+              <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "section_page", "inter-block"]  />
+            </@slot>
+            <@slot position="after" index=8 modifiers=["ad"]>
+              <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "section_page", "inter-block"]  />
+            </@slot>
+            </@nodes>
+          </marko-web-node-list>
+        </marko-web-query>
 
-        <theme-latest-products-feed-block alias=alias>
-          <@query-params limit=perPage skip=p.skip({ perPage }) />
-        </theme-latest-products-feed-block>
         <theme-latest-products-feed-block|{ totalCount }| alias=alias count-only=true>
           <theme-pagination-controls
             per-page=perPage
@@ -54,13 +73,6 @@ $ const perPage = 10;
             path=alias
           />
         </theme-latest-products-feed-block>
-      </div>
-      <div class="col-lg-4 pt-block">
-        <${input.railSlotA}
-          block-name=blockName
-          section=section
-          aliases=aliases
-        />
       </div>
     </div>
   </@section>

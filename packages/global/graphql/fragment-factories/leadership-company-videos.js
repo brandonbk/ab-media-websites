@@ -1,6 +1,6 @@
 const gql = require('graphql-tag');
 
-module.exports = leadersAlias => gql`
+module.exports = (leadersAlias) => gql`
 
 fragment LeadershipCompanyVideosFragment on Content {
   id

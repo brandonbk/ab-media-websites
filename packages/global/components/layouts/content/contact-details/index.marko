@@ -54,7 +54,7 @@ $ const lang = input.lang || "en";
   <if(showSocial)>
     <global-content-contact-details-section block-name=blockName modifiers=["social-links"]>
       <for|item| of=socialLinks>
-        <global-social-icon-link
+        <theme-social-icon-link
           label=item.label
           provider=item.provider
           href=item.url

@@ -2,79 +2,91 @@ name: Deploy sites (staging)
 
 on:
   push:
-    branches: [ staging ]
+    tags:
+      - '*'
 
 jobs:
-
-  build:
+  version:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        namespace:
-          - staging-websites-virgon
-        site:
-          - aquamagazine.com
-          - athleticbusiness.com
-          - woodfloorbusiness.com
     steps:
-      - uses: actions/checkout@v2
-      - name: Log in to ECR
-        uses: docker/login-action@v1
-        with:
-          registry: 598984531759.dkr.ecr.us-east-2.amazonaws.com
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      - name: Build docker image
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          build-args: |
-            SITE=${{ matrix.site }}
-          tags: 598984531759.dkr.ecr.us-east-2.amazonaws.com/ab-media-${{ matrix.site }}:staging-${{ github.sha }}
+    - id: tag_version
+      run: |
+        REF=$(echo $GITHUB_REF | cut -d / -f 3)
+        [[ "$GITHUB_REF" =~ ^refs/tags.*$ ]] && VERSION="$REF" || VERSION="${REF}-${GITHUB_SHA::7}"
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+    outputs:
+      version: ${{ steps.tag_version.outputs.version }}
 
-  deploy:
-    needs: [build]
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        namespace:
-          - staging-websites-virgon
-        site:
-          - aquamagazine.com
-          - athleticbusiness.com
-          - woodfloorbusiness.com
-    steps:
-      - name: Deploy to Kubernetes
-        run: npx @endeavorb2b/rancher2cli dl basecms-website ab-media-${{ matrix.site }} --namespace ${{ matrix.namespace }} 598984531759.dkr.ecr.us-east-2.amazonaws.com/ab-media-${{ matrix.site }}:staging-${{ github.sha }}
-        env:
-          RANCHER_CLUSTERID: ${{ secrets.RANCHER_CLUSTERID_BASECMS }}
-          RANCHER_TOKEN: ${{ secrets.RANCHER_TOKEN }}
-          RANCHER_URL: ${{ secrets.RANCHER_URL }}
+  notify-start:
+    needs: [version]
+    uses: parameter1/actions/.github/workflows/notify-start.yml@main
+    secrets: inherit
+    with:
+      version: ${{ needs.version.outputs.version }}
 
   post-deploy-failure:
     if: failure()
-    needs: [deploy]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify failure
-        run: npx @parameter1/base-cms-website-deployment-tool notify-failed
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          ENVIRONMENT: staging
-          RANCHER_CLUSTERID: ${{ secrets.RANCHER_CLUSTERID_BASECMS }}
-          TRAVIS_REPO_SLUG: ${{ github.repository }}
-          TRAVIS_TAG: staging-${{ github.sha }}
+    needs: [notify-start, deploy-sites]
+    uses: parameter1/actions/.github/workflows/notify-fail.yml@main
+    secrets: inherit
+    with:
+      slack-thread: ${{ needs.notify-start.outputs.slack-thread }}
 
-  post-deploy-success:
+  post-deploy-complete:
     if: success()
-    needs: [deploy]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify success
-        run: npx @parameter1/base-cms-website-deployment-tool notify-finished
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          ENVIRONMENT: staging
-          RANCHER_CLUSTERID: ${{ secrets.RANCHER_CLUSTERID_BASECMS }}
-          TRAVIS_REPO_SLUG: ${{ github.repository }}
-          TRAVIS_TAG: staging-${{ github.sha }}
+    needs: [notify-start, deploy-sites]
+    uses: parameter1/actions/.github/workflows/notify-complete.yml@main
+    secrets: inherit
+    with:
+      slack-thread: ${{ needs.notify-start.outputs.slack-thread }}
+
+  ######################
+  # Add websites here! #
+  ######################
+
+  build-sites:
+    needs: [version]
+    uses: parameter1/actions/.github/workflows/website-build-push-test.yml@main
+    strategy:
+      matrix:
+        ###############################################
+        #v# Make sure this matches the site matrix! #v#
+        ###############################################
+        site:
+          - { dir: aquamagazine.com, stack: virgon, id: 60f6ec34d28860bc3384e447, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-aquamagazine.com }
+          - { dir: athleticbusiness.com, stack: virgon, id: 60f6ec0bd28860bc3384daa1, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-athleticbusiness.com }
+          - { dir: woodfloorbusiness.com, stack: virgon, id: 60f6ec3bd28860bc3384e784, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-woodfloorbusiness.com }
+        ###############################################
+        #^# Make sure this matches the site matrix! #^#
+        ###############################################
+    with:
+      ecr_registry: ${{ vars.AWS_ECR_REGISTRY }}
+      docker_image: ${{ vars.AWS_ECR_REGISTRY }}/base-cms-websites-staging:${{ matrix.site.account }}-${{ matrix.site.dir }}-${{ needs.version.outputs.version }}
+      site_id: ${{ matrix.site.id }}
+      site_host: ${{ matrix.site.dir }}
+      infra_stack: ${{ matrix.site.stack }}
+      tenant_key: ${{ matrix.site.tenant }}
+      push: true
+    secrets: inherit
+
+  deploy-sites:
+    needs: [version, build-sites]
+    uses: parameter1/actions/.github/workflows/website-deploy-staging.yml@main
+    strategy:
+      matrix:
+        ###############################################
+        #v# Make sure this matches the site matrix! #v#
+        ###############################################
+        site:
+          - { dir: aquamagazine.com, stack: virgon, id: 60f6ec34d28860bc3384e447, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-aquamagazine.com }
+          - { dir: athleticbusiness.com, stack: virgon, id: 60f6ec0bd28860bc3384daa1, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-athleticbusiness.com }
+          - { dir: woodfloorbusiness.com, stack: virgon, id: 60f6ec3bd28860bc3384e784, account: abmedia, tenant: abmedia_all, rancher_label: ab-media-woodfloorbusiness.com }
+        ###############################################
+        #^# Make sure this matches the site matrix! #^#
+        ###############################################
+    with:
+      docker_image: ${{ vars.AWS_ECR_REGISTRY }}/base-cms-websites-staging:${{ matrix.site.account }}-${{ matrix.site.dir }}-${{ needs.version.outputs.version }}
+      infra_stack: ${{ matrix.site.stack }}
+      rancher_label_key: basecms-website
+      rancher_label_val: ${{ matrix.site.rancher_label }}
+    secrets: inherit

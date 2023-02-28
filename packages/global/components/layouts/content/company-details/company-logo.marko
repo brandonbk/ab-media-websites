@@ -2,7 +2,7 @@ import { get, getAsObject } from "@parameter1/base-cms-object-path";
 import { buildImgixUrl } from "@parameter1/base-cms-image";
 
 $ const { content } = input;
-$ const image = getAsObject(content, "primaryImage");
+$ const image = getAsObject(content, "leadersLogo");
 $ const blockName = "company-logo";
 
 $ const hasImage = Boolean(image.src);

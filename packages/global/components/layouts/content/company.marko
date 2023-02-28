@@ -89,12 +89,28 @@ $ const lang = site.config.lang || "en";
             </marko-web-block>
           </div>
           <div class="content-page-body">
-            <default-theme-page-contents|{ blockName }| attrs={ "data-gallery-id": id }>
+            <theme-page-contents|{ blockName }| attrs={ "data-gallery-id": id }>
               $ const bodyId = `content-body-${content.id}`;
               <marko-web-content-body block-name=blockName obj=content attrs={ id: bodyId } />
-            </default-theme-page-contents>
+            </theme-page-contents>
           </div>
 
+        $ const childCompanies = content.children ? getAsArray(content.children.edges).map((edge) => edge.node) : [];
+        <if(childCompanies.length)>
+          <p><b>Branch Locations</b></p>
+          <div class="row">
+            <for|childCompany| of=childCompanies>
+              <div class="col-lg-6">
+                <div class="content-page-header">
+                <marko-web-block name=detailsBlock>
+                  <p><marko-web-content-name tag="b" obj=childCompany /></p>
+                  <global-content-company-details obj=childCompany />
+                </marko-web-block>
+                </div>
+              </div>
+            </for>
+          </div>
+        </if>
 
           <marko-web-query|{ nodes }|
             name="all-company-content"
@@ -159,8 +175,12 @@ $ const lang = site.config.lang || "en";
             </theme-content-directory-section-flow>
           </marko-web-query>
 
-          <global-directory-sections-block schedules=content.websiteSchedules />
-
+          <global-sections-listed-in-block
+            schedules=content.websiteSchedules
+            root-alias="directory"
+            title="Categories Listed In"
+            full-name-find="Directory > "
+          />
         </if>
         <else>
           <div class="content-page-body">
@@ -187,7 +207,7 @@ $ const lang = site.config.lang || "en";
 
                 <label class="content-section-header content-section-header--border">${i18n("Contact")}</label>
                 $ const { socialLinks, ...contentSansSocial } = content;
-                <default-theme-content-contact-details
+                <theme-content-contact-details
                   obj=contentSansSocial
                   website-link-attrs=eventLinkAttrs({
                     category: "Company Profile Page",
@@ -201,42 +221,49 @@ $ const lang = site.config.lang || "en";
                 <global-content-body-with-tracking block-name="leaders-more-info" content=content />
               </@body>
             </marko-web-node-list>
-
-            <marko-web-query|{ nodes }|
-              name="all-company-content"
-              params={
-                companyId: id,
-                includeContentTypes: ["Promotion"],
-                queryFragment,
-                limit: 4,
-                withSite: false,
-              }
-            >
-              <marko-web-node-list class="mt-block">
-                <@header>
-                  ${i18n("Featured Products")}
-                </@header>
-                <@nodes|{ nodes: items }| nodes=nodes>
-                  <default-theme-card-deck-flow cols=4 nodes=items modifiers=["featured-products"]>
-                    <@slot|{ node, index }|>
-                      <theme-featured-products-card-node
-                        company-id=id
-                        image-width=340
-                        node=node
-                      />
-                    </@slot>
-                  </default-theme-card-deck-flow>
-                </@nodes>
-              </marko-web-node-list>
-            </marko-web-query>
           </div>
+          <global-sections-listed-in-block
+            schedules=content.websiteSchedules
+            root-alias=site.get('leaders.alias')
+            title=site.get('leaders.calloutValue')
+            full-name-find=site.get('leaders.listedInFind')
+            full-name-replace=site.get('leaders.listedInReplace')
+          />
+
+          <marko-web-query|{ nodes }|
+            name="all-company-content"
+            params={
+              companyId: id,
+              includeContentTypes: ["Promotion"],
+              queryFragment,
+              limit: 4,
+              withSite: false,
+            }
+          >
+            <marko-web-node-list class="mt-block">
+              <@header>
+                ${i18n("Featured Products")}
+              </@header>
+              <@nodes|{ nodes: items }| nodes=nodes>
+                <theme-card-deck-flow cols=4 nodes=items modifiers=["featured-products"]>
+                  <@slot|{ node, index }|>
+                    <theme-featured-products-card-node
+                      company-id=id
+                      image-width=340
+                      node=node
+                    />
+                  </@slot>
+                </theme-card-deck-flow>
+              </@nodes>
+            </marko-web-node-list>
+          </marko-web-query>
           $ const videos = getAsArray(content, "videos.edges").map(({ node }) => node);
           <marko-web-node-list class="mt-block">
             <@header>
               ${i18n("Featured Videos")}
             </@header>
             <@nodes|{ nodes }| nodes=videos>
-              <default-theme-card-deck-flow cols=3 nodes=nodes modifiers=["featured-videos"]>
+              <theme-card-deck-flow cols=3 nodes=nodes modifiers=["featured-videos"]>
                 <@slot|{ node, index }|>
                   <div class="node-list__node">
                     <theme-youtube-card-node
@@ -250,7 +277,7 @@ $ const lang = site.config.lang || "en";
                     />
                   </div>
                 </@slot>
-              </default-theme-card-deck-flow>
+              </theme-card-deck-flow>
             </@nodes>
             <@footer>
               $ const url = get(content, "youtube.url");
@@ -259,6 +286,28 @@ $ const lang = site.config.lang || "en";
               </a>
             </@footer>
           </marko-web-node-list>
+
+          <theme-latest-content-list-block
+              query-name="all-company-content"
+              query-params={
+                companyId: content.id,
+                includeContentTypes: ["MediaGallery"],
+                includeLabels: "Buyers Guide Project Gallery",
+                limit: 10,
+                queryFragment,
+              }
+              title=`${i18n("Project Gallery")}`
+              with-native-x-section=false
+              flush-x=false
+              class="mt-block"
+            >
+              <@node with-dates=false />
+            </theme-latest-content-list-block>
+
+            <global-leaders-featured-projects-block
+              graphql-client=$projectsGraphQL
+              short-ids=content.projectShortIds
+            />
 
           <theme-latest-content-list-block
             query-name="all-company-content"
