@@ -1264,10 +1264,10 @@
     moment "^2.29.1"
     node-fetch "^2.6.9"
 
-"@parameter1/base-cms-marko-web@^4.6.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/@parameter1/base-cms-marko-web/-/base-cms-marko-web-4.6.0.tgz#7e12d4be2d557acdff9ad6900f42f8ff248c76ef"
-  integrity sha512-nviy9Fgf7GUfP3PSyrhutSxPrbdcaiIUkwqAIM7pABvWz/1JX3lFME3A+qbLwXpmzO2HTe0taLSKU5d7rHfRFA==
+"@parameter1/base-cms-marko-web@^4.6.1":
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/@parameter1/base-cms-marko-web/-/base-cms-marko-web-4.6.1.tgz#89c80728e190689a2f7ec78fd862bb9071ac6510"
+  integrity sha512-UUQ/u85D7Gk/48TdIUU5aLhBfKbJMrYWtfyh0ZAv0fUUcyJKygmAxKI22+Wk8fKISZEFDZaT8Fz+LleJd3bHAQ==
   dependencies:
     "@godaddy/terminus" "^4.11.2"
     "@parameter1/base-cms-apollo-ssr" "^4.5.12"
