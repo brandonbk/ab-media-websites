@@ -1,6 +1,6 @@
 {
   "name": "@ab-media/base-cms-marko-web-broadstreet",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "description": "Broadstreet Ads Marko components for BaseCMS websites",
   "author": "Brian Miller <brian@parameter1.com>",
   "license": "MIT",
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@parameter1/base-cms-marko-core": "^4.6.0",
-    "@parameter1/base-cms-marko-web": "^4.6.0",
+    "@parameter1/base-cms-marko-web": "^4.6.1",
     "@parameter1/base-cms-marko-web-deferred-script-loader": "^4.5.12",
     "@parameter1/base-cms-object-path": "^4.5.12",
     "@parameter1/base-cms-utils": "^4.5.12"
