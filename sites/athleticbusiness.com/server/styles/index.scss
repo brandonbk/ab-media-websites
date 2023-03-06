@@ -11,13 +11,37 @@ $primary: #103a57;
 
 $leaders-primary-color: #103a57;
 $leaders-primary-color-light: #103a57bf;
-$leaders-accent-color: #d70025;
+$leaders-accent-color: #c42327;
 $leaders-section-contextual-title-font-size: 16px;
 $leaders-section-contextual-title-color: $leaders-primary-color;
 $leaders-section-contextual-title-font-weight: normal;
 $leaders-section-contextual-title-transform: none;
 
 @import "@ab-media/package-global/scss/core";
+
+.leaders {
+  &__header {
+    background-color: $leaders-accent-color;
+  }
+  &__header-image {
+    img {
+      width: 100%;
+      max-width: 512px;
+      max-height: 180px;
+    }
+  }
+  &__footer {
+    .btn-primary {
+      background-color: $leaders-primary-color;
+    }
+  }
+}
+
+.leaders-index-page {
+  &__logo {
+    padding: 0;
+  }
+}
 
 .project-gallery-architects,
 .project-gallery-vendors {
