@@ -7,7 +7,7 @@ const products = require('../templates/website-section/products');
 const section = require('../templates/website-section');
 
 module.exports = (app) => {
-  app.get('/:alias(event/webinars-workshops)', withWebsiteSection({
+  app.get('/:alias(events/webinars-workshops)', withWebsiteSection({
     template: webinars,
     queryFragment,
   }));
