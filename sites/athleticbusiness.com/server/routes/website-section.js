@@ -15,6 +15,10 @@ module.exports = (app) => {
     template: webinars,
     queryFragment,
   }));
+  app.get('/:alias(webinars)', withWebsiteSection({
+    template: webinars,
+    queryFragment,
+  }));
   app.get('/:alias(leaders)', withWebsiteSection({
     template: leaders,
     queryFragment: leadersFragment,
