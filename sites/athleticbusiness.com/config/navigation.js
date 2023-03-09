@@ -25,6 +25,7 @@ const resources = [
   ...projectGalleries,
   { href: '/directory', label: 'Buyer\'s Guide' },
   { href: '/magazine', label: 'Magazine' },
+  { href: '/webinars', label: 'Webinars' },
 ];
 
 const utilities = [
