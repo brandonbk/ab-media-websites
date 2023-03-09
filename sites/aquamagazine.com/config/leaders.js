@@ -7,7 +7,7 @@ module.exports = {
   listedInReplace: process.envLEADERS_LISTED_IN_FULLNAME_REPLACE || '',
   alias: process.env.LEADERS_ALIAS || 'leaders/2022',
   header: {
-    imgSrc: process.env.LEADERS_LOGO || 'https://img.aquamagazine.com/files/base/abmedia/all/image/static/leaders-2022.png?auto=format,compress&h=90',
-    imgSrcset: process.env.LEADERS_LOGO || 'https://img.aquamagazine.com/files/base/abmedia/all/image/static/leaders-2022.png?auto=format,compress&h=90&dpr=2 2x',
+    imgSrc: process.env.LEADERS_LOGO || 'https://img.aquamagazine.com/files/base/abmedia/all/image/static/Leader_Header_V4.png?auto=format,compress&h=90',
+    imgSrcset: process.env.LEADERS_LOGO || 'https://img.aquamagazine.com/files/base/abmedia/all/image/static/Leader_Header_V4.png?auto=format,compress&h=90&dpr=2 2x',
   },
 };
