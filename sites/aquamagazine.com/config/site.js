@@ -9,6 +9,7 @@ const subscribe = require('./subscribe');
 const omeda = require('./omeda');
 const identityX = require('./identity-x');
 const omedaIdentityX = require('./omeda-identity-x');
+const identityXOptInHooks = require('./identity-x-opt-in-hooks');
 const leaders = require('./leaders');
 
 module.exports = {
@@ -26,6 +27,7 @@ module.exports = {
   omeda,
   identityX,
   omedaIdentityX,
+  identityXOptInHooks,
   digitalEdition,
   search,
   subscribe,
