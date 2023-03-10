@@ -34,6 +34,9 @@
     "@full-name-replace": "string",
     "@title": "string"
   },
+  "<global-content-meter-block>": {
+    "template": "./content-meter.marko"
+  },
   "<global-premium-partners-block>": {
     "template": "./premium-partners.marko"
   },

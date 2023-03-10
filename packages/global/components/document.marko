@@ -6,6 +6,7 @@ $ const {
   req,
   nativeX,
   BAM,
+  contentMeterState,
 } = out.global;
 
 $ const omedaConfig = site.get('omeda');
@@ -99,4 +100,14 @@ $ const omedaConfig = site.get('omeda');
     $ const useIdxNewsletterSignup = true !== pushdownDisabled;
     <theme-site-footer use-idx-newsletter-signup=useIdxNewsletterSignup />
   </@below-container>
+  <@below-wrapper>
+    <if(contentMeterState && !contentMeterState.isLoggedIn)>
+      <global-content-meter-block
+        views=contentMeterState.views
+        view-limit=contentMeterState.viewLimit
+        display-overlay=contentMeterState.displayOverlay
+        display-gate=contentMeterState.displayGate
+      />
+    </if>
+  </@below-wrapper>
 </marko-web-document>

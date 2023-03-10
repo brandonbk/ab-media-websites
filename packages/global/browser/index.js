@@ -8,6 +8,7 @@ const CompanySearch = () => import(/* webpackChunkName: "global-company-search" 
 const SectionSearch = () => import(/* webpackChunkName: "global-section-search" */ './section-search.vue');
 const ImageSlider = () => import(/* webpackChunkName: "global-image-slider" */ './image-slider.vue');
 const PremiumPartners = () => import(/* webpackChunkName: "global-premium-partners" */ './premium-partners.vue');
+const ContentMeterTrack = () => import(/* webpackChunkName: "content-meter-tracker" */ './track-content-meter.vue');
 
 export default (Browser) => {
   const { EventBus } = Browser;
@@ -16,6 +17,7 @@ export default (Browser) => {
   MonoRail(Browser);
   Leaders(Browser);
 
+  Browser.register('ContentMeterTrack', ContentMeterTrack);
   Browser.register('GlobalBillboardCookie', BillboardCookie);
 
   Browser.register('GlobalImageSlider', ImageSlider);

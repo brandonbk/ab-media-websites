@@ -16,6 +16,9 @@
   "<global-image-slider>": {
     "template": "./image-slider.marko"
   },
+  "<global-content-meter-track>": {
+    "template": "./content-meter-track.marko"
+  },
   "<global-sponsored-label-logo>": {
     "template": "./sponsored-label-logo.marko"
   },
