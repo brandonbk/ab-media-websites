@@ -41,13 +41,6 @@ $ const omedaConfig = site.get('omeda');
       target-tag="body"
     />
 
-    <${input.head} />
-
-    <!-- Leaders -->
-    <marko-web-leaders-p1events-tracker />
-    <marko-web-leaders-gtm-tracker />
-    <marko-web-leaders-dropdown-portal />
-
     <!-- init native-x -->
     <marko-web-native-x-init
       uri=nativeX.getUri()
@@ -65,12 +58,19 @@ $ const omedaConfig = site.get('omeda');
       target-tag="body"
     />
 
+    <${input.head} />
+
     <!-- start gtm -->
     <marko-web-gtm-start />
 
   </@head>
   <@above-container>
     <marko-web-browser-component name="OmedaIdentityXRapidIdentify" />
+
+    <!-- Leaders -->
+    <marko-web-leaders-p1events-tracker />
+    <marko-web-leaders-gtm-tracker />
+    <marko-web-leaders-dropdown-portal />
 
     <marko-web-gtm-track-bus-event
       on="newsletter-form-action"
