@@ -26,6 +26,11 @@ $ const sections = getAsArray(input, "sections");
       <marko-web-content-name tag="h1" block-name=blockName obj=content />
 
       <theme-content-attribution obj=content elements=["company"] />
+      <marko-web-social-sharing
+        path=content.siteContext.path
+        providers=["print", "facebook", "linkedin", "twitter", "pinterest"]
+        print-path=`/print/content/${content.id}`
+      />
     </div>
   </@section>
 
