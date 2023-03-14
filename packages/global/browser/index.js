@@ -32,7 +32,6 @@ export default (Browser) => {
 
   EventBus.$on('identity-x-login-link-sent', ({ additionalEventData }) => {
     const { autoSignups } = additionalEventData;
-    console.log('hitting: ', autoSignups)
     if (autoSignups) {
       autoSignups.forEach((autoSignup) => {
         window.dataLayer.push({ event: 'identity-x-auto-signup', autoSignup });
