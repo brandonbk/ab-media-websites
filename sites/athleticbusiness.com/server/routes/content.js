@@ -45,7 +45,7 @@ module.exports = (app) => {
   // determin to use newsletterstate or contentMeter middleware
   routesList.forEach((route) => {
     if (contentMeterEnable) {
-      if ( route.useProjectsGraphQLClient) {
+      if (route.useProjectsGraphQLClient) {
         app.get(route.regex, contentMeter(), projectsGraphQLClient(), withContent({
           template: route.template,
           queryFragment: route.queryFragment,
