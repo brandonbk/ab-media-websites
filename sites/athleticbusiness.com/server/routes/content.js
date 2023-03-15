@@ -39,13 +39,12 @@ module.exports = (app) => {
       regex: '/*?/:id(\\d{8})/*|/:id(\\d{8})(/|$)*',
       template: content,
       queryFragment: contentQueryFragmentFn(site.get('leaders.alias')),
-      withContentMeter: true,
     },
   ];
   const contentMeterEnable = site.get('contentMeter.enable');
   // determin to use newsletterstate or contentMeter middleware
   routesList.forEach((route) => {
-    if (route.withContentMeter && contentMeterEnable) {
+    if (contentMeterEnable) {
       if ( route.useProjectsGraphQLClient) {
         app.get(route.regex, contentMeter(), projectsGraphQLClient(), withContent({
           template: route.template,
