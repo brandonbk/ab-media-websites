@@ -2,10 +2,10 @@ module.exports = {
   enable: process.env.ENABLE_CONTENT_METER === 'true',
   viewLimit: 3,
   excludeLabels: ['Sponsored'],
-  // excludeContentTypes: [
-  //   'company',
-  //   'contact',
-  // ],
+  excludeContentTypes: [
+    'company',
+    'contact',
+  ],
   // excludePrimarySectionIds: [
   //   75347,
   // ],
