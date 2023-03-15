@@ -6,6 +6,7 @@ $ const {
   req,
   nativeX,
   BAM,
+  contentMeterState,
 } = out.global;
 
 $ const omedaConfig = site.get('omeda');
@@ -41,11 +42,6 @@ $ const omedaConfig = site.get('omeda');
       target-tag="body"
     />
 
-    <!-- Leaders -->
-    <marko-web-leaders-p1events-tracker />
-    <marko-web-leaders-gtm-tracker />
-    <marko-web-leaders-dropdown-portal />
-
     <!-- init native-x -->
     <marko-web-native-x-init
       uri=nativeX.getUri()
@@ -71,6 +67,11 @@ $ const omedaConfig = site.get('omeda');
   </@head>
   <@above-container>
     <marko-web-browser-component name="OmedaIdentityXRapidIdentify" />
+
+    <!-- Leaders -->
+    <marko-web-leaders-p1events-tracker />
+    <marko-web-leaders-gtm-tracker />
+    <marko-web-leaders-dropdown-portal />
 
     <marko-web-gtm-track-bus-event
       on="newsletter-form-action"
@@ -99,4 +100,14 @@ $ const omedaConfig = site.get('omeda');
     $ const useIdxNewsletterSignup = true !== pushdownDisabled;
     <theme-site-footer use-idx-newsletter-signup=useIdxNewsletterSignup />
   </@below-container>
+  <@below-wrapper>
+    <if(contentMeterState && !contentMeterState.isLoggedIn)>
+      <global-content-meter-block
+        views=contentMeterState.views
+        view-limit=contentMeterState.viewLimit
+        display-overlay=contentMeterState.displayOverlay
+        display-gate=contentMeterState.displayGate
+      />
+    </if>
+  </@below-wrapper>
 </marko-web-document>

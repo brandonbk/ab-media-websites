@@ -1,6 +1,7 @@
 const digitalEdition = require('./digital-edition');
 const navigation = require('./navigation');
 const bam = require('./bam');
+const contentMeter = require('./content-meter');
 const nativeX = require('./native-x');
 const magazine = require('./magazine');
 const newsletter = require('./newsletter');
@@ -9,11 +10,13 @@ const subscribe = require('./subscribe');
 const omeda = require('./omeda');
 const identityX = require('./identity-x');
 const omedaIdentityX = require('./omeda-identity-x');
+const identityXOptInHooks = require('./identity-x-opt-in-hooks');
 const leaders = require('./leaders');
 
 module.exports = {
   navigation,
   bam,
+  contentMeter,
   leaders,
   nativeX,
   magazine,
@@ -26,6 +29,7 @@ module.exports = {
   omeda,
   identityX,
   omedaIdentityX,
+  identityXOptInHooks,
   digitalEdition,
   search,
   subscribe,

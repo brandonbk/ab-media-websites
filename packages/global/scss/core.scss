@@ -78,6 +78,7 @@
 
 // skin components
 @import "./components/carousel";
+@import "./components/content-meter";
 @import "./components/digital-edition";
 @import "./components/directory-facets";
 @import "./components/leaders";
@@ -356,4 +357,8 @@ label {
     font-weight: 600;
     margin-bottom: 16px;
   }
+}
+
+.content-page-header .social-sharing {
+  margin-top: 1rem;
 }
