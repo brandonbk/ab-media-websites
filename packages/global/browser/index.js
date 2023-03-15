@@ -29,4 +29,13 @@ export default (Browser) => {
     provide: { EventBus },
   });
   Browser.register('GlobalPremiumPartners', PremiumPartners);
+
+  EventBus.$on('identity-x-login-link-sent', ({ additionalEventData }) => {
+    const { autoSignups } = additionalEventData;
+    if (autoSignups) {
+      autoSignups.forEach((autoSignup) => {
+        window.dataLayer.push({ event: 'identity-x-auto-signup', autoSignup });
+      });
+    }
+  });
 };
