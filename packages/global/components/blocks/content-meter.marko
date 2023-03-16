@@ -13,7 +13,7 @@ $ const additionalEventData = {
   displayOverlay,
 };
 
-$ function setTextVariables() {
+<!-- $ function setTextVariables() {
   // Set title based on views remaining
   let dynamicTitle = "We hope you’ve enjoyed your articles."
   if (views < viewLimit) dynamicTitle = `You have ${viewLimit - views} article views remaining.`;
@@ -26,8 +26,13 @@ $ function setTextVariables() {
     `Create a free <span class="content-meter__call-to-action--site-name">${config.siteName()}</span> account to continue reading`,
     "Continue",
   ];
-}
-$ const [title, collapsedTitle, callToAction, registerText] = setTextVariables();
+} -->
+
+// Hard Gate variables
+$ const title = "Create an account";
+$ const collapsedTitle = "Create a free account";
+$ const callToAction = `Create a free <span class="content-meter__call-to-action--site-name">${config.siteName()}</span> account to continue reading`;
+$ const registerText = "Continue";
 
 $ const classes = [
   "content-meter",
