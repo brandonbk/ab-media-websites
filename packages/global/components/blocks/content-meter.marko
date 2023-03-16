@@ -28,19 +28,11 @@ $ const additionalEventData = {
   ];
 } -->
 
-$ function setTextVariables() {
-  // Hard Get title
-  let dynamicTitle = "Create an account."
-
-  return [
-    dynamicTitle,
-    "Create a free account",
-    `Create a free <span class="content-meter__call-to-action--site-name">${config.siteName()}</span> account to continue reading`,
-    "Continue",
-  ];
-}
-
-$ const [title, collapsedTitle, callToAction, registerText] = setTextVariables();
+// Hard Gate variables
+$ const title = "Create an account";
+$ const collapsedTitle = "Create a free account";
+$ const callToAction = `Create a free <span class="content-meter__call-to-action--site-name">${config.siteName()}</span> account to continue reading`;
+$ const registerText = "Continue";
 
 $ const classes = [
   "content-meter",
