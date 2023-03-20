@@ -28,11 +28,13 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
   ...rest
 >
   <@section|{ aliases }| modifiers=["break-container", "first-sm"]>
-    <global-leaderboard-ad-block
-      billboardZoneAlias="desktopBillboard"
-      leadboardZoneAlias="desktopLeaderboard"
-      modifiers=["inter-block", "combined-leaderboard", "content-leaderboard"]
-    />
+    <if(!showOverlay)>
+      <global-leaderboard-ad-block
+        billboardZoneAlias="desktopBillboard"
+        leadboardZoneAlias="desktopLeaderboard"
+        modifiers=["inter-block", "combined-leaderboard", "content-leaderboard"]
+      />
+    </if>
   </@section>
 
   <@section|{ blockName, content, aliases, authors }| modifiers=["content-header"]>
