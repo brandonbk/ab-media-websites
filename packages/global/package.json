@@ -54,7 +54,8 @@
     "object-path": "^0.11.5",
     "purgecss": "^5.0.0",
     "slug": "^4.0.2",
-    "vue-slick-carousel": "^1.0.6"
+    "vue-slick-carousel": "^1.0.6",
+    "ua-parser-js": "^1.0.33"
   },
   "engines": {
     "node": ">=14.15"
