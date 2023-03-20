@@ -104,16 +104,14 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
         $ const contentRequiresRegistration = get(content, "userRegistration.isCurrentlyRequired");
         $ const requiresRegistration = contentRequiresRegistration || cmRestrictContentByReg(contentMeterState, content);
         $ const accessLevels = getAsArray(content, "userRegistration.accessLevels");
+
         <marko-web-identity-x-access|context|
           enabled=requiresRegistration
           required-access-level-ids=accessLevels
         >
-        $ console.log('hitting layout: ', showOverlay, cmTruncateBody(contentMeterState), context.canAccess, context.requiresUserInput)
-          <if(cmTruncateBody(contentMeterState))>
-            $ const body = showOverlay ? getContentPreview({ body: content.body, selector: "p:lt(3)" }) : getContentPreview({ body: content.body, selector: "p:nth-of-type(1)" });
-            <marko-web-content-body block-name=blockName obj={ body } >
-              <@embed-options lazyloadImages=false/>
-            </marko-web-content-body>
+       <if(cmTruncateBody(contentMeterState))>
+            $ const body = showOverlay ? getContentPreview({ body: content.body, selector: "p:lt(7)" }) : getContentPreview({ body: content.body, selector: "p:lt(3)" });
+            <marko-web-content-body block-name=blockName obj={ body } />
 
             <div class="content-page-preview-overlay" />
             <if(!showOverlay)>
@@ -132,7 +130,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
             </if>
           </if>
           <else-if(!context.canAccess || context.requiresUserInput)>
-            $ const body = getContentPreview({ body: content.body, selector: "p:nth-of-type(1)" });
+            $ const body = getContentPreview({ body: content.body, selector: "p:lt(3)" });
             <marko-web-content-body block-name=blockName obj={ body } />
 
             <div class="content-page-preview-overlay" />
