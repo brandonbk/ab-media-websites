@@ -1,6 +1,6 @@
 module.exports = {
   enable: process.env.ENABLE_CONTENT_METER === 'true',
-  viewLimit: 3,
+  viewLimit: process.env.CONTENT_METER_VIEW_LIMIT || 3,
   excludeLabels: ['Sponsored'],
   excludeContentTypes: [
     'company',

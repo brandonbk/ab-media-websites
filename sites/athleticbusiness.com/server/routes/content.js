@@ -1,6 +1,7 @@
 const companyQueryFragmentFn = require('@ab-media/package-global/graphql/fragment-factories/content-company');
 const contentQueryFragmentFn = require('@ab-media/package-global/graphql/fragment-factories/content-page');
 const contentMeter = require('@ab-media/package-global/middleware/content-meter');
+const { newsletterState, formatContentResponse } = require('@ab-media/package-global/middleware/newsletter-state');
 
 const withContent = require('@ab-media/package-global/middleware/with-content');
 const queryFragment = require('@ab-media/package-global/graphql/fragments/content-page');
@@ -46,25 +47,40 @@ module.exports = (app) => {
   routesList.forEach((route) => {
     if (contentMeterEnable) {
       if (route.useProjectsGraphQLClient) {
-        app.get(route.regex, contentMeter(), projectsGraphQLClient(), withContent({
-          template: route.template,
-          queryFragment: route.queryFragment,
-        }));
+        app.get(
+          route.regex,
+          newsletterState({ setCookie: false }),
+          contentMeter(),
+          projectsGraphQLClient(),
+          withContent({
+            template: route.template,
+            queryFragment: route.queryFragment,
+            formatResponse: formatContentResponse,
+          }),
+        );
       } else {
-        app.get(route.regex, contentMeter(), withContent({
+        app.get(route.regex, newsletterState({ setCookie: false }), contentMeter(), withContent({
           template: route.template,
           queryFragment: route.queryFragment,
+          formatResponse: formatContentResponse,
         }));
       }
     } else if (route.useProjectsGraphQLClient) {
-      app.get(route.regex, projectsGraphQLClient(), withContent({
-        template: route.template,
-        queryFragment: route.queryFragment,
-      }));
+      app.get(
+        route.regex,
+        newsletterState({ setCookie: false }),
+        projectsGraphQLClient(),
+        withContent({
+          template: route.template,
+          queryFragment: route.queryFragment,
+          formatResponse: formatContentResponse,
+        }),
+      );
     } else {
-      app.get(route.regex, withContent({
+      app.get(route.regex, newsletterState({ setCookie: false }), withContent({
         template: route.template,
         queryFragment: route.queryFragment,
+        formatResponse: formatContentResponse,
       }));
     }
   });

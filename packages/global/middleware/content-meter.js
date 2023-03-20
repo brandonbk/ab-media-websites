@@ -1,3 +1,4 @@
+const parser = require('ua-parser-js');
 const { get } = require('@parameter1/base-cms-object-path');
 const defaultValue = require('@parameter1/base-cms-marko-core/utils/default-value');
 
@@ -12,6 +13,10 @@ const now = new Date().getTime();
 async function shouldMeter(req) {
   const { apollo, params } = req;
   const config = req.app.locals.site.getAsObject('contentMeter');
+
+  // If broserser Facebook do not display content meter gate.
+  if (parser(req.headers['user-agent']).browser.name === 'Facebook') return false;
+
   const { id } = params;
   const additionalInput = buildContentInput({ req });
   const content = await loader(apollo, { id, additionalInput, queryFragment });
@@ -42,6 +47,12 @@ async function shouldMeter(req) {
   return true;
 }
 
+const getId = (value) => {
+  if (!value) return null;
+  const trimmed = `${value}`.trim();
+  return /^[a-z0-9]{15}$/i.test(trimmed) ? trimmed : null;
+};
+
 module.exports = () => asyncRoute(async (req, res, next) => {
   const {
     identityX,
@@ -49,21 +60,21 @@ module.exports = () => asyncRoute(async (req, res, next) => {
     query,
     cookies,
   } = req;
+  const bypassMeter = get(query, 'bypassContentMetering') === 'true';
   const config = req.app.locals.site.getAsObject('contentMeter');
   const { id } = params;
   const idxObj = { isEnabled: true, requiredAccessLevelIds: [] };
   const contentAccess = await identityX.checkContentAccess(idxObj);
   const { isLoggedIn, requiresUserInput } = contentAccess;
-
-  const idFromQuery = query.braze_ext_id;
-  const idFromCookie = cookies.braze_ext_id ? cookies.braze_ext_id : undefined;
-  const brazeId = idFromQuery || idFromCookie;
-
+  // oly_enc_id getting of query param or if cookie is present
+  const idFromQuery = getId(query.oly_enc_id);
+  const idFromCookie = cookies.oly_enc_id ? getId(cookies.oly_enc_id.replace(/^"/, '').replace(/"$/, '')) : undefined;
+  const olyEncId = idFromQuery || idFromCookie;
   // Prop to see if the newsletterState is going to attempt to be initiallyExpanded
   // If it can.  Allow it to win and add prop check to list to disable contentMeter
   const pushdownWins = Boolean(get(res, 'locals.newsletterState.canBeInitiallyExpanded'));
   // If disabled, not logged in & have a oly_enc_id or logged in and have all required fields
-  if (!config.enable || (!isLoggedIn && brazeId) || (isLoggedIn && !requiresUserInput));
+  if (!config.enable || (!isLoggedIn && olyEncId) || (isLoggedIn && !requiresUserInput));
 
   else if (isLoggedIn && requiresUserInput && await shouldMeter(req)) {
     res.locals.contentMeterState = {
@@ -87,14 +98,15 @@ module.exports = () => asyncRoute(async (req, res, next) => {
       valid.push({ id, viewed: now });
     }
 
-    const displayOverlay = (valid.length >= config.viewLimit && !valid.find((v) => v.id === id));
+    const displayOverlay = (valid.length >= config.viewLimit && !valid.find((v) => v.id === id))
+    && !bypassMeter;
 
     res.locals.contentMeterState = {
       ...config,
       views: valid.length,
       isLoggedIn: false,
       requiresUserInput: true,
-      displayGate: (config.enable && !pushdownWins),
+      displayGate: (config.enable && !pushdownWins && !bypassMeter),
       displayOverlay,
     };
     res.cookie(cookieName, JSON.stringify(valid), { maxAge: config.timeframe });

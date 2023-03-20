@@ -1,4 +1,5 @@
 $content-meter-mobile-breakpoint: 600px !default;
+
 .content-meter {
   $self: &;
   &__overlay {
@@ -129,4 +130,12 @@ $content-meter-mobile-breakpoint: 600px !default;
       padding-bottom: 70px;
     }
   }
+}
+
+.content-meter--display-overlay~.document-container {
+  height: 0;
+  overflow: hidden;
+}
+.content-meter--display-overlay ~ .document-container ~ .site-footer {
+  display: none;
 }
