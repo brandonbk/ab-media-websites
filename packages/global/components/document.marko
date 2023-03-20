@@ -91,6 +91,14 @@ $ const omedaConfig = site.get('omeda');
       </global-site-header>
       <global-site-menu has-user=hasUser reg-enabled=isEnabled />
     </marko-web-identity-x-context>
+    <if(contentMeterState && !contentMeterState.isLoggedIn)>
+      <global-content-meter-block
+        views=contentMeterState.views
+        view-limit=contentMeterState.viewLimit
+        display-overlay=contentMeterState.displayOverlay
+        display-gate=contentMeterState.displayGate
+      />
+    </if>
     <${input.aboveContainer} />
   </@above-container>
   <@below-container>
@@ -100,14 +108,4 @@ $ const omedaConfig = site.get('omeda');
     $ const useIdxNewsletterSignup = true !== pushdownDisabled;
     <theme-site-footer use-idx-newsletter-signup=useIdxNewsletterSignup />
   </@below-container>
-  <@below-wrapper>
-    <if(contentMeterState && !contentMeterState.isLoggedIn)>
-      <global-content-meter-block
-        views=contentMeterState.views
-        view-limit=contentMeterState.viewLimit
-        display-overlay=contentMeterState.displayOverlay
-        display-gate=contentMeterState.displayGate
-      />
-    </if>
-  </@below-wrapper>
 </marko-web-document>
