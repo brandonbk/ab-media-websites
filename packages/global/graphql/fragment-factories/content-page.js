@@ -72,6 +72,7 @@ fragment LeadersContentPageFragment on Content {
         caption
         credit
         isLogo
+        inCarousel
       }
     }
   }
