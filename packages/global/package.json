@@ -1,6 +1,6 @@
 {
   "name": "@ab-media/package-global",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "author": "Brandon Krigbaum <brandon@parameter1.com>",
   "repository": "https://github.com/parameter1/ab-media-websites/tree/master/packages/global",
   "license": "MIT",
@@ -54,8 +54,8 @@
     "object-path": "^0.11.5",
     "purgecss": "^5.0.0",
     "slug": "^4.0.2",
-    "vue-slick-carousel": "^1.0.6",
-    "ua-parser-js": "^1.0.33"
+    "ua-parser-js": "^1.0.33",
+    "vue-slick-carousel": "^1.0.6"
   },
   "engines": {
     "node": ">=14.15"
