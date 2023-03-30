@@ -196,7 +196,9 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
           </theme-content-download>
         </if>
 
-        <global-leaders-contextual content-id=id skip-when-exists=true />
+        <if(type !== "webinar")>
+          <global-leaders-contextual content-id=id skip-when-exists=true />
+        </if>
 
         <if(type !== "contact")>
           <for|author| of=authors>
