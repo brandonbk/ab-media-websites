@@ -83,6 +83,27 @@ fragment LeadersContentPageFragment on Content {
       }
     }
   }
+  slideshows: relatedContent(input: { includeContentTypes: [MediaGallery] }) {
+    edges {
+      node {
+        id
+        images(input:{ pagination: { limit: 100 }, sort: { order: values } }) {
+          edges {
+            node {
+              id
+              src(input: { options: { auto: "format,compress", q: 70 } })
+              alt
+              displayName
+              caption
+              credit
+              isLogo
+              inCarousel
+            }
+          }
+        }
+      }
+    }
+  }
   gating {
     surveyType
     surveyId

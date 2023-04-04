@@ -207,6 +207,16 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
             </if>
           </for>
         </if>
+        $ const slideshows = getAsArray(content, 'slideshows.edges');
+        <if(slideshows.length)>
+          <for|slideshow| of=slideshows>
+            $ const images = getAsArray(slideshow, 'node.images.edges');
+            <global-image-slider
+              images=images.map(edge => edge.node)
+              image-options={ fit: "crop", w: 879, h: 586, auto: "format,compress" }
+            />
+          </for>
+        </if>
         <if(!newsletterConfig.disabled)>
           <identity-x-newsletter-form-inline type="inlineContent" />
         </if>
