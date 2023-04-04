@@ -2,10 +2,15 @@ import { get, getAsArray } from "@parameter1/base-cms-object-path";
 import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
 import getContentPreview from "@parameter1/base-cms-marko-web-theme-monorail/utils/get-content-preview";
 
-import contentRegistrationGating from "../../../utils/content-registration-gating";
 import { cmShowOverlay, cmRestrictContentByReg, cmTruncateBody } from "../../../utils/content-meter-helpers";
 
-$ const { site, contentMeterState, pagination: p } = out.global;
+$ const {
+  site,
+  contentMeterState,
+  pagination: p,
+  contentGatingHandler,
+} = out.global;
+
 $ const showOverlay = cmShowOverlay(contentMeterState);
 $ const { id, type, pageNode, ...rest } = input;
 $ const sections = getAsArray(input, "sections");
@@ -104,7 +109,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
           </marko-web-link>
         </if>
 
-        $ const contentRequiresRegistration = contentRegistrationGating({ content, siteConfig: site });
+        $ const contentRequiresRegistration = contentGatingHandler(content);
         $ const requiresRegistration = contentRequiresRegistration || cmRestrictContentByReg(contentMeterState, content);
         $ const accessLevels = getAsArray(content, "userRegistration.accessLevels");
 
@@ -132,6 +137,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
                 profile-event-name="content_meter_profile"
               />
             </if>
+            <marko-web-content-body block-name=blockName attrs={ style: "display: none;" } obj=content modifiers=["gated", "hide"] />
           </if>
           <else-if(!context.canAccess || context.requiresUserInput)>
             $ const body = getContentPreview({ body: content.body, selector: "p:lt(3)" });
@@ -146,6 +152,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
               requires-user-input=context.requiresUserInput
               messages=context.messages
             />
+            <marko-web-content-body block-name=blockName attrs={ style: "display: none;" }  obj=content modifiers=["ld-json"] />
           </else-if>
           <else>
 

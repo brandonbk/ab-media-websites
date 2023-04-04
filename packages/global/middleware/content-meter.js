@@ -7,8 +7,6 @@ const { content: loader } = require('@parameter1/base-cms-web-common/page-loader
 const buildContentInput = require('@parameter1/base-cms-marko-web/utils/build-content-input');
 const queryFragment = require('@parameter1/base-cms-marko-web-theme-monorail/graphql/fragments/content-meter');
 
-const contentRegistrationGating = require('../utils/content-registration-gating');
-
 const cookieName = 'contentMeter';
 const now = new Date().getTime();
 
@@ -23,8 +21,8 @@ async function shouldMeter(req) {
   const additionalInput = buildContentInput({ req });
   const content = await loader(apollo, { id, additionalInput, queryFragment });
   // Skip if gated by reg on content itself
-  const siteConfig = req.app.locals.site;
-  if (contentRegistrationGating({ content, siteConfig })) return false;
+  const { contentGatingHandler } = req.app.locals;
+  if (contentGatingHandler(content)) return false;
 
   // @todo implement how the gate should be restricted
   // By type || By section || By primarySection
