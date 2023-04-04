@@ -137,7 +137,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
                 profile-event-name="content_meter_profile"
               />
             </if>
-            <marko-web-content-body block-name=blockName attrs={ style: "display: none;" } obj=content modifiers=["gated", "hide"] />
+            <marko-web-content-body block-name=blockName attrs={ style: "display: none;" } obj=content modifiers=["ld-json"] />
           </if>
           <else-if(!context.canAccess || context.requiresUserInput)>
             $ const body = getContentPreview({ body: content.body, selector: "p:lt(3)" });
