@@ -62,7 +62,9 @@ module.exports = (options = {}) => {
 
       // Apply site level and org level content gating rules
       const contentTypesToGateByDefault = getAsArray(options, 'siteConfig.contentTypesToGateByDefault');
-      const contentGating = (content) => {
+      const contentGating = ({ content }) => {
+        // ensure content exists or return false
+        if (!content) return false;
         // Force gating by reg base on site's for contentGatingByType by content type
         if (contentTypesToGateByDefault.includes(content.type)) {
           return true;

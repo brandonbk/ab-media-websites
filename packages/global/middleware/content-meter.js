@@ -22,7 +22,7 @@ async function shouldMeter(req) {
   const content = await loader(apollo, { id, additionalInput, queryFragment });
   // Skip if gated by reg on content itself
   const { contentGatingHandler } = req.app.locals;
-  if (contentGatingHandler(content)) return false;
+  if (contentGatingHandler({ content })) return false;
 
   // @todo implement how the gate should be restricted
   // By type || By section || By primarySection
