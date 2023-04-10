@@ -40,15 +40,20 @@ module.exports = (app) => {
       queryFragment: contentQueryFragmentFn(site.get('leaders.alias')),
     },
   ];
-  const contentMeterEnable = site.get('contentMeter.enable');
+  const cmConfig = site.getAsObject('contentMeter');
   // determin to use newsletterstate or contentMeter middleware
   routesList.forEach((route) => {
-    if (contentMeterEnable) {
-      app.get(route.regex, newsletterState({ setCookie: false }), contentMetering(), withContent({
-        template: route.template,
-        queryFragment: route.queryFragment,
-        formatResponse: formatContentResponse,
-      }));
+    if (cmConfig.enable) {
+      app.get(
+        route.regex,
+        newsletterState({ setCookie: false }),
+        contentMetering(cmConfig),
+        withContent({
+          template: route.template,
+          queryFragment: route.queryFragment,
+          formatResponse: formatContentResponse,
+        }),
+      );
     } else {
       app.get(route.regex, newsletterState({ setCookie: false }), withContent({
         template: route.template,

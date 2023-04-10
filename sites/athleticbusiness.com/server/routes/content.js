@@ -42,15 +42,15 @@ module.exports = (app) => {
       queryFragment: contentQueryFragmentFn(site.get('leaders.alias')),
     },
   ];
-  const contentMeterEnable = site.get('contentMeter.enable');
+  const cmConfig = site.getAsObject('contentMeter');
   // determin to use newsletterstate or contentMeter middleware
   routesList.forEach((route) => {
-    if (contentMeterEnable) {
+    if (cmConfig.enable) {
       if (route.useProjectsGraphQLClient) {
         app.get(
           route.regex,
           newsletterState({ setCookie: false }),
-          contentMetering(),
+          contentMetering(cmConfig),
           projectsGraphQLClient(),
           withContent({
             template: route.template,
@@ -59,11 +59,16 @@ module.exports = (app) => {
           }),
         );
       } else {
-        app.get(route.regex, newsletterState({ setCookie: false }), contentMetering(), withContent({
-          template: route.template,
-          queryFragment: route.queryFragment,
-          formatResponse: formatContentResponse,
-        }));
+        app.get(
+          route.regex,
+          newsletterState({ setCookie: false }),
+          contentMetering(cmConfig),
+          withContent({
+            template: route.template,
+            queryFragment: route.queryFragment,
+            formatResponse: formatContentResponse,
+          }),
+        );
       }
     } else if (route.useProjectsGraphQLClient) {
       app.get(
