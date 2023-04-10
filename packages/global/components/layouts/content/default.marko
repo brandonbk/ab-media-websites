@@ -196,13 +196,25 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
           </theme-content-download>
         </if>
 
-        <global-leaders-contextual content-id=id skip-when-exists=true />
+        <if(type !== "webinar")>
+          <global-leaders-contextual content-id=id skip-when-exists=true />
+        </if>
 
         <if(type !== "contact")>
           <for|author| of=authors>
             <if(getAsArray(author, "labels").includes("Contributor"))>
               <marko-web-content-body obj=author block-name="inline-author-bio" />
             </if>
+          </for>
+        </if>
+        $ const slideshows = getAsArray(content, 'slideshows.edges');
+        <if(slideshows.length)>
+          <for|slideshow| of=slideshows>
+            $ const images = getAsArray(slideshow, 'node.images.edges');
+            <global-image-slider
+              images=images.map(edge => edge.node)
+              image-options={ fit: "crop", w: 879, h: 586, auto: "format,compress" }
+            />
           </for>
         </if>
         <if(!newsletterConfig.disabled)>
