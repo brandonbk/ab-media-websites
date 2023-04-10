@@ -30,6 +30,7 @@ module.exports = ({
     'postalCode',
   ],
   booleanQuestionsLabel = 'Choose your subscriptions:',
+  requiredCreateFields = ['givenName', 'familyName'],
 } = {}) => {
   const config = new IdentityXConfiguration({
     appId,
@@ -39,6 +40,7 @@ module.exports = ({
     requiredServerFields,
     requiredClientFields,
     booleanQuestionsLabel,
+    requiredCreateFields,
     onHookError: (e) => {
       if (process.env.NODE_ENV === 'development') {
         log('ERROR IN IDENTITY-X HOOK', e);

@@ -1,6 +1,6 @@
+const contentMetering = require('@parameter1/base-cms-marko-web-theme-monorail/middleware/content-metering');
 const companyQueryFragmentFn = require('@ab-media/package-global/graphql/fragment-factories/content-company');
 const contentQueryFragmentFn = require('@ab-media/package-global/graphql/fragment-factories/content-page');
-const contentMeter = require('@ab-media/package-global/middleware/content-meter');
 const { newsletterState, formatContentResponse } = require('@ab-media/package-global/middleware/newsletter-state');
 
 const withContent = require('@ab-media/package-global/middleware/with-content');
@@ -50,7 +50,7 @@ module.exports = (app) => {
         app.get(
           route.regex,
           newsletterState({ setCookie: false }),
-          contentMeter(),
+          contentMetering(),
           projectsGraphQLClient(),
           withContent({
             template: route.template,
@@ -59,7 +59,7 @@ module.exports = (app) => {
           }),
         );
       } else {
-        app.get(route.regex, newsletterState({ setCookie: false }), contentMeter(), withContent({
+        app.get(route.regex, newsletterState({ setCookie: false }), contentMetering(), withContent({
           template: route.template,
           queryFragment: route.queryFragment,
           formatResponse: formatContentResponse,
