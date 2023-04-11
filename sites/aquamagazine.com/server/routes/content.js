@@ -43,7 +43,7 @@ module.exports = (app) => {
   const cmConfig = site.getAsObject('contentMeter');
   // determin to use newsletterstate or contentMeter middleware
   routesList.forEach((route) => {
-    if (cmConfig.enable) {
+    if (cmConfig.enabled) {
       app.get(
         route.regex,
         newsletterState({ setCookie: false }),
