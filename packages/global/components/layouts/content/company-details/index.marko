@@ -36,14 +36,18 @@ $ const showFields = fields.some(k => content[k]);
 
   <if(showFields)>
     <theme-content-contact-details-section block-name=blockName>
-      <div class=`${blockName}__field`>
-        <span class=`${blockName}__label`>eMail:</span>
-        <marko-web-content-public-email block-name=blockName obj=content link=true/>
-      </div>
-      <div class=`${blockName}__field`>
-        <span class=`${blockName}__label`>Website:</span>
-        <marko-web-content-website block-name=blockName obj=content link=true />
-      </div>
+      <if(content.publicEmail)>
+        <div class=`${blockName}__field`>
+          <span class=`${blockName}__label`>Email:</span>
+          <marko-web-content-public-email block-name=blockName obj=content link=true/>
+        </div>
+      </if>
+      <if(content.website)>
+        <div class=`${blockName}__field`>
+          <span class=`${blockName}__label`>Website:</span>
+          <marko-web-content-website block-name=blockName obj=content link=true />
+        </div>
+      </if>
     </theme-content-contact-details-section>
   </if>
 
