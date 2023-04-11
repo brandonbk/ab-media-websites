@@ -1,8 +1,7 @@
 import { get, getAsArray } from "@parameter1/base-cms-object-path";
 import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
 import getContentPreview from "@parameter1/base-cms-marko-web-theme-monorail/utils/get-content-preview";
-
-import { cmShowOverlay, cmRestrictContentByReg, cmTruncateBody } from "../../../utils/content-meter-helpers";
+import { shouldOverlay, restrictContentByReg, shouldTruncate } from "@parameter1/base-cms-marko-web-theme-monorail/utils/content-meter-helpers";
 
 $ const {
   site,
@@ -11,7 +10,7 @@ $ const {
   contentGatingHandler,
 } = out.global;
 
-$ const showOverlay = cmShowOverlay(contentMeterState);
+$ const showOverlay = shouldOverlay(contentMeterState);
 $ const { id, type, pageNode, ...rest } = input;
 $ const sections = getAsArray(input, "sections");
 
@@ -109,8 +108,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
           </marko-web-link>
         </if>
 
-        $ const contentRequiresRegistration = contentGatingHandler({ content });
-        $ const requiresRegistration = contentRequiresRegistration || cmRestrictContentByReg(contentMeterState, content);
+        $ const requiresRegistration = contentGatingHandler({ content }) || restrictContentByReg(contentMeterState, contentGatingHandler, content);
         $ const accessLevels = getAsArray(content, "userRegistration.accessLevels");
 
         <marko-web-identity-x-access|context|
@@ -118,7 +116,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
           required-access-level-ids=accessLevels
         >
 
-       <if(cmTruncateBody(contentMeterState))>
+          <if(shouldTruncate(contentMeterState))>
             $ const body = showOverlay ? getContentPreview({ body: content.body, selector: "p:lt(7)" }) : getContentPreview({ body: content.body, selector: "p:lt(3)" });
             <marko-web-content-body block-name=blockName obj={ body } />
 
