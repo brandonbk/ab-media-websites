@@ -86,17 +86,20 @@ module.exports = ({
           && namespace.provider === 'omeda'
           && namespace.tenant === omeda.brandKey);
 
-      // BAIL if no encryptedCustomerId and return payload
-      // if (!found) return payload;
-      // Can not do above on loginLinkSent as you may need to create this user in Omeda
-      const encryptedCustomerId = get(found, 'identifier.value');
+      // If no external found attempt to rapid identity with the current payload
+      // and continue to attempt to auto signup the given user
+      const { encryptedCustomerId } = (!found)
+        ? await req.$idxOmedaRapidIdentify(payload)
+        : { encryptedCustomerId: get(found, 'identifier.value') };
+
+      // If no encryptedCustomerId just return standard payload
+      if (!encryptedCustomerId) return payload;
+
       // Retrive the omeda customer or return empty obj {}
-      const omedaCustomer = (encryptedCustomerId)
-        ? await getOmedaCustomerRecord({
-          omedaGraphQLClient: req.$omedaGraphQLClient,
-          encryptedCustomerId,
-        })
-        : {};
+      const omedaCustomer = await getOmedaCustomerRecord({
+        omedaGraphQLClient: req.$omedaGraphQLClient,
+        encryptedCustomerId,
+      });
       // Get the current user subscriptions or [] if no user
       const subscriptions = getAsArray(omedaCustomer, 'subscriptions');
       // For each autoOptinProduct check if they have a subscription.
