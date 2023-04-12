@@ -3,6 +3,7 @@ import MonoRail from '@parameter1/base-cms-marko-web-theme-monorail/browser';
 import Leaders from '@parameter1/base-cms-marko-web-leaders/browser';
 
 const AutoScroll = () => import(/* webpackChunkName: "global-auto-scroll" */ './auto-scroll.vue');
+const BroadstreetP1EventsTracker = () => import('./broadstreet-p1-events-tracker.vue');
 const BillboardCookie = () => import(/* webpackChunkName: "global-billboard-cookie" */ './billboard-cookie.vue');
 const CompanySearch = () => import(/* webpackChunkName: "global-company-search" */ './company-search.vue');
 const SectionSearch = () => import(/* webpackChunkName: "global-section-search" */ './section-search.vue');
@@ -16,6 +17,8 @@ export default (Browser) => {
   GCSE(Browser);
   MonoRail(Browser);
   Leaders(Browser);
+
+  Browser.register('GlobalBroadstreetP1EventsTracker', BroadstreetP1EventsTracker);
 
   Browser.register('ContentMeterTrack', ContentMeterTrack);
   Browser.register('GlobalBillboardCookie', BillboardCookie);
