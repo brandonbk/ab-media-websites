@@ -4,7 +4,6 @@ const {
   set,
   get,
   getAsObject,
-  getAsArray,
 } = require('@parameter1/base-cms-object-path');
 const loadInquiry = require('@parameter1/base-cms-marko-web-inquiry');
 const htmlSitemapPagination = require('@parameter1/base-cms-marko-web-html-sitemap/middleware/paginated');
@@ -12,8 +11,8 @@ const stripOlyticsParam = require('@parameter1/base-cms-marko-web-omeda-identity
 const omedaIdentityX = require('@parameter1/base-cms-marko-web-omeda-identity-x');
 const i18n = require('@parameter1/base-cms-marko-web-theme-monorail/middleware/i18n');
 const newsletterState = require('@parameter1/base-cms-marko-web-theme-monorail/middleware/newsletter-state');
-const contentGatingHandler = require('@parameter1/base-cms-marko-web-theme-monorail/middleware/content-gating');
 
+const contenGating = require('./middleware/content-gating');
 const companySearchHandler = require('./company-search');
 const document = require('./components/document');
 const components = require('./components');
@@ -60,19 +59,7 @@ module.exports = (options = {}) => {
       // Use paginated middleware
       app.use(paginated());
 
-      // Apply site level and org level content gating rules
-      const contentTypesToGateByDefault = getAsArray(options, 'siteConfig.contentTypesToGateByDefault');
-      const contentGating = ({ content }) => {
-        // ensure content exists or return false
-        if (!content) return false;
-        // Force gating by reg base on site's for contentGatingByType by content type
-        if (contentTypesToGateByDefault.includes(content.type)) {
-          return true;
-        }
-        return get(content, 'userRegistration.isCurrentlyRequired', false);
-      };
-      // Set Content Gating Handler to out.global
-      contentGatingHandler(app, true, contentGating);
+      app.use(contenGating(app, options));
 
       // i18n
       i18n(app, options.i18n);
