@@ -12,7 +12,7 @@ const omedaIdentityX = require('@parameter1/base-cms-marko-web-omeda-identity-x'
 const i18n = require('@parameter1/base-cms-marko-web-theme-monorail/middleware/i18n');
 const newsletterState = require('@parameter1/base-cms-marko-web-theme-monorail/middleware/newsletter-state');
 
-const contenGating = require('./middleware/content-gating');
+const contentGating = require('./middleware/content-gating');
 const companySearchHandler = require('./company-search');
 const document = require('./components/document');
 const components = require('./components');
@@ -59,7 +59,7 @@ module.exports = (options = {}) => {
       // Use paginated middleware
       app.use(paginated());
 
-      app.use(contenGating(app, options));
+      app.use(contentGating(app, options));
 
       // i18n
       i18n(app, options.i18n);
