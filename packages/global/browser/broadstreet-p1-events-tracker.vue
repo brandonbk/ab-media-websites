@@ -12,6 +12,7 @@ export default {
   },
 
   data: () => ({
+    trackedImpressions: {},
     /**
      * @type {MutationObserver[]}
      */
@@ -35,7 +36,10 @@ export default {
                 /** @type {NodeList} */
                 const links = child.querySelectorAll('a');
                 if (!links.length) return;
-                links.forEach((link) => this.addListener(link));
+                links.forEach((link) => {
+                  this.addClickListener(link);
+                  this.trackImpression(link);
+                });
               });
             });
           });
@@ -57,28 +61,54 @@ export default {
      *
      * @param {HTMLAnchorElement} link
      */
-    addListener(link) {
+    addClickListener(link) {
       const { id } = link;
-      if (!this.listeners[id]) {
-        this.listeners[id] = true;
-        link.addEventListener('click', () => {
-          const url = new URL(link.dataset.href);
-          const [, advertisementId, campaignId, zoneId] = url.pathname.split('/').filter((v) => v);
-          const props = {
-            advertisementId,
-            campaignId: campaignId.replace(/[a-z]/g, ''),
-            zoneId: zoneId.replace(/[a-z]/g, ''),
-          };
-          window.p1events('track', {
-            action: 'Click',
-            category: 'Banner Ad',
-            entity: {
-              id: `${props.advertisementId}_${props.campaignId}`,
-              ns: `broadstreet.${this.networkId}.advertisement-campaign`,
-            },
-          });
-        });
-      }
+      if (this.listeners[id]) return;
+      this.listeners[id] = true;
+      link.addEventListener('click', () => {
+        const entity = this.parseAdEntityFromUrl(link, 'href');
+        this.track({ action: 'Click', entity });
+      });
+    },
+
+    /**
+     * @typedef P1EventsEntity
+     * @prop {string} id The entity ID.
+     * @prop {string} ns The entity namespace.
+     *
+     * @param {HTMLElement} element
+     * @param {string} key The dataset (data attribute) key to get the URL from.
+     * @returns {P1EventsEntity}
+     */
+    parseAdEntityFromUrl(element, key) {
+      const url = new URL(element.dataset[key]);
+      const [, advertisementId, campaignId] = url.pathname.split('/').filter((v) => v);
+      return {
+        id: `${advertisementId}_${campaignId.replace(/[a-z]/g, '')}`,
+        ns: `broadstreet.${this.networkId}.advertisement-campaign`,
+      };
+    },
+
+    /**
+     *
+     * @param {object} params
+     * @param {string} params.action The P1Events action, e.g. `Click` or `Impression`
+     * @param {P1EventsEntity} params.entity The Broadstreet ad entity id and namespace
+     */
+    track({ action, entity }) {
+      window.p1events('track', { action, category: 'Banner Ad', entity });
+    },
+
+    /**
+     *
+     * @param {HTMLElement} element
+     */
+    trackImpression(element) {
+      const { id } = element;
+      if (this.trackedImpressions[id]) return;
+      this.trackedImpressions[id] = true;
+      const entity = this.parseAdEntityFromUrl(element, 'view');
+      this.track({ action: 'Impression', entity });
     },
   },
 };
