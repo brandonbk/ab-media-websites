@@ -64,6 +64,12 @@ $ const omedaConfig = site.get('omeda');
     <!-- start gtm -->
     <marko-web-gtm-start />
 
+    <marko-web-identity-x-context|{ hasUser, user }|>
+      <if(hasUser && user.id)>
+        <marko-web-gtm-push data={ 'identity-x.user_id': user.id } />
+      </if>
+    </marko-web-identity-x-context>
+
   </@head>
   <@above-container>
     <marko-web-browser-component name="OmedaIdentityXRapidIdentify" />
