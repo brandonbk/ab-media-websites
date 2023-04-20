@@ -61,7 +61,13 @@ $ const { site } = out.global;
   <@section>
     <marko-web-identity-x-context|{ hasUser }|>
       <if(!hasUser)>
-        <identity-x-newsletter-form-inline />
+        $ const newsletterConfig = site.getAsObject('newsletter.signupBannerLarge');
+        <if(!newsletterConfig.disabled)>
+          <identity-x-newsletter-form-inline type="inlineSection"/>
+        </if>
+        <else>
+          <theme-newsletter-signup-banner-external-block config-name="signupBannerStatic" />
+        </else>
       </if>
     </marko-web-identity-x-context>
   </@section>
