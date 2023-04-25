@@ -144,3 +144,11 @@
     margin-right: 2rem;
   }
 }
+
+.page-contents {
+  &__content-body {
+    .leaders {
+      margin-bottom: map-get($spacers, block);
+    }
+  }
+}
