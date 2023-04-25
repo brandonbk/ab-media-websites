@@ -36,12 +36,12 @@ $ const showFields = fields.some(k => content[k]);
 
   <if(showFields)>
     <theme-content-contact-details-section block-name=blockName>
-      <if(content.publicEmail)>
+      <!-- <if(content.publicEmail)>
         <div class=`${blockName}__field`>
           <span class=`${blockName}__label`>Email:</span>
           <marko-web-content-public-email block-name=blockName obj=content link=true/>
         </div>
-      </if>
+      </if> -->
       <if(content.website)>
         <div class=`${blockName}__field`>
           <span class=`${blockName}__label`>Website:</span>
