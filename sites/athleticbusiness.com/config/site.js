@@ -9,6 +9,7 @@ const search = require('./search');
 const subscribe = require('./subscribe');
 const omeda = require('./omeda');
 const identityX = require('./identity-x');
+const identityXOptInHooks = require('./identity-x-opt-in-hooks');
 const omedaIdentityX = require('./omeda-identity-x');
 
 const leaders = require('./leaders');
@@ -20,6 +21,9 @@ module.exports = {
   leaders,
   nativeX,
   magazine,
+  contentTypesToGateByDefault: [
+    'article',
+  ],
   // temp fix till we update base-cms package
   // Dep Upgrades after https://github.com/parameter1/base-cms/pull/364
   publicationIds: [
@@ -28,6 +32,7 @@ module.exports = {
   newsletter,
   omeda,
   identityX,
+  identityXOptInHooks,
   omedaIdentityX,
   digitalEdition,
   search,
