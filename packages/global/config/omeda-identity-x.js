@@ -1,6 +1,22 @@
 const { getOmedaCustomerRecord } = require('@parameter1/base-cms-marko-web-omeda-identity-x/omeda-data');
 const { get, getAsArray } = require('@parameter1/base-cms-object-path');
 
+const getEncryptedOmedaId = async ({ req, payload }) => {
+  const omeda = req.app.locals.site.getAsObject('omeda');
+  const { user } = payload;
+  const found = getAsArray(user, 'externalIds')
+    .find(({ identifier, namespace }) => identifier.type === 'encrypted'
+      && namespace.provider === 'omeda'
+      && namespace.tenant === omeda.brandKey);
+  if (found) return get(found, 'identifier.value');
+  // If no external user found attempt to rapid identity with the current payload
+  // in order to bring back the user to check their subscriptions info below.
+  const rapidIdentity = await req.$idxOmedaRapidIdentify(payload);
+  const id = (rapidIdentity && rapidIdentity.encryptedCustomerId)
+    ? rapidIdentity.encryptedCustomerId : undefined;
+  return id;
+};
+
 module.exports = ({
   omedaConfig,
   idxConfig,
@@ -75,30 +91,23 @@ module.exports = ({
   }) => {
     // BAIL if omedaGraphQLCLient isnt available return payload.
     if (!req.$omedaGraphQLClient) return payload;
-    const omeda = req.app.locals.site.getAsObject('omeda');
     const identityXOptInHooks = req.app.locals.site.getAsObject('identityXOptInHooks');
     if (identityXOptInHooks.onLoginLinkSent) {
       const { productIds } = identityXOptInHooks.onLoginLinkSent;
       const { user } = payload;
+      const encryptedCustomerId = await getEncryptedOmedaId({ req, payload });
+      // If no encryptedCustomerId just return standard payload
+      if (!encryptedCustomerId) return payload;
 
-      const found = getAsArray(user, 'externalIds')
-        .find(({ identifier, namespace }) => identifier.type === 'encrypted'
-          && namespace.provider === 'omeda'
-          && namespace.tenant === omeda.brandKey);
-
-      // BAIL if no encryptedCustomerId and return payload
-      if (!found) return payload;
-      const encryptedCustomerId = get(found, 'identifier.value');
-      // Retrive the omeda customer
+      // Retrive the omeda customer or return empty obj {}
       const omedaCustomer = await getOmedaCustomerRecord({
         omedaGraphQLClient: req.$omedaGraphQLClient,
         encryptedCustomerId,
       });
-      // Get the current user subscriptions
+      // Get the current user subscriptions or [] if no user
       const subscriptions = getAsArray(omedaCustomer, 'subscriptions');
       // For each autoOptinProduct check if they have a subscription.
       // Sign the user up if they do not
-
       const newSubscriptions = productIds.filter(
         (id) => !subscriptions.some(({ product }) => product.deploymentTypeId === id),
       );

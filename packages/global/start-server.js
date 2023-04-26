@@ -1,6 +1,10 @@
 const newrelic = require('newrelic');
 const { startServer } = require('@parameter1/base-cms-marko-web');
-const { set, get, getAsObject } = require('@parameter1/base-cms-object-path');
+const {
+  set,
+  get,
+  getAsObject,
+} = require('@parameter1/base-cms-object-path');
 const loadInquiry = require('@parameter1/base-cms-marko-web-inquiry');
 const htmlSitemapPagination = require('@parameter1/base-cms-marko-web-html-sitemap/middleware/paginated');
 const stripOlyticsParam = require('@parameter1/base-cms-marko-web-omeda-identity-x/middleware/strip-olytics-param');
@@ -8,6 +12,7 @@ const omedaIdentityX = require('@parameter1/base-cms-marko-web-omeda-identity-x'
 const i18n = require('@parameter1/base-cms-marko-web-theme-monorail/middleware/i18n');
 const newsletterState = require('@parameter1/base-cms-marko-web-theme-monorail/middleware/newsletter-state');
 
+const contentGating = require('./middleware/content-gating');
 const companySearchHandler = require('./company-search');
 const document = require('./components/document');
 const components = require('./components');
@@ -53,6 +58,8 @@ module.exports = (options = {}) => {
 
       // Use paginated middleware
       app.use(paginated());
+
+      app.use(contentGating(app, options));
 
       // i18n
       i18n(app, options.i18n);
