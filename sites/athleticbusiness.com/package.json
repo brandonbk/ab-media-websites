@@ -35,7 +35,7 @@
     "@ab-media/package-global": "^2.7.1",
     "@parameter1/base-cms-apollo-ssr": "^4.5.12",
     "@parameter1/base-cms-marko-core": "^4.9.0",
-    "@parameter1/base-cms-marko-web": "^4.22.0",
+    "@parameter1/base-cms-marko-web": "^4.22.3",
     "@parameter1/base-cms-marko-web-gtm": "^4.17.1",
     "@parameter1/base-cms-marko-web-identity-x": "^4.21.0",
     "@parameter1/base-cms-marko-web-leaders": "^4.16.2",

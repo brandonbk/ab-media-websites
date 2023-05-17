@@ -1269,10 +1269,10 @@
     node-fetch "^2.6.9"
     ua-parser-js "^1.0.33"
 
-"@parameter1/base-cms-marko-web@^4.22.0":
-  version "4.22.0"
-  resolved "https://registry.yarnpkg.com/@parameter1/base-cms-marko-web/-/base-cms-marko-web-4.22.0.tgz#75c947b385201bf5e0c44da3877afcc7e7df9d8a"
-  integrity sha512-SOCXVIatA6KLo+QduZVSAegQ7lgiYPHXmX18jktSYmj2Ew+Svk/d630JnsTb12DbYeZBpRDGidcI59I8r2YCMg==
+"@parameter1/base-cms-marko-web@^4.22.3":
+  version "4.22.3"
+  resolved "https://registry.yarnpkg.com/@parameter1/base-cms-marko-web/-/base-cms-marko-web-4.22.3.tgz#92038b43420cf0ed583354d110b261dca8efc17d"
+  integrity sha512-syIV2vGqLWzguytIIEm0Dzp4YU25XJVh0J+fmY5r6T52MtljIK4W+SDk3GPPfbXjyAhj4hqWMy6vgIp5/xaqbw==
   dependencies:
     "@godaddy/terminus" "^4.11.2"
     "@parameter1/base-cms-apollo-ssr" "^4.5.12"
@@ -6704,7 +6704,7 @@ postcss-convert-values@^5.1.3:
     browserslist "^4.21.4"
     postcss-value-parser "^4.2.0"
 
-"postcss-critical-split@github:mrnocreativity/postcss-critical-split#51bb6d62bc75d635e32dcce90f30ba3ef6299081":
+postcss-critical-split@mrnocreativity/postcss-critical-split#51bb6d62bc75d635e32dcce90f30ba3ef6299081:
   version "2.5.3"
   resolved "https://codeload.github.com/mrnocreativity/postcss-critical-split/tar.gz/51bb6d62bc75d635e32dcce90f30ba3ef6299081"
 
