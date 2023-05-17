@@ -8,7 +8,7 @@
 @import "@parameter1/base-cms-marko-web-theme-monorail-magazine/scss/index";
 
 // Leaders css import
-@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600,700&display=swap");
+@import "@parameter1/base-cms-marko-web/scss/fonts/ibm-plex-sans-fallback";
 @import "@parameter1/base-cms-marko-web-leaders/scss/leaders";
 
 // boradstreet ads import
