@@ -12,6 +12,7 @@ const defaults = {
 module.exports = {
   pushdown: {
     ...defaults,
+    disabled: true,
     imagePath: 'files/base/abmedia/all/image/static/newsletter-signup/ab-signup-half.png',
   },
   signupBanner: {
