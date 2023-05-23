@@ -14,7 +14,6 @@ const topics = {
 const resources = [
   { href: '/directory', label: 'Resource Book' },
   { href: '/magazine', label: 'Magazine' },
-  { href: '/page/forum', label: 'Forum' },
   { href: '/news', label: 'News' },
 ];
 
