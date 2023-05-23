@@ -67,6 +67,7 @@
 // 5. selectively import theme items. mark as critical when necessary
 /*! critical:start */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/default-theme/site-navbar"; // load navbar from default theme first... allows for alternate monorail navbars to override these defaults
+@import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/site-navbar";
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/ad-container";
 /*! critical:end */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/author-node";
@@ -167,14 +168,16 @@
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/newsletter-signup-site-footer";
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/node-author";
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/opinion";
-/*! critical:start|content.whitepaper */
+/*! critical:start|content */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/primary-image";
 /*! critical:end */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/products";
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/promo-card";
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/read-next";
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/related-native-x-stories";
+/*! critical:start|content */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/related-stories";
+/*! critical:end */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/section-card-deck-featured";
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/section-card-list";
 /*! critical:start|website-section */
