@@ -18,7 +18,7 @@
     "@parameter1/base-cms-image": "^4.6.0",
     "@parameter1/base-cms-inflector": "^4.5.12",
     "@parameter1/base-cms-marko-core": "^4.9.0",
-    "@parameter1/base-cms-marko-web": "^4.22.0",
+    "@parameter1/base-cms-marko-web": "^4.22.3",
     "@parameter1/base-cms-marko-web-deferred-script-loader": "^4.5.12",
     "@parameter1/base-cms-marko-web-gcse": "^4.5.12",
     "@parameter1/base-cms-marko-web-gtm": "^4.17.1",
