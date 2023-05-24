@@ -202,7 +202,9 @@
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/white-papers";
 
 // 7. selectively import theme _flow_ items. mark as critical when necessary
+/*! critical:start */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/flows/card-deck";
+/*! critical:end */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/flows/column-list";
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/flows/featured";
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/flows/hero";
