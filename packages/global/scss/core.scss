@@ -36,6 +36,7 @@
 /*! critical:start|website-section.directory */
 /*! critical:start|subscribe */
 /*! critical:start|content */
+/*! critical:start|magazine-issue */
 @import "bootstrap/scss/breadcrumb";
 /*! critical:end */
 @import "bootstrap/scss/alert";
@@ -80,6 +81,7 @@
 /*! critical:start|website-section.directory */
 /*! critical:start|subscribe */
 /*! critical:start|content */
+/*! critical:start|magazine-issue */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/breadcrumbs";
 /*! critical:end */
 
@@ -93,6 +95,8 @@
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/lazyload";
 /*! critical:end */
 /*! critical:start|magazine */
+/*! critical:start|magazine-issue */
+/*! critical:start|magazine-publication */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/magazine-publication-buttons";
 /*! critical:end */
 /*! critical:start */
@@ -156,6 +160,8 @@
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/latest-podcast";
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/latest-products-feed";
 /*! critical:start|magazine */
+/*! critical:start|magazine-issue */
+/*! critical:start|magazine-publication */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/magazine-publication-card";
 /*! critical:end */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/blocks/more-products";
@@ -206,6 +212,8 @@
 
 // magazine component
 /*! critical:start|magazine */
+/*! critical:start|magazine-issue */
+/*! critical:start|magazine-publication */
 @import "@parameter1/base-cms-marko-web-theme-monorail-magazine/scss/index";
 /*! critical:end */
 
