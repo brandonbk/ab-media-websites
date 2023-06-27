@@ -278,6 +278,9 @@
       }
     }
   }
+  .content-page-gate {
+    margin-bottom: map-get($spacers, block);
+   }
 }
 /*! critical:end */
 
