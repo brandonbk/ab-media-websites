@@ -20,6 +20,9 @@ module.exports = {
   leaders,
   nativeX,
   magazine,
+  contentTypesToGateByDefault: [
+    'article',
+  ],
   // temp fix till we update base-cms package
   // Dep Upgrades after https://github.com/parameter1/base-cms/pull/364
   publicationIds: [
