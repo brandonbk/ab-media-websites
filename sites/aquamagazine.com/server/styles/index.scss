@@ -36,3 +36,72 @@ $leaders-primary-color: $primary;
     padding: 0;
   }
 }
+
+.site-navbar {
+  $self: &;
+  .btn--aqua-live-dropdown {
+    .marko-web-icon {
+      display: none;
+    }
+  }
+  &__items--aqua-live-dropdown {
+    position: absolute;
+    top: 55px;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    background: #fff;
+
+    width: 227px;
+    padding: map-get($spacers, 2);
+    box-shadow: $theme-box-shadow-lg;
+    &#{ $self }__items--aqua-live-dropdown-open {
+      display: inline;
+
+    }
+    #{ $self }__link {
+      padding-left: 0;
+    }
+    li {
+      margin-bottom: 0.25rem;
+    }
+    .btn:hover {
+      box-shadow: none;
+    }
+  }
+  &__left {
+    .btn--aqua-live-dropdown {
+      @include skin-button($style: "secondary");
+      padding: 0 12px 0 10px;
+      min-width: 40px;
+      height: 40px;
+      font-size: 1rem;
+      color: $white;
+      border-radius: 4px;
+      outline-color: none;
+      box-shadow: none;
+      border: 1px solid $white;
+      background-color: $secondary;
+      &:hover,
+      &:focus {
+        color: $white;
+        border: 1px solid $white;
+        background-color: $secondary;
+        border: 1px solid $white;
+        svg {
+          fill: $white;;
+        }
+      }
+      :first-child {
+        margin-right: 2px;
+      }
+      svg {
+        display: inline-block;
+        width: 12px;
+        height: 1.25rem;
+        fill: $white;
+        vertical-align: sub;
+      }
+    }
+  }
+}
