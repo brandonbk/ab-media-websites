@@ -1,3 +1,5 @@
+import { asObject } from "@parameter1/base-cms-utils";
+
 $ const { config, site } = out.global;
 
 $ const blockName = input.blockName || "site-header";
@@ -7,6 +9,7 @@ $ const navigation = {
   primary: site.getAsArray("navigation.primary.items"),
   secondary: site.getAsArray("navigation.secondary.items"),
   tertiary: site.getAsArray("navigation.tertiary.items"),
+  aquaLiveDropdown: site.getAsArray("navigation.aquaLiveDropdown.items"),
 };
 
 <marko-web-block
@@ -36,12 +39,52 @@ $ const navigation = {
       />
     </theme-site-navbar-brand>
 
-    <theme-site-navbar-items
-      items=navigation.secondary
-      modifiers=["secondary"]
-      reg-enabled=input.regEnabled
-      has-user=input.hasUser
-    />
+    <if(navigation.aquaLiveDropdown.length)>
+      <marko-web-element tag="ul" block-name="site-navbar" name="items" modifiers=["secondary"]>
+        <for|item| of=navigation.secondary>
+          $ const obj = asObject(item);
+          <theme-site-navbar-item
+            block-name="site-navbar"
+            href=obj.href
+            title=obj.title
+            target=obj.target
+            label=obj.label
+            icon=obj.icon
+            children=obj.children
+            force-label=obj.forceLabel
+            modifiers=obj.modifiers
+          />
+        </for>
+        <marko-web-element
+          block-name="site-navbar"
+          name="item"
+          tag="li"
+          modifiers=["secondary"]
+        >
+          <theme-menu-toggle-button
+              class="site-navbar__toggler btn btn--aqua-live-dropdown site-navbar__items site-navbar__items--secondary"
+              targets=[".site-navbar__items--aqua-live-dropdown"]
+              toggle-class="site-navbar__items--aqua-live-dropdown-open"
+              icon-modifiers=["sm"]
+              after="Aqua Live"
+              icon-name="plus"
+              expanded-icon-name="dash"
+            />
+            <theme-site-navbar-items
+              items=navigation.aquaLiveDropdown
+              modifiers=["aqua-live-dropdown"]
+            />
+          </marko-web-element>
+      </marko-web-element>
+    </if>
+    <else>
+      <theme-site-navbar-items
+        items=navigation.secondary
+        modifiers=["secondary"]
+        reg-enabled=input.regEnabled
+        has-user=input.hasUser
+      />
+    </else>
     <if(showIdxNewsletterSignup)>
       <marko-web-browser-component name="IdentityXNewsletterToggleButton" ssr=true />
     </if>
