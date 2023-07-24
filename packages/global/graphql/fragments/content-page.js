@@ -70,7 +70,7 @@ fragment ContentPageFragment on Content {
     starts
   }
   ... on SidebarEnabledInterface {
-    sidebars: sidebarStubs {
+    sidebarStubs {
       name
       body
       label
