@@ -182,8 +182,15 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
                 </marko-web-link>
               </if>
             </if>
-            $ const sidebars = getAsArray(content, "sidebars").map((sidebar) => sidebar.body);
-            <marko-web-content-sidebars block-name=blockName obj={ sidebars } />
+            <marko-web-content-sidebar-stubs|{ sidebar }|
+              obj=content
+              block-name=blockName
+            >
+              <div id=sidebar.sequence class="page-contents__content-sidebar">
+                <p><b>${sidebar.name}</b></p>
+                <div>$!{sidebar.body}</div>
+              </div>
+            </marko-web-content-sidebar-stubs>
             <if(content.transcript)>
               <div id=`transcript-${id}` class="page-contents__content-transcript">
                 <marko-web-element block-name="page-contents" name="content-transcript-title">

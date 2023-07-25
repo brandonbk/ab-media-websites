@@ -128,7 +128,7 @@ fragment LeadersContentPageFragment on Content {
     startDate
   }
   ... on SidebarEnabledInterface {
-    sidebars: sidebarStubs {
+    sidebarStubs {
       name
       body
       label

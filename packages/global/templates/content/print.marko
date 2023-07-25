@@ -131,7 +131,15 @@ $ const displayPublishedDate = ["event", "webinar", "contact", "company"].includ
           <marko-web-content-body block-name=contentsBlock obj=content>
             <@embed-options lazyload-images=false />
           </marko-web-content-body>
-          <marko-web-content-sidebars block-name=contentsBlock obj=content />
+          <marko-web-content-sidebar-stubs|{ sidebar }|
+            obj=content
+            block-name=blockName
+          >
+            <div id=sidebar.sequence class="page-contents__content-sidebar">
+              <p><b>${sidebar.name}</b></p>
+              <div>$!{sidebar.body}</div>
+            </div>
+          </marko-web-content-sidebar-stubs>
 
           <hr>
           <div>
