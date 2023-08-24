@@ -1,6 +1,7 @@
 const digitalEdition = require('./digital-edition');
 const navigation = require('./navigation');
 const bam = require('./bam');
+const contentMeter = require('./content-meter');
 const nativeX = require('./native-x');
 const magazine = require('./magazine');
 const newsletter = require('./newsletter');
@@ -16,9 +17,13 @@ const leaders = require('./leaders');
 module.exports = {
   navigation,
   bam,
+  contentMeter,
   leaders,
   nativeX,
   magazine,
+  contentTypesToGateByDefault: [
+    // 'article',
+  ],
   // temp fix till we update base-cms package
   // Dep Upgrades after https://github.com/parameter1/base-cms/pull/364
   publicationIds: [
