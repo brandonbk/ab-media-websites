@@ -43,9 +43,16 @@ $ const aliases = [gallery.primarySection.alias, gallery.primarySection.alias.sp
             <marko-web-website-section-name|{ value }| tag="h1" block-name=blockName obj=gallery />
           </if>
           <marko-web-element name="button-wrapper">
-            <marko-web-link href="/architectural-showcase/article/15306248/2023-architectural-showcase-submissions-now-open" title="Submit Showcase" class="btn btn-primary">
-              2023 Architectural Showcase Submissions Now Open
-            </marko-web-link>
+            <if(gallery.primarySection.alias === 'project-galleries/aquatic-design-portfolio')>
+              <marko-web-link href="https://www.surveymonkey.com/r/9JBZRWK" target="_blank" title="Submit Showcase" class="btn btn-primary">
+                2024 Aquatic Design Portfolio Submissions Now Open
+              </marko-web-link>
+            </if>
+            <else>
+              <marko-web-link href="/architectural-showcase/article/15306248/2023-architectural-showcase-submissions-now-open" title="Submit Showcase" class="btn btn-primary">
+                2023 Architectural Showcase Submissions Now Open
+              </marko-web-link>
+            </else>
           </marko-web-element>
           <marko-web-node-list
             inner-justified=true
