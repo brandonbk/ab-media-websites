@@ -69,7 +69,7 @@ $ const omedaConfig = site.get('omeda');
 
     <marko-web-identity-x-context|{ hasUser, user }|>
       <if(hasUser && user.id)>
-        <marko-web-gtm-push data={ 'identity-x.user_id': user.id } />
+        <marko-web-gtm-push data={ user_id: user.id, 'identity-x.user_id': user.id } />
       </if>
     </marko-web-identity-x-context>
 
