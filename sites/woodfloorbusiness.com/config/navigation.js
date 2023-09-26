@@ -15,7 +15,7 @@ const resources = [
   { href: '/directory', label: 'Resource Book' },
   { href: '/magazine', label: 'Magazine' },
   { href: '/news', label: 'News' },
-  { href: '/webinars', label: 'Webinars' },
+  { href: '/webinars', label: 'WFB Live Demos' },
 ];
 
 const utilities = [
