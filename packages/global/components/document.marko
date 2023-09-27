@@ -68,20 +68,7 @@ $ const omedaConfig = site.get('omeda');
     <${input.head} />
 
     <marko-web-identity-x-context|{ hasUser, user }|>
-      <if(hasUser && user.id)>
-        <!-- make this reusable -->
-        $ const userData = {
-          user_id: user.id,
-        }
-        $ const questions = site.get('identityX.options.gtmKeysToMap') || [];
-        $ Object.entries(questions).forEach(([key, value]) => {
-          const select = user.customSelectFieldAnswers.find(({id: qId}) => qId === value)
-          if (select && select.answers.length) userData[key] = select.answers.map(({ label }) => label).join("| ");
-          const boolean = user.customBooleanFieldAnswers.find(({id: qId}) => qId === value)
-          if (boolean && boolean.hasAnswered) userData[key] =  boolean.answer;
-        });
-        <marko-web-gtm-push data=userData />
-      </if>
+        <marko-web-gtm-push data=site.get('identityX').getGTMUserFieldsData(user) />
     </marko-web-identity-x-context>
 
     <!-- Send Encrypted Omeda Id to GTM -->
