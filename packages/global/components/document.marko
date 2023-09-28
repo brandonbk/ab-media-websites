@@ -68,7 +68,9 @@ $ const omedaConfig = site.get('omeda');
     <${input.head} />
 
     <marko-web-identity-x-context|{ hasUser, user }|>
-        <marko-web-gtm-push data=site.get('identityX').getGTMUserData(user) />
+      <if(hasUser && user.id)>
+        <marko-web-gtm-push data={ user: site.get('identityX').getGTMUserData(user), user_id: user.id}  />
+      </if>
     </marko-web-identity-x-context>
 
     <!-- Send Encrypted Omeda Id to GTM -->
