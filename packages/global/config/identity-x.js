@@ -32,12 +32,14 @@ module.exports = ({
   ],
   booleanQuestionsLabel = 'Choose your subscriptions:',
   requiredCreateFields = ['givenName', 'familyName'],
+  gtmUserFields = {},
 } = {}) => {
   const config = new IdentityXConfiguration({
     appId,
     apiToken,
     hiddenFields,
     defaultCountryCode,
+    gtmUserFields,
     requiredServerFields,
     requiredClientFields,
     booleanQuestionsLabel,
