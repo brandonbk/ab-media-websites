@@ -18,7 +18,7 @@ module.exports = {
   bam,
   contentMeter,
   contentTypesToGateByDefault: [
-    'article',
+    // 'article',
   ],
   leaders,
   nativeX,
