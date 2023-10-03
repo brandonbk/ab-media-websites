@@ -8,6 +8,7 @@ $ const {
   contentMeterState,
   pagination: p,
   contentGatingHandler,
+  i18n,
 } = out.global;
 
 $ const showOverlay = shouldOverlay(contentMeterState);
@@ -170,7 +171,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
             </if>
             <if(type === "webinar")>
               $ const isUpcoming = content.startDate > Date.now();
-              $ const btnLabel = (isUpcoming ? "Register for Webinar" : "View Webinar")
+              $ const btnLabel = (isUpcoming ? `${i18n("Register for Webinar")}` : `${i18n("View Webinar")}`)
               <if(content.linkUrl && isUpcoming)>
                 <marko-web-link
                   class="my-block btn btn-primary btn-lg"
