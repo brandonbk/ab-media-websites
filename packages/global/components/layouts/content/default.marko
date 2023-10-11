@@ -139,7 +139,7 @@ $ const shouldInjectAds = ["article", "video", "news", "podcast"].includes(type)
             <marko-web-content-body block-name=blockName attrs={ style: "display: none;" } obj=content modifiers=["ld-json"] />
           </if>
           <else-if(!context.canAccess || context.requiresUserInput)>
-            $ const body = getContentPreview({ body: content.body, selector: "p:lt(3)" });
+            $ const body = getContentPreview({ body: content.body, selector: "p:lt(1)" });
             <marko-web-content-body block-name=blockName obj={ body } />
 
             <div class="content-page-preview-overlay" />
