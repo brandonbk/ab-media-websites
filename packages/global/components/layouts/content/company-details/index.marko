@@ -12,7 +12,7 @@ $ const showPhones = phoneFields.some(k => content[k]);
 $ const socialLinks = getAsArray(content, "socialLinks");
 $ const showSocial = socialLinks.length;
 
-$ const fields = ["title", "website"];
+$ const fields = ["title", "website", "linesCarried", "salesRegion"];
 $ if (showEmail) fields.push("publicEmail");
 $ const showFields = fields.some(k => content[k]);
 
@@ -36,10 +36,33 @@ $ const showFields = fields.some(k => content[k]);
 
   <if(showFields)>
     <theme-content-contact-details-section block-name=blockName>
+      <if(content.publicEmail)>
+        <div class=`${blockName}__field`>
+          <span class=`${blockName}__label`>Email:</span>
+          <marko-web-content-public-email block-name=blockName obj=content link=true/>
+        </div>
+      </if>
       <if(content.website)>
         <div class=`${blockName}__field`>
           <span class=`${blockName}__label`>Website:</span>
           <marko-web-content-website block-name=blockName obj=content link=true />
+        </div>
+      </if>
+      $ console.log(content)
+      <if(content.salesRegion)>
+        <div class=`${blockName}__field`>
+          <span class=`${blockName}__label`>Areas Served:</span>
+          <marko-web-element block-name=blockName name="sales-region">
+            ${content.salesRegion}
+          </marko-web-element>
+        </div>
+      </if>
+      <if(content.linesCarried)>
+        <div class=`${blockName}__field`>
+          <span class=`${blockName}__label`>Lines Carried:</span>
+          <marko-web-element block-name=blockName name="lines-carried">
+            ${content.linesCarried}
+          </marko-web-element>
         </div>
       </if>
     </theme-content-contact-details-section>
