@@ -87,6 +87,7 @@ fragment LeadersWebsiteContentCompanyFragment on Content {
           publicEmail
         }
       }
+    }
 
     isLeader: hasWebsiteSchedule(input: { sectionAlias: "${leadersAlias}" })
 
