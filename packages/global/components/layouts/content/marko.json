@@ -36,21 +36,6 @@
     "@type": "string",
     "@page-node": "object"
   },
-  "<global-content-company-details>": {
-    "template": "./company-details.marko",
-    "@obj": "object",
-    "@show-email": {
-      "type": "boolean",
-      "default-value": true
-    },
-    "@tag": {
-      "type": "string",
-      "default-value": "div"
-    },
-    "@class": "string",
-    "@modifiers": "array",
-    "@attrs": "object"
-  },
   "<global-content-media-gallery-layout>": {
     "template": "./media-gallery.marko",
     "<after-body>": {},

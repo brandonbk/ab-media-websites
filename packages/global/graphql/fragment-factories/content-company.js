@@ -42,6 +42,9 @@ fragment LeadersWebsiteContentCompanyFragment on Content {
     numberOfEmployees
     salesChannels
     salesRegion
+    linesCarried: customAttribute(input: {
+      path: "linesCarried"
+    })
 
     # long text data
     productSummary
@@ -68,6 +71,22 @@ fragment LeadersWebsiteContentCompanyFragment on Content {
         aspectRatio
       }
       primaryImageDisplay
+    }
+
+    children(input: { pagination: { limit: 25 } }) {
+      edges {
+        node {
+          name(input: { mutation: null })
+          address1
+          address2
+          cityStateZip
+          country
+          phone
+          tollfree
+          fax
+          publicEmail
+        }
+      }
     }
 
     isLeader: hasWebsiteSchedule(input: { sectionAlias: "${leadersAlias}" })
