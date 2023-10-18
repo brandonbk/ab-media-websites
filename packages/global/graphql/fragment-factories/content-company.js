@@ -42,6 +42,9 @@ fragment LeadersWebsiteContentCompanyFragment on Content {
     numberOfEmployees
     salesChannels
     salesRegion
+    linesCarried: customAttribute(input: {
+      path: "linesCarried"
+    })
 
     # long text data
     productSummary
