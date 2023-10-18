@@ -29,6 +29,7 @@ $ const lang = site.config.lang || "en";
   </@section>
 
   <@section|{ aliases, blockName, content }| modifiers=["content-header"]>
+
     $ const { primarySection } = content;
     <if(content.isLeader && site.get('leaders.enabled'))>
       <div>
@@ -95,22 +96,22 @@ $ const lang = site.config.lang || "en";
             </theme-page-contents>
           </div>
 
-        $ const childCompanies = content.children ? getAsArray(content.children.edges).map((edge) => edge.node) : [];
-        <if(childCompanies.length)>
-          <p><b>Branch Locations</b></p>
-          <div class="row">
-            <for|childCompany| of=childCompanies>
-              <div class="col-lg-6">
-                <div class="content-page-header">
-                <marko-web-block name=detailsBlock>
-                  <p><marko-web-content-name tag="b" obj=childCompany /></p>
-                  <global-content-company-details obj=childCompany />
-                </marko-web-block>
+          $ const childCompanies = content.children ? getAsArray(content.children.edges).map((edge) => edge.node) : [];
+          <if(childCompanies.length)>
+            <p><b>Branch Locations</b></p>
+            <div class="row">
+              <for|childCompany| of=childCompanies>
+                <div class="col-lg-6">
+                  <div class="content-page-header">
+                  <marko-web-block name=detailsBlock>
+                    <p><marko-web-content-name tag="b" obj=childCompany /></p>
+                    <global-content-company-details obj=childCompany />
+                  </marko-web-block>
+                  </div>
                 </div>
-              </div>
-            </for>
-          </div>
-        </if>
+              </for>
+            </div>
+          </if>
 
           <marko-web-query|{ nodes }|
             name="all-company-content"
