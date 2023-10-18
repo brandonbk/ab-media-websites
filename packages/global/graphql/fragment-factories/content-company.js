@@ -70,6 +70,21 @@ fragment LeadersWebsiteContentCompanyFragment on Content {
       primaryImageDisplay
     }
 
+    children(input: { pagination: { limit: 25 } }) {
+      edges {
+        node {
+          name(input: { mutation: null })
+          address1
+          address2
+          cityStateZip
+          country
+          phone
+          tollfree
+          fax
+          publicEmail
+        }
+      }
+
     isLeader: hasWebsiteSchedule(input: { sectionAlias: "${leadersAlias}" })
 
     contacts: publicContacts {
