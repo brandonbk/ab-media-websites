@@ -136,7 +136,10 @@
 /*! critical:start */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/site-header";
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/site-menu";
-@import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/site-newsletter-menu";
+// NOTE: This is being omitted temporarily until the correct styling can be applied for multiple form rows
+// @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/site-newsletter-menu";
+// We're opting to include the styling prior to the changes that broke this in a local override here:
+@import "./components/site-newsletter-menu";
 /*! critical:end */
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/social-icons";
 @import "@parameter1/base-cms-marko-web-theme-monorail/scss/components/sponsor-logo";
