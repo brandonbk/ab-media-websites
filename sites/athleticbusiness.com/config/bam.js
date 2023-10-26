@@ -50,7 +50,7 @@ module.exports = ({
     },
     desktopRotation: {
       zoneIdSizeMapping: [
-        ['(min-width: 980px)', 99649],
+        ['(min-width: 980px)', 147422],
       ],
     },
     mobileLeaderboard: {
