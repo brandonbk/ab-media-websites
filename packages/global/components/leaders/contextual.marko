@@ -1,6 +1,8 @@
 $ const { site } = out.global;
 $ const { contentId } = input;
 
+$ const mediaQueries = input.mediaQueries || [{ prop: "columns", value: 2, query: "(min-width: 700px)" }]
+
 <if(contentId && site.get("leaders.enabled"))>
   <marko-web-leaders skip-when-exists=input.skipWhenExists props={
     contentId,
@@ -16,9 +18,7 @@ $ const { contentId } = input;
     columns: 1,
     useContentPrimarySection: true,
     useContentSchedules: true,
-    mediaQueries: [
-      { prop: "columns", value: 2, query: "(min-width: 700px)" },
-    ],
+    mediaQueries,
     calloutPrefix: site.get("leaders.calloutPrefix") || "Browse these",
     calloutValue: site.get("leaders.calloutValue") || "leading business partners",
     viewAllText: site.get("leaders.viewAllText") || "View All Leaders Companies &gt;",
