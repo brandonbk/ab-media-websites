@@ -2,15 +2,18 @@
 // contentMobileRotation, contentMobileLeaderboard & contentDesktopRotation
 // within the bam site configs so the rotation
 $altZoneWidth: 980px !default;
-
+/*! critical:start */
 .broadstreet-zone {
   > div:only-child {
     padding-top: 30px !important;
   }
 }
+/*! purgecss start ignore */
 .broadstreet-zone-label {
+  line-height: initial;
   display: block;
 }
+/*! purgecss end ignore */
 .ad-container {
   $self: &;
   &--broadstreet {
