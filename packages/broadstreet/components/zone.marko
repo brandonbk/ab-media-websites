@@ -6,7 +6,7 @@ $ const { BAM } = out.global;
 $ const { zoneAlias, zoneIdSizeMapping } = input;
 $ const blockName = input.blockName || "ad-container"
 $ const modifiers = getAsArray(input, "modifiers");
-$ modifiers.push("broadstreet", "inter-block");
+$ modifiers.push("broadstreet");
 
 $ const zone = getAsObject(BAM, `zones.${zoneAlias}`);
 $ const sizeMapping = zoneIdSizeMapping || zone.zoneIdSizeMapping;
