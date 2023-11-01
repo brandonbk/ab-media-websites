@@ -56,5 +56,15 @@
     "@alias": "string",
     "@name": "string",
     "@page-node": "object"
+  },
+  "<global-website-section-events-feed-layout>": {
+    "template": "./events-feed.marko",
+    "@sections <section>[]": {},
+    "<before-name>": {},
+    "<after-name>": {},
+    "@id": "number",
+    "@alias": "string",
+    "@name": "string",
+    "@page-node": "object"
   }
 }
