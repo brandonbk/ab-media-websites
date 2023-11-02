@@ -13,8 +13,8 @@
     "test": "yarn lint && yarn compile --no-clean"
   },
   "dependencies": {
-    "@parameter1/base-cms-marko-core": "^4.36.0",
-    "@parameter1/base-cms-marko-web": "^4.38.1",
+    "@parameter1/base-cms-marko-core": "^4.40.0",
+    "@parameter1/base-cms-marko-web": "^4.40.0",
     "@parameter1/base-cms-marko-web-deferred-script-loader": "^4.5.12",
     "@parameter1/base-cms-object-path": "^4.5.12",
     "@parameter1/base-cms-utils": "^4.5.12"
