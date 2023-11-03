@@ -1,6 +1,5 @@
 import createOmedaIdentityBuilder from "@parameter1/base-cms-marko-web-p1-events/utils/create-omeda-identity-builder";
 import { getAsObject } from "@parameter1/base-cms-object-path";
-import getCookieId from "@parameter1/base-cms-marko-web-omeda-identity-x/utils/get-cookie-id";
 
 $ const {
   site,
@@ -9,8 +8,6 @@ $ const {
   BAM,
   contentMeterState,
 } = out.global;
-
-$ const { cookies } = req;
 
 $ const omedaConfig = site.get('omeda');
 
@@ -68,17 +65,6 @@ $ const omedaConfig = site.get('omeda');
     <${input.head} />
 
     <identity-x-identify />
-
-    <!-- Send Encrypted Omeda Id to GTM -->
-    $ const olyEncId = cookies.oly_enc_id ? getCookieId(cookies.oly_enc_id, 'enc') : undefined;
-    <if(olyEncId)>
-      <marko-web-gtm-push data={ oly_enc_id: olyEncId } />
-    </if>
-    <!-- Send Anonomouse Omeda Id to GTM -->
-    $ const olyAnonId = cookies.oly_anon_id ? getCookieId(cookies.oly_anon_id, 'anon') : undefined;
-    <if(olyAnonId)>
-      <marko-web-gtm-push data={ oly_anon_id: olyAnonId } />
-    </if>
 
     <!-- start gtm -->
     <marko-web-gtm-start />
