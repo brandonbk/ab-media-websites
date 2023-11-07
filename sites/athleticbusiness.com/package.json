@@ -39,7 +39,7 @@
     "@parameter1/base-cms-marko-web-gtm": "^4.40.3",
     "@parameter1/base-cms-marko-web-identity-x": "^4.40.3",
     "@parameter1/base-cms-marko-web-leaders": "^4.40.3",
-    "@parameter1/base-cms-marko-web-theme-monorail": "^4.40.5",
+    "@parameter1/base-cms-marko-web-theme-monorail": "^4.40.6",
     "@parameter1/base-cms-marko-web-theme-monorail-magazine": "^4.40.3",
     "@parameter1/base-cms-object-path": "^4.40.3",
     "@parameter1/base-cms-utils": "^4.40.3",
