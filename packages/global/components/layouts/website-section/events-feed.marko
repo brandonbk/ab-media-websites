@@ -101,8 +101,8 @@ $ const countQueryParams = {
     </if>
 
     <marko-web-website-section-name|{ value }| tag="h1" block-name=blockName obj=section>
-      <if(p.page > 1)>${value}: Page ${p.page}</if>
-      <else>${value}</else>
+      <if(p.page > 1)> ${i18n("Industry")} ${value}: Page ${p.page}</if>
+      <else>${i18n("Industry")} ${value}</else>
     </marko-web-website-section-name>
     <marko-web-website-section-description obj=section />
 
