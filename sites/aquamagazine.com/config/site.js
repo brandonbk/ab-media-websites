@@ -99,4 +99,8 @@ module.exports = {
     logo: 'https://img.aquamagazine.com/files/base/abmedia/all/image/static/aqua-site-logo.png?h=60&auto=format,compress&q=70&bg=FFFFFF&pad=5',
     bgColor: '#FFFFFF',
   },
+  linkOffsite: {
+    event: 'website',
+    target: '_blank',
+  },
 };
