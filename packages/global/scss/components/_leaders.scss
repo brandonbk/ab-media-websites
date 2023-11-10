@@ -2,6 +2,7 @@
   $self: &;
   margin-right: auto;
   margin-left: auto;
+  max-width: $skin-content-body-max-width;
   &__header-image {
     img {
       width: 100%;
