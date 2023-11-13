@@ -1,6 +1,6 @@
 import { getAsArray } from "@parameter1/base-cms-object-path";
 
-$ const { id, alias, name, pageNode } = input;
+$ const { id, alias, name, pageNode, withNativeX } = input;
 $ const sections = getAsArray(input, "sections");
 
 $ const { pagination: p, site } = out.global;
@@ -54,59 +54,36 @@ $ const perPage = 12;
       />
     </if>
 
-    <theme-section-feed-block alias=alias lazyload=false>
-      <@query-params limit=3 skip=p.skip({ perPage }) />
-    </theme-section-feed-block>
-  </@section>
-
-  <@section|{ aliases }|>
-    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "section_page", "inter-block"] />
-  </@section>
-
-  <@section>
-    <theme-section-feed-block alias=alias>
-      <@query-params limit=3 skip=p.skip({ perPage, skip: 3 }) />
-    </theme-section-feed-block>
-  </@section>
-
-  <@section>
-    <if(!newsletterConfig.disabled)>
-      <identity-x-newsletter-form-inline type="inlineSection"/>
-    </if>
-    <else>
-      <theme-newsletter-signup-banner-external-block config-name="signupBannerStatic" />
-    </else>
-  </@section>
-
-  <@section>
-    <theme-section-feed-block alias=alias>
-      <@query-params limit=3 skip=p.skip({ perPage, skip: 6 }) />
-    </theme-section-feed-block>
-  </@section>
-
-  <@section|{ aliases }|>
-    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "section_page", "inter-block"] />
-  </@section>
-
-  <@section>
-    <theme-section-feed-block alias=alias>
-      <@query-params limit=3 skip=p.skip({ perPage, skip: 9 }) />
-    </theme-section-feed-block>
-    <theme-section-feed-block|{ totalCount }| alias=alias count-only=true>
-      <theme-pagination-controls
-        per-page=perPage
-        total-count=totalCount
-        path=alias
-      />
-    </theme-section-feed-block>
-  </@section>
-
-  <@section>
-    <theme-top-stories-block query-params={ optionName: "Pinned" } />
-  </@section>
-
-  <@section|{ aliases }|>
-    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "section_page", "inter-block"] />
+    <global-section-feed-wrapper
+        aliases=aliases
+        alias=alias
+        flow=input.feedFlow
+        with-ads=input.withAds
+        query-params=input.queryParams
+        above-the-fold=true
+        ad-name=input.adName
+      >
+        <@node ...input.node />
+        <if(withNativeX)>
+          <@native-x index=[1] name="brand-insights" aliases=aliases sectionName="Brand Insights" />
+        </if>
+        <@rail>
+          <!-- Remobe sticky top if you add user stuff back. -->
+          <div class="mb-block sticky-top">
+            <marko-web-broadstreet-zone zone-alias="rotaction300" modifiers=["rotation",  "content_page"] />
+          </div>
+          <!-- <marko-web-identity-x-context|{ hasUser }|>
+            <if(!hasUser)>
+              <div class="sticky-top mt-2">
+                <global-identity-x-newsletter-form-inline with-image=false type="inlineContent" />
+              </div>
+            </if>
+          </marko-web-identity-x-context> -->
+        </@rail>
+        <@rail>
+          <theme-client-side-most-popular-list-block class="sticky-top" />
+        </@rail>
+      </global-section-feed-wrapper>
   </@section>
 
   <for|s| of=sections>

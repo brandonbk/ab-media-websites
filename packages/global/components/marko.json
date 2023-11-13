@@ -4,7 +4,8 @@
     "./directory-facets/marko.json",
     "./layouts/marko.json",
     "./leaders/marko.json",
-    "./search/marko.json"
+    "./search/marko.json",
+    "./wrappers/marko.json"
   ],
   "<global-ssr-html-inject>": {
     "template": "./ssr-html-inject.marko",

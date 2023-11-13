@@ -513,6 +513,14 @@ label {
   }
 }
 
+.page-rail {
+  .node-list {
+    .node-list__header {
+      @include skin-typography($style: "section-header-small", $link-style: "primary");
+    }
+  }
+}
+
 .card-deck-flow {
   $self: &;
 

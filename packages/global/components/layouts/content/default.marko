@@ -288,42 +288,21 @@ $ const withRecommended = defaultValue(input.withRecommended, true);
     />
   </@section>
 
-  <if(showMoreSection && type !== 'webinar')>
-    $ const perPage = 12;
-    $ const moreSectionLimit = 3;
-    $ const moreSectionCount = perPage / moreSectionLimit;
-    <for|i| from=1 to=moreSectionCount>
-
-      <@section|{ content, aliases, blockName }|>
-        <aside aria-label=`More In ${get(content, 'primarySection.name')} List ${i}`>
-        <if(i === 1)>
-          <marko-web-website-section-name|{ value }| tag="h2" block-name=blockName obj=content.primarySection>
-            More in ${value}
-          </marko-web-website-section-name>
-        </if>
-
-        $ let skip = (i * moreSectionLimit) - moreSectionLimit;
-        <theme-section-feed-block alias=content.primarySection.alias>
-          <@query-params limit=moreSectionLimit skip=p.skip({ perPage, skip }) />
-        </theme-section-feed-block>
-
-        <if(i === moreSectionCount)>
-          <theme-section-feed-block|{ totalCount }| alias=content.primarySection.alias count-only=true>
-            <theme-pagination-controls
-              per-page=perPage
-              total-count=totalCount
-              path=content.primarySection.alias
-            />
-          </theme-section-feed-block>
-        </if>
-        </aside>
-      </@section>
-
-      <@section|{ content, aliases, blockName }|>
-        <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "content_page", "inter-block"] />
-      </@section>
-    </for>
-  </if>
+  <@section|{ content, aliases }|>
+    <global-section-feed-wrapper aliases=aliases alias=content.primarySection.alias ad-name="rotation">
+      <@header>More in ${content.primarySection.name}</@header>
+      <@query-params excludeContentIds=[content.id] />
+      <@native-x index=[1] name="default" aliases=aliases sectionName="Sponsored" />
+      <@rail>
+        <div class="sticky-top">
+          <marko-web-broadstreet-zone zone-alias="rotaction300" modifiers=["rotation", "content_page"] />
+        </div>
+      </@rail>
+      <@rail>
+        <theme-client-side-most-popular-list-block class="sticky-top" />
+      </@rail>
+    </global-section-feed-wrapper>
+  </@section>
 
   <for|s| of=sections>
     <@section|{ blockName, content, aliases }| modifiers=s.modifiers>
