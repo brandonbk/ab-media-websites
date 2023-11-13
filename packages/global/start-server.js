@@ -82,9 +82,6 @@ module.exports = (options = {}) => {
       omedaIdentityX(app, { ...omedaIdentityXConfig, idxRouteTemplates });
       idxNavItems({ site: app.locals.site });
 
-      const bamConfig = get(options, 'siteConfig.bam');
-      set(app.locals, 'BAM', bamConfig);
-
       // Setup NativeX.
       const nativeXConfig = get(options, 'siteConfig.nativeX');
       set(app.locals, 'nativeX', nativeXConfig);

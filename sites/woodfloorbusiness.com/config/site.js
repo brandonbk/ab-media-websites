@@ -10,13 +10,11 @@ const identityX = require('./identity-x');
 const identityXOptInHooks = require('./identity-x-opt-in-hooks');
 const omedaIdentityX = require('./omeda-identity-x');
 const leaders = require('./leaders');
-const bam = require('./bam');
 const gam = require('./gam');
 const contentMeter = require('./content-meter');
 
 module.exports = {
   navigation,
-  bam,
   gam,
   contentMeter,
   contentTypesToGateByDefault: [

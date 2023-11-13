@@ -1,6 +1,5 @@
 const digitalEdition = require('./digital-edition');
 const navigation = require('./navigation');
-const bam = require('./bam');
 const gam = require('./gam');
 const contentMeter = require('./content-meter');
 const nativeX = require('./native-x');
@@ -17,7 +16,6 @@ const leaders = require('./leaders');
 
 module.exports = {
   navigation,
-  bam,
   gam,
   contentMeter,
   leaders,
