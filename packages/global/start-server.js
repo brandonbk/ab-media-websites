@@ -64,6 +64,10 @@ module.exports = (options = {}) => {
       // i18n
       i18n(app, options.i18n);
 
+      // Setup GAM.
+      const gamConfig = get(options, 'siteConfig.gam');
+      set(app.locals, 'GAM', gamConfig);
+
       // Use paginated middleware
       app.use(htmlSitemapPagination());
 
