@@ -72,6 +72,22 @@ $ const sections = getAsArray(input, "sections");
     <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "inter-block", "content_page"] />
   </@section>
 
+  <@section|{ content, aliases }|>
+    <global-section-feed-wrapper aliases=aliases alias=content.primarySection.alias ad-name="rotation">
+      <@header>More in ${content.primarySection.name}</@header>
+      <@query-params excludeContentIds=[content.id] />
+      <@native-x index=[1] name="default" aliases=aliases sectionName="Sponsored" />
+      <@rail>
+        <div class="sticky-top">
+          <marko-web-broadstreet-zone zone-alias="rotaction300" modifiers=["rotation", "content_page"] />
+        </div>
+      </@rail>
+      <@rail>
+        <theme-client-side-most-popular-list-block class="sticky-top" />
+      </@rail>
+    </global-section-feed-wrapper>
+  </@section>
+
   <for|s| of=sections>
     <@section|{ blockName, content, aliases }| modifiers=s.modifiers>
       <${s.renderBody}
