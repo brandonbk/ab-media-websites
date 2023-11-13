@@ -32,6 +32,11 @@ module.exports = ({
         ['(max-width: 980px)', 147422],
       ],
     },
+    rotaction300: {
+      zoneIdSizeMapping: [
+        ['', 147422],
+      ],
+    },
     // for use in content pages when positions move
     desktopBillboard: {
       zoneIdSizeMapping: [
