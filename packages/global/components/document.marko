@@ -29,12 +29,11 @@ $ const omedaConfig = site.get('omeda');
       identity-query-builder=createOmedaIdentityBuilder(omedaConfig.brandKey)
     />
 
-    <!-- init bam -->
-    <marko-web-broadstreet-init
-      on="load"
+    <!-- init gam -->
+    <marko-web-gam-init
       request-frame=true
       target-tag="body"
-      config=BAM
+      on="load"
     />
 
     <!-- init gtm -->
@@ -69,10 +68,15 @@ $ const omedaConfig = site.get('omeda');
     <!-- start gtm -->
     <marko-web-gtm-start />
 
+     <!-- start gam -->
+    <marko-web-gam-enable>
+      <@lazy-load ...site.getAsObject("gam.lazyLoad") />
+    </marko-web-gam-enable>
+    <marko-web-gam-targeting key-values={ uri: req.path } />
+
   </@head>
   <@above-container>
     <marko-web-browser-component name="OmedaIdentityXRapidIdentify" />
-    <marko-web-browser-component name="GlobalBroadstreetP1EventsTracker" props={ networkId: BAM.networkId } />
 
     <!-- Leaders -->
     <marko-web-leaders-p1events-tracker />
