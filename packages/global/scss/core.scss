@@ -241,7 +241,8 @@
 
 // boradstreet ads import
 /*! critical:start */
-@import "@ab-media/base-cms-marko-web-broadstreet/scss/ads";
+// @import "@ab-media/base-cms-marko-web-broadstreet/scss/ads";
+@import "./components/ads";
 /*! critical:end */
 @import "./components/specialized-events";
 // page wrapper
