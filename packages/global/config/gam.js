@@ -37,14 +37,14 @@ module.exports = ({
         { viewport: [300, 0], size: [[265, 149]] },
       ],
     })
-    .setTemplate('ROTATION-RAIL', {
-      size: [300, 250],
+    .setTemplate('ROTATION-300', {
+      size: [[300, 50], [300, 250]],
       sizeMapping: [
-        { viewport: [300, 0], size: [300, 250] },
+        { viewport: [300, 0], size: [[300, 50], [300, 250]] },
       ],
     })
     .setTemplate('ROTATION', {
-      size: [[970, 250], [970, 90], [728, 90]],
+      size: [[970, 250], [970, 90], [728, 90], [300, 50], [300, 250]],
       sizeMapping: [
         { viewport: [980, 0], size: [[970, 250], [970, 90], [728, 90]] },
         { viewport: [750, 0], size: [[728, 90], [300, 250]] },
