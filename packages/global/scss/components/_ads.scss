@@ -1,5 +1,6 @@
 .col-lg-8  {
-  > .ad-container {
+  .ad-container {
+    &--inline-content,
     &--inter-block {
       margin-left: 0;
       margin-right: 0;
