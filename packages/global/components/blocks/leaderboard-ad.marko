@@ -1,12 +1,10 @@
 import { get } from "@parameter1/base-cms-object-path";
 
-$ const { GAM } = out.global;
 $ const leaderboardZoneAlias = input.leaderboardZoneAlias || 'leaderboard';
 $ const billboardZoneAlias = input.billboardZoneAlias || 'billboard';
 $ const { hasCookie, cookieValue, cookieName } = get(out.global, "billboardState");
 $ const name = (hasCookie && cookieValue === "0") ? billboardZoneAlias : leaderboardZoneAlias;
 $ const expires = 1/24; // Days
-$ const adUnit = GAM.getAdUnit({ name, aliases: input.aliases });
 
 <if(!hasCookie)>
   <marko-web-browser-component
