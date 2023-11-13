@@ -36,6 +36,11 @@ $ const withNativeXSection = defaultValue(input.withNativeXSection, true);
     </theme-section-feed-flow>
   </else>
   <if(input.withAds)>
-    <marko-web-broadstreet-zone zone-alias="rotaction300" modifiers=["rotation", "inter-block", "content_page"] />
+    <theme-gam-define-display-ad
+      name="rotation-300"
+      position="content_page"
+      aliases=input.aliases
+      modifiers=["rotation", "inter-block", "content_page"]
+    />
   </if>
 </if>

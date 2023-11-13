@@ -84,7 +84,12 @@ $ const aliases = [gallery.primarySection.alias, gallery.primarySection.alias.sp
       </@section>
 
       <@section>
-        <marko-web-broadstreet-zone zone-alias="rotation" />
+        <theme-gam-define-display-ad
+          name="rotation"
+          position="section_page"
+          aliases=input.aliases
+          modifiers=["rotation", "inter-block", "section_page"]
+        />
       </@section>
     </marko-web-page-wrapper>
   </@page>

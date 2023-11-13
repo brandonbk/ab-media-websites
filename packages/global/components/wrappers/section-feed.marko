@@ -101,17 +101,29 @@ $ const params = { ...queryParams, limit, skip };
         </if>
         <else>
           <marko-web-identity-x-context|{ hasUser }|>
+            <!-- figure out if this user block logic should be used -->
+            <!--
             <if(!hasUser)>
               <div class="sticky-top">
-                <!-- <global-identity-x-newsletter-form-inline with-image=false type="inlineContent" /> -->
-                <h1>
-                USER BLOCK
-              </h1>>
+                <global-identity-x-newsletter-form-inline with-image=false type="inlineContent" />
               </div>
             </if>
             <else>
-              <marko-web-broadstreet-zone zone-alias="rotaction300" modifiers=["rotation", "content_page"] />
+              <theme-gam-define-display-ad
+                name="rotation-300"
+                position=input.position
+                aliases=input.aliases
+                modifiers=["rotation", "content_page"]
+              />
             </else>
+            -->
+            <theme-gam-define-display-ad
+              name="rotation-300"
+              position=input.position
+              aliases=input.aliases
+              modifiers=["rotation", "content_page"]
+            />
+
           </marko-web-identity-x-context>
         </else>
       </div>

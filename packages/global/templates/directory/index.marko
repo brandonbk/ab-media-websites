@@ -175,6 +175,11 @@ $ const currentPage = search.getCurrentPage();
     </div>
   </@section>
   <@section>
-    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["inter-block", "rotation", "static_page"] />
+    <theme-gam-define-display-ad
+      name="rotation"
+      position="static_page"
+      aliases=input.aliases
+      modifiers=["rotation", "inter-block", "static_page"]
+    />
   </@section>
 </global-website-section-default-layout>

@@ -31,7 +31,12 @@ $ const alias = get(input, "primarySection.alias");
         </for>
 
         <@section>
-          <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "inter-block", "content_page"] />
+          <theme-gam-define-display-ad
+            name="rotation"
+            position="content_page"
+            aliases=input.aliases
+            modifiers=["rotation", "inter-block", "content_page"]
+          />
         </@section>
       </marko-web-page-wrapper>
     </marko-web-resolve-page>

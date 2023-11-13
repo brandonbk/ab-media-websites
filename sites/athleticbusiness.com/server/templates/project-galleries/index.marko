@@ -32,7 +32,12 @@ $ const aliases = [primarySection.alias, primarySection.alias.split('/')[0]];
       </@section>
 
       <@section>
-        <marko-web-broadstreet-zone zone-alias="rotation" />
+        <theme-gam-define-display-ad
+          name="rotation"
+          position="section_page"
+          aliases=input.aliases
+          modifiers=["rotation", "inter-block", "section_page"]
+        />
       </@section>
     </marko-web-page-wrapper>
   </@page>

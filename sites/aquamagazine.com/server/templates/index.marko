@@ -45,7 +45,12 @@ $ const { site } = out.global;
   </@section>
 
   <@section|{ aliases }|>
-    <marko-web-broadstreet-zone zone-alias="rotation" />
+    <theme-gam-define-display-ad
+      name="rotation"
+      position="section_page"
+      aliases=input.aliases
+      modifiers=["rotation", "inter-block", "section_page"]
+    />
   </@section>
 
   <if(site.get("leaders.enabled"))>

@@ -101,7 +101,12 @@ $ const countQueryParams = {
         </@header>
         <@query-params ...upcomingQueryParams />
         <@after>
-          <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "section_page", "inter-block"] />
+          <theme-gam-define-display-ad
+            name="rotation"
+            position="section_page"
+            aliases=input.aliases
+            modifiers=["rotation", "inter-block", "section_page"]
+          />
         </@after>
       </theme-section-feed-block>
     </if>

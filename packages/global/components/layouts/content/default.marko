@@ -159,7 +159,17 @@ $ const withRecommended = defaultValue(input.withRecommended, true);
               <else>
 
                 <if(shouldInjectAds)>
-                  <content-body-with-injection with-leaders-block=false content=content aliases=aliases block-name=blockName />
+                  <!-- <content-body-with-injection with-leaders-block=false content=content aliases=aliases block-name=blockName /> -->
+                  $ const bodyId = `content-body-${content.id}`;
+                  <theme-body-with-injection
+                    content=content
+                    aliases=aliases
+                    block-name=blockName
+                    selector=bodyId
+                    preventHTMLInjection=false
+                    mobile-leaderboard-ad-name="top-rotation-mobile"
+                    lazyload-first-image=false
+                  />
                 </if>
                 <else>
                   <marko-web-content-body block-name=blockName obj=content />
@@ -276,7 +286,13 @@ $ const withRecommended = defaultValue(input.withRecommended, true);
 
   <if(showBottomAdBlock)>
     <@section|{ aliases }|>
-      <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "inter-block", "content_page"] />
+      <theme-gam-define-display-ad
+        name="rotation"
+        position="content_page"
+        aliases=aliases
+        show-label=true
+        modifiers=["rotation", "inter-block", "content_page"]
+      />
     </@section>
   </if>
 
@@ -295,7 +311,12 @@ $ const withRecommended = defaultValue(input.withRecommended, true);
       <@native-x index=[1] name="default" aliases=aliases sectionName="Sponsored" />
       <@rail>
         <div class="sticky-top">
-          <marko-web-broadstreet-zone zone-alias="rotaction300" modifiers=["rotation", "content_page"] />
+          <theme-gam-define-display-ad
+            name="rotation-300"
+            position="section_page"
+            aliases=input.aliases
+            modifiers=["inline-section-feed"]
+          />
         </div>
       </@rail>
       <@rail>
