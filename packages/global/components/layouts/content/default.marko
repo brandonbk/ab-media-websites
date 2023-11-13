@@ -210,7 +210,7 @@ $ const withRecommended = defaultValue(input.withRecommended, true);
                     <marko-web-element block-name="page-contents" name="content-transcript-title">
                       <marko-web-icon name="file" modifiers=["lg"] /> Transcript
                     </marko-web-element>
-                    <content-body-with-injection content={ id: `transcript-${content.id}`, body: content.transcript } with-mobile-leaderboard=false with-leaders-block=false aliases=aliases block-name=blockName />
+                    <theme-body-with-injection content={ id: `transcript-${content.id}`, body: content.transcript } with-mobile-leaderboard=false with-leaders-block=false aliases=aliases block-name=blockName />
                   </div>
                 </if>
               </else>
