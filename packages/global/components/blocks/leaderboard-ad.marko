@@ -1,9 +1,9 @@
 import { get } from "@parameter1/base-cms-object-path";
 
-$ const leaderboardZoneAlias = input.leaderboardZoneAlias || 'leaderboard';
-$ const billboardZoneAlias = input.billboardZoneAlias || 'billboard';
+$ const leaderboardName = input.leaderboardName || 'leaderboard';
+$ const billboardName = input.billboardName || 'billboard';
 $ const { hasCookie, cookieValue, cookieName } = get(out.global, "billboardState");
-$ const name = (hasCookie && cookieValue === "0") ? billboardZoneAlias : leaderboardZoneAlias;
+$ const name = (hasCookie && cookieValue === "0") ? billboardName : leaderboardName;
 $ const expires = 1/24; // Days
 
 <if(!hasCookie)>

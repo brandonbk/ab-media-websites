@@ -37,9 +37,10 @@ $ const withRecommended = defaultValue(input.withRecommended, true);
   <@section|{ aliases }| modifiers=["break-container", "first-sm"]>
     <if(!showOverlay)>
       <global-leaderboard-ad-block
-        billboardZoneAlias="desktopBillboard"
-        leadboardZoneAlias="desktopLeaderboard"
-        modifiers=["inter-block", "combined-leaderboard", "content-leaderboard"]
+        position="content_page"
+        aliases=aliases
+        billboard-name='billboard-desktop'
+        modifiers=["inter-block", "combined-leaderboard"]
       />
     </if>
   </@section>
@@ -159,15 +160,16 @@ $ const withRecommended = defaultValue(input.withRecommended, true);
               <else>
 
                 <if(shouldInjectAds)>
-                  <!-- <content-body-with-injection with-leaders-block=false content=content aliases=aliases block-name=blockName /> -->
                   $ const bodyId = `content-body-${content.id}`;
+                  $ const { hasCookie, cookieValue, cookieName } = get(out.global, "billboardState");
+                  $ const mobileLeaderboard = hasCookie && cookieValue == 0 ? 'billboard-mobile' : 'inline-leaderboard-mobile'
                   <theme-body-with-injection
                     content=content
                     aliases=aliases
                     block-name=blockName
                     selector=bodyId
                     preventHTMLInjection=false
-                    mobile-leaderboard-ad-name="top-rotation-mobile"
+                    mobile-leaderboard-ad-name=mobileLeaderboard
                     lazyload-first-image=false
                   />
                 </if>
@@ -315,7 +317,7 @@ $ const withRecommended = defaultValue(input.withRecommended, true);
             name="rotation-300"
             position="section_page"
             aliases=input.aliases
-            modifiers=["inline-section-feed"]
+            modifiers=[]
           />
         </div>
       </@rail>

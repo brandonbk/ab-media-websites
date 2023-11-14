@@ -7,3 +7,14 @@
     }
   }
 }
+.ad-container {
+  &--inline-content,
+  &--inline-section-feed  {
+    background-color: #fff;
+    & > :first-child {
+      border-bottom: 3px solid #f0f1f2;
+      border-top: 3px solid #f0f1f2;
+      padding-bottom: 30px;
+    }
+  }
+}
