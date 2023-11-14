@@ -1,7 +1,7 @@
 .col-lg-8  {
   .ad-container {
-    &--inline-content,
-    &--inter-block {
+    &--inline-content {
+      background-color: none;
       margin-left: 0;
       margin-right: 0;
     }
