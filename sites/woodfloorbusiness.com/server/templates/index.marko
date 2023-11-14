@@ -15,10 +15,12 @@ $ const { site } = out.global;
   </@head> -->
 
   <@section|{ aliases }|>
-    <!-- <marko-web-broadstreet-zone
-      zone-alias="mobileLeaderboard"
-      modifiers=["inline-mobile-leaderboard"]
-    /> -->
+    <theme-gam-define-display-ad
+      name="inline-leaderboard-mobile"
+      position="section_page"
+      aliases=input.aliases
+      modifiers=["leaderboard-mobile", "inter-block", "section_page"]
+    />
   </@section>
 
   <@section|{ aliases }| modifiers=["break-container"]>
