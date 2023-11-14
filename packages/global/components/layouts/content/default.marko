@@ -39,7 +39,7 @@ $ const withRecommended = defaultValue(input.withRecommended, true);
       <global-leaderboard-ad-block
         position="content_page"
         aliases=aliases
-        billboard-name='billboard-desktop'
+        billboard-name='billboard'
         modifiers=["inter-block", "combined-leaderboard"]
       />
     </if>
@@ -161,15 +161,13 @@ $ const withRecommended = defaultValue(input.withRecommended, true);
 
                 <if(shouldInjectAds)>
                   $ const bodyId = `content-body-${content.id}`;
-                  $ const { hasCookie, cookieValue, cookieName } = get(out.global, "billboardState");
-                  $ const mobileLeaderboard = hasCookie && cookieValue == 0 ? 'billboard-mobile' : 'inline-leaderboard-mobile'
                   <theme-body-with-injection
                     content=content
                     aliases=aliases
                     block-name=blockName
                     selector=bodyId
                     preventHTMLInjection=false
-                    mobile-leaderboard-ad-name=mobileLeaderboard
+                    mobile-leaderboard-ad-name="inline-leaderboard-mobile"
                     lazyload-first-image=false
                   />
                 </if>

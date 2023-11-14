@@ -13,8 +13,6 @@ config
   .setAliasAdUnits('default', [
     { name: 'leaderboard', templateName: 'LEADERBOARD', path: 'leaderboard' },
     { name: 'billboard', templateName: 'BILLBOARD', path: 'leaderboard' },
-    { name: 'billboard-desktop', templateName: 'BILLBOARD-DESKTOP', path: 'leaderboard' },
-    { name: 'billboard-mobile', templateName: 'BILLBOARD-MOBILE', path: 'leaderboard' },
     { name: 'rail', templateName: 'ROTATION-300', path: 'rotation' },
     { name: 'rotation', templateName: 'ROTATION', path: 'rotation' },
     { name: 'rotation-desktop', templateName: 'ROTATION-DESKTOP', path: 'rotation' },
@@ -35,8 +33,6 @@ const aliases = [
 aliases.forEach((alias) => config.setAliasAdUnits(alias, [
   { name: 'leaderboard', templateName: 'LEADERBOARD', path: `${alias}-leaderboard` },
   { name: 'billboard', templateName: 'BILLBOARD', path: `${alias}-leaderboard` },
-  { name: 'billboard-desktop', templateName: 'BILLBOARD-DESKTOP', path: `${alias}-leaderboard` },
-  { name: 'billboard-mobile', templateName: 'BILLBOARD-MOBILE', path: `${alias}-leaderboard` },
   { name: 'rail', templateName: 'ROTATION-300', path: `${alias}-rotation` },
   { name: 'rotation', templateName: 'ROTATION', path: `${alias}-rotation` },
   { name: 'rotation-desktop', templateName: 'ROTATION-DESKTOP', path: `${alias}-rotation` },

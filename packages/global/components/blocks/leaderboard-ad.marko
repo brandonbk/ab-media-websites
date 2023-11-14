@@ -23,5 +23,5 @@ $ const expires = 1/24; // Days
   name=name
   position=input.position
   aliases=input.aliases
-  modifiers=input.modifiers
+  modifiers=[...input.modifiers, `template-${name}`]
 />

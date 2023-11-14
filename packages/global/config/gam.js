@@ -24,43 +24,11 @@ module.exports = ({
     .setTemplate('BILLBOARD', {
       size: [
         [1060, 596],
-        // [736, 414],
-        // [428, 241],
-        // [265, 149],
+        [265, 149],
       ],
       sizeMapping: [
-        // { viewport: [1070, 0], size: [[1060, 596], [265, 149]] },
-        // { viewport: [980, 0], size: [[736, 414], [265, 149]] },
-        // { viewport: [750, 0], size: [[736, 414], [265, 149]] },
-        // { viewport: [430, 0], size: [[428, 241], [265, 149]] },
-        // { viewport: [300, 0], size: [[265, 149]] },
-        { viewport: [300, 0], size: [[1060, 596]] },
-      ],
-    })
-    .setTemplate('BILLBOARD-DESKTOP', {
-      size: [
-        [1060, 596],
-        // [736, 414],
-      ],
-      sizeMapping: [
-        { viewport: [980, 0], size: [[1060, 596]] },
-        // { viewport: [1070, 0], size: [[1060, 596], [265, 149]] },
-        // { viewport: [980, 0], size: [[736, 414], [265, 149]] },
-        // { viewport: [750, 0], size: [[736, 414], [265, 149]] },
-        // { viewport: [430, 0], size: [] },
-      ],
-    })
-    .setTemplate('BILLBOARD-MOBILE', {
-      size: [
-        [1060, 596],
-        // [428, 241],
-        // [265, 149],
-      ],
-      sizeMapping: [
-        { viewport: [750, 0], size: [[1060, 596]] },
-        // { viewport: [750, 0], size: [] },
-        // { viewport: [430, 0], size: [[428, 241], [265, 149]] },
-        // { viewport: [300, 0], size: [[265, 149]] },
+        { viewport: [1070, 0], size: [[1060, 596], [265, 149]] },
+        { viewport: [300, 0], size: [[265, 149]] },
       ],
     })
     .setTemplate('ROTATION-300', {
