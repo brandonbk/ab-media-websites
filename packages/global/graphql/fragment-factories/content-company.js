@@ -1,13 +1,13 @@
 const gql = require('graphql-tag');
 
-module.exports = (leadersAlias) => gql`
+module.exports = ({ leadersAlias, useLinkInjectedBody = false } = {}) => gql`
 
 fragment LeadersWebsiteContentCompanyFragment on Content {
   id
   type
   name
   teaser(input: { maxLength: 0 })
-  body
+  body(input: { useLinkInjectedBody: ${useLinkInjectedBody} })
 
   siteContext {
     path

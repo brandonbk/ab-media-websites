@@ -15,6 +15,7 @@ const omedaIdentityX = require('./omeda-identity-x');
 const leaders = require('./leaders');
 
 module.exports = {
+  useLinkInjectedBody: process.env.USE_LINK_INJECTED_BODY || false,
   navigation,
   gam,
   contentMeter,

@@ -13,6 +13,7 @@ const content = require('../templates/content');
 
 module.exports = (app) => {
   const { site } = app.locals;
+  const useLinkInjectedBody = site.get('useLinkInjectedBody');
   const routesList = [
     { // contact
       regex: '/*?contact/:id(\\d{8})*',
@@ -22,22 +23,34 @@ module.exports = (app) => {
     { // company
       regex: '/*?company/:id(\\d{8})*',
       template: company,
-      queryFragment: companyQueryFragmentFn(site.get('leaders.alias')),
+      queryFragment: companyQueryFragmentFn({
+        siteAlias: site.get('leaders.alias'),
+        useLinkInjectedBody,
+      }),
     },
     { // product
       regex: '/*?media-gallery/:id(\\d{8})*',
       template: mediaGallery,
-      queryFragment: contentQueryFragmentFn(site.get('leaders.alias')),
+      queryFragment: contentQueryFragmentFn({
+        siteAlias: site.get('leaders.alias'),
+        useLinkInjectedBody,
+      }),
     },
     { // whitepaper
       regex: '/*?whitepaper/:id(\\d{8})*',
       template: whitepaper,
-      queryFragment: contentQueryFragmentFn(site.get('leaders.alias')),
+      queryFragment: contentQueryFragmentFn({
+        siteAlias: site.get('leaders.alias'),
+        useLinkInjectedBody,
+      }),
     },
     { // default
       regex: '/*?/:id(\\d{8})/*|/:id(\\d{8})(/|$)*',
       template: content,
-      queryFragment: contentQueryFragmentFn(site.get('leaders.alias')),
+      queryFragment: contentQueryFragmentFn({
+        siteAlias: site.get('leaders.alias'),
+        useLinkInjectedBody,
+      }),
     },
   ];
   const cmConfig = site.getAsObject('contentMeter');

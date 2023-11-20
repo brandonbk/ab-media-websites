@@ -14,6 +14,7 @@ const identityXOptInHooks = require('./identity-x-opt-in-hooks');
 const leaders = require('./leaders');
 
 module.exports = {
+  useLinkInjectedBody: process.env.USE_LINK_INJECTED_BODY || false,
   navigation,
   gam,
   contentMeter,
