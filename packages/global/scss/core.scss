@@ -510,6 +510,12 @@ label {
       }
     }
   }
+  &--section-feed {
+    #{ $self }__header  {
+      margin-bottom: 20px;
+      @include skin-typography($style: "section-header");
+    }
+  }
 }
 
 .page-rail {
@@ -658,6 +664,18 @@ label {
 .content-page-header .social-sharing {
   margin-top: 1rem;
 }
+
+
+body.site-menu--open {
+  bottom: initial;
+  left:  initial;
+  position:  initial;
+  right:  initial;
+  top:  initial;
+}
+
+
+
 /*! critical:end */
 
 // pulls footer up to touch ad
