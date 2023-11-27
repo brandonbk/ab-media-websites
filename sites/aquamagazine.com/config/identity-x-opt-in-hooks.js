@@ -1,5 +1,5 @@
 module.exports = {
   onLoginLinkSent: {
-    productIds: [11],
+    productIds: [11, 16],
   },
 };
