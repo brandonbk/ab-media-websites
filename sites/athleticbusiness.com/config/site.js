@@ -23,7 +23,7 @@ module.exports = {
   nativeX,
   magazine,
   contentTypesToGateByDefault: [
-    'article',
+    // 'article',
   ],
   // temp fix till we update base-cms package
   // Dep Upgrades after https://github.com/parameter1/base-cms/pull/364
