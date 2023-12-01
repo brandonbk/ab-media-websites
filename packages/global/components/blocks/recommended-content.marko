@@ -1,12 +1,14 @@
 import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
 import queryFragment from "@parameter1/base-cms-marko-web-theme-monorail/graphql/fragments/content-list";
-$ const { personasHandler } = out.global;
+$ // See comment below regarding Personas handling
+$ // const { personasHandler } = out.global;
 
 $ const title = defaultValue(input.title, "Recommended");
 
 <marko-web-identity-x-context|{ user, hasUser }|>
   $ const customTitle = (hasUser) ? `${title} for ${user.givenName}` : title;
-  <if(hasUser && process.env.ENABLE_PERSONAS_RECOMMENDATIONS === "true")>
+  $ // Personas handling will need to be implemented in order for this to work
+  <!--<if(hasUser && process.env.ENABLE_PERSONAS_RECOMMENDATIONS === "true")>
     $ const answeredQuestions = user.customSelectFieldAnswers.filter((answers) => answers.hasAnswered);
     $ const { assignedRecommendContentSections } = personasHandler({ answeredQuestions });
     $ const sectionIdForRecommendedContent = assignedRecommendContentSections[Math.floor(Math.random() * assignedRecommendContentSections.length)];
@@ -32,11 +34,10 @@ $ const title = defaultValue(input.title, "Recommended");
         <@node with-section=true with-dates=false ...input.node />
       </theme-latest-content-list-block>
     </else>
-  </if>
-  <else>
-    <theme-latest-content-list-block title=customTitle query-params=input.queryParams class="recommended-content">
-      <@native-x indexes=[0] name="default" aliases=input.aliases ...input.nativeX />
-      <@node with-section=true with-dates=false ...input.node />
-    </theme-latest-content-list-block>
-  </else>
+  </if>-->
+  $ // Following Personas handling implementation this should be wrapped in an else
+  <theme-latest-content-list-block title=customTitle query-params=input.queryParams class="recommended-content">
+    <@native-x indexes=[0] name="default" aliases=input.aliases ...input.nativeX />
+    <@node with-section=true with-dates=false ...input.node />
+  </theme-latest-content-list-block>
 </marko-web-identity-x-context>
