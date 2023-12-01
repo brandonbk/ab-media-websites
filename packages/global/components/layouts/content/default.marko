@@ -277,7 +277,7 @@ $ const withRecommended = defaultValue(input.withRecommended, true);
         </if>
         <if(withRecommended)>
           <div class="sticky-top">
-            <global-recommended-content-block query-params={ excludeContentIds: [content.id] } alias=primarySection.alias aliases=aliases />
+            <global-recommended-content-block query-params={ excludeContentIds: [content.id], sectionId: primarySection.id } aliases=aliases />
           </div>
         </if>
       </div>
