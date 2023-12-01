@@ -20,7 +20,7 @@ $ const title = defaultValue(input.title, "Recommended");
         name="website-scheduled-content"
         params=queryParams
       >
-        <theme-latest-content-list-block nodes=nodes title=customTitle query-params=input.queryParams class="recommended-content">
+        <theme-latest-content-list-block nodes=nodes title=customTitle class="recommended-content">
           <@native-x indexes=[0] name="default" aliases=input.aliases ...input.nativeX />
           <@node with-section=true with-dates=false ...input.node />
         </theme-latest-content-list-block>
