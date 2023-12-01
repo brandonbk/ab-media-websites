@@ -239,9 +239,8 @@
 @import "@parameter1/base-cms-marko-web-leaders/scss/leaders";
 /*! critical:end */
 
-// boradstreet ads import
 /*! critical:start */
-@import "@ab-media/base-cms-marko-web-broadstreet/scss/ads";
+@import "./components/ads";
 /*! critical:end */
 @import "./components/specialized-events";
 // page wrapper
@@ -318,6 +317,7 @@
 /*! critical:start|home */
 /*! critical:start|website-section */
 /*! critical:start|content */
+@import "./components/content-page";
 @import "./components/carousel";
 @import "./components/content-meter";
 /*! critical:end */
@@ -496,6 +496,34 @@ label {
       }
     }
   }
+  &--latest-content-list {
+    #{ $self } {
+      &__header {
+        padding-bottom: 10px;
+        margin-bottom: 24px;
+
+        border-bottom: 1px solid $gray-700;
+        @include media-breakpoint-up(md) {
+          margin-bottom: 0;
+        }
+        @include skin-typography($style: "section-header-small", $link-style: "primary");
+      }
+    }
+  }
+  &--section-feed {
+    #{ $self }__header  {
+      margin-bottom: 20px;
+      @include skin-typography($style: "section-header");
+    }
+  }
+}
+
+.page-rail {
+  .node-list {
+    .node-list__header {
+      @include skin-typography($style: "section-header-small", $link-style: "primary");
+    }
+  }
 }
 
 .card-deck-flow {
@@ -636,4 +664,21 @@ label {
 .content-page-header .social-sharing {
   margin-top: 1rem;
 }
+
+
+body.site-menu--open {
+  bottom: initial;
+  left:  initial;
+  position:  initial;
+  right:  initial;
+  top:  initial;
+}
+
+
+
 /*! critical:end */
+
+// pulls footer up to touch ad
+.site-footer {
+  margin-top: 0;
+}

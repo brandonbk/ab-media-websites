@@ -1,0 +1,46 @@
+import defaultValue from "@parameter1/base-cms-marko-core/utils/default-value";
+
+$ const { nativeX: nxConfig } = out.global;
+
+$ const { nodes, nativeX } = input;
+
+$ const lazyload = defaultValue(input.lazyload, true);
+$ const adName = defaultValue(input.adName, "rotation");
+$ const withNativeXSection = defaultValue(input.withNativeXSection, true);
+
+<if(nodes && nodes.length)>
+  <if(nativeX && nativeX.index)>
+    $ const nodesBefore = nodes.slice(0, nativeX.index);
+    $ const nodesAfter = nodes.slice(nativeX.index);
+    <theme-section-feed-flow ...input.flow nodes=nodesBefore header=input.header modifiers=input.modifiers>
+      <@node-list inner-justified=false ...input.nodeList />
+      <@node with-dates=false with-section ...input.node />
+    </theme-section-feed-flow>
+    <marko-web-native-x-retrieve|{ wasFound, hasCampaign, campaign, linkAttrs, containerAttrs }| ...nxConfig.getPlacement({ name: nativeX.name, aliases: nativeX.aliases }) section-name=nativeX.sectionName>
+      <if(wasFound && hasCampaign)>
+        <theme-section-feed-flow ...input.flow nodes=[campaign] modifiers=input.modifiers>
+          <@node-list inner-justified=false ...input.nodeList />
+          <@node with-dates=false with-section=true ...input.node container-attrs=containerAttrs link-attrs=linkAttrs />
+        </theme-section-feed-flow>
+      </if>
+    </marko-web-native-x-retrieve>
+    <theme-section-feed-flow ...input.flow nodes=nodesAfter modifiers=input.modifiers>
+      <@node-list inner-justified=false ...input.nodeList />
+      <@node with-dates=false with-section ...input.node />
+    </theme-section-feed-flow>
+  </if>
+  <else>
+    <theme-section-feed-flow ...input.flow nodes=nodes header=input.header modifiers=input.modifiers>
+      <@node-list inner-justified=false ...input.nodeList />
+      <@node with-dates=false with-section ...input.node />
+    </theme-section-feed-flow>
+  </else>
+  <if(input.withAds)>
+    <theme-gam-define-display-ad
+      name="rotation-300"
+      position="content_page"
+      aliases=input.aliases
+      modifiers=["rotation", "inline-section-feed", "content_page"]
+    />
+  </if>
+</if>

@@ -33,6 +33,11 @@ $ const sections = getAsArray(input, "sections");
   </for>
 
   <@section|{ aliases }|>
-    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "home_page", "section_page", "inter-block"] />
+    <theme-gam-define-display-ad
+      name="rotation"
+      position="home_page"
+      aliases=input.aliases
+      modifiers=["rotation", "inter-block", "home_page"]
+    />
   </@section>
 </global-website-section-default-layout>

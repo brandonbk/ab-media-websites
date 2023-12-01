@@ -1,6 +1,6 @@
 const digitalEdition = require('./digital-edition');
 const navigation = require('./navigation');
-const bam = require('./bam');
+const gam = require('./gam');
 const contentMeter = require('./content-meter');
 const nativeX = require('./native-x');
 const magazine = require('./magazine');
@@ -15,14 +15,15 @@ const omedaIdentityX = require('./omeda-identity-x');
 const leaders = require('./leaders');
 
 module.exports = {
+  useLinkInjectedBody: process.env.USE_LINK_INJECTED_BODY || false,
   navigation,
-  bam,
+  gam,
   contentMeter,
   leaders,
   nativeX,
   magazine,
   contentTypesToGateByDefault: [
-    'article',
+    // 'article',
   ],
   // temp fix till we update base-cms package
   // Dep Upgrades after https://github.com/parameter1/base-cms/pull/364

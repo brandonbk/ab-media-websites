@@ -1,12 +1,12 @@
 const gql = require('graphql-tag');
 
-module.exports = (leadersAlias) => gql`
+module.exports = ({ leadersAlias, useLinkInjectedBody = false } = {}) => gql`
 fragment LeadersContentPageFragment on Content {
   id
   name
   labels
   teaser(input: { useFallback: false, maxLength: null })
-  body
+  body(input: { useLinkInjectedBody: ${useLinkInjectedBody} })
   status
   published
   siteContext {

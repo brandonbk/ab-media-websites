@@ -43,6 +43,9 @@
   "<global-company-search-block>": {
     "template": "./company-search.marko"
   },
+  "<global-recommended-content-block>": {
+    "template": "./recommended-content.marko"
+  },
   "<global-section-search-block>": {
     "template": "./section-search.marko"
   }

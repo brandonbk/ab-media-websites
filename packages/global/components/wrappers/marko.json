@@ -1,0 +1,26 @@
+{
+  "taglib-imports": [],
+  "<global-section-feed-wrapper>": {
+    "template": "./section-feed.marko",
+    "<flow>": {},
+    "@rails <rail>[]": {},
+    "@after": {},
+    "@with-pagination": "boolean",
+    "@modifiers": "array",
+    "@with-ads": "boolean",
+    "@ad-name": "string",
+    "@alias": "string",
+    "@header": "string",
+    "@aliases": "array",
+    "@query-name": "string",
+    "@query-params": "object",
+    "@native-x": "object",
+    "@node": "object",
+    "@node-list": "object",
+    "@path": "string",
+    "@above-the-fold": "boolean"
+  },
+  "<global-native-x-section-feed-wrapper>": {
+    "template": "./native-x-section-feed.marko"
+  }
+}

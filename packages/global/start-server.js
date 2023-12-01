@@ -64,6 +64,10 @@ module.exports = (options = {}) => {
       // i18n
       i18n(app, options.i18n);
 
+      // Setup GAM.
+      const gamConfig = get(options, 'siteConfig.gam');
+      set(app.locals, 'GAM', gamConfig);
+
       // Use paginated middleware
       app.use(htmlSitemapPagination());
 
@@ -77,9 +81,6 @@ module.exports = (options = {}) => {
       const omedaIdentityXConfig = getAsObject(options, 'siteConfig.omedaIdentityX');
       omedaIdentityX(app, { ...omedaIdentityXConfig, idxRouteTemplates });
       idxNavItems({ site: app.locals.site });
-
-      const bamConfig = get(options, 'siteConfig.bam');
-      set(app.locals, 'BAM', bamConfig);
 
       // Setup NativeX.
       const nativeXConfig = get(options, 'siteConfig.nativeX');

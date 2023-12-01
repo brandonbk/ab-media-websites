@@ -1,0 +1,58 @@
+import { defaultValue } from "@parameter1/base-cms-marko-web/utils";
+import { getAsArray, getAsObject } from "@parameter1/base-cms-object-path";
+import convertAdToNode from "@parameter1/base-cms-marko-web-native-x/utils/convert-ad-to-node";
+import chunkArray from "../../utils/chunk-array";
+
+$ const { nativeX: nxConfig, i18n } = out.global;
+$ const { section, modifiers } = input;
+$ const limit = defaultValue(input.limit, 6);
+$ const placementName = defaultValue(input.placementName, "default");
+$ const aliases = defaultValue(input.aliases, []);
+$ const cols = input.cols != null ? input.cols : limit;
+$ const viewMore = defaultValue(input.viewMore, false);
+$ const nodeImageInput = getAsObject(input, "node.image");
+$ const aboveTheFold = defaultValue(input.aboveTheFold, false);
+$ const excludeContentIds = getAsArray(input.excludeContentIds);
+$ const displayImage = defaultValue(input.displayImage, true);
+
+$ const uri = nxConfig.getUri();
+$ const placement = nxConfig.getPlacement({ name: placementName, aliases });
+
+<marko-web-native-x-fetch-elements|{ ads }| uri=uri id=placement.id opts={ n: limit }>
+  $ const hasAd = ads && ads.length && ads[0] && ads[0].hasCampaign;
+  <if(hasAd)>
+    $ const nodes = ads.filter(
+      (ad) => ad.hasCampaign).map(
+      (ad) => convertAdToNode(ad, { sectionName: "Brand Insights" }).node).filter(
+      (node) => !excludeContentIds.includes(node.storyId)
+    );
+    $ const nodeGroups = chunkArray(nodes, 3);
+
+    <div class="row">
+      <div class="col-lg-8">
+        <for|nodeGroup, index| of=nodeGroups>
+          $ const header = index === 0 ? input.header : null;
+          $ const flowInput = (index === 0 && aboveTheFold) ? { displayImage, ...input.flow, lazyload: false } : { displayImage, ...input.flow};
+          <section-feed-flow
+            nodes=nodeGroup
+            header=header
+            modifiers=modifiers
+            node=input.node
+            node-list=input.nodeList
+            aliases=aliases
+            with-ads=false
+            flow=flowInput
+          />
+        </for>
+      </div>
+      <div class="col-lg-4">
+        <if(input.rails && input.rails[0])>
+          <${input.rails[0].renderBody} />
+        </if>
+        <else>
+
+        </else>
+      </div>
+    </div>
+  </if>
+</marko-web-native-x-fetch-elements>

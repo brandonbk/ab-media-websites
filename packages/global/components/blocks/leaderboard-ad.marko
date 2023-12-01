@@ -1,8 +1,9 @@
 import { get } from "@parameter1/base-cms-object-path";
-$ const leaderboardZoneAlias = input.leaderboardZoneAlias || 'leaderboard';
-$ const billboardZoneAlias = input.billboardZoneAlias || 'billboard';
+
+$ const leaderboardName = input.leaderboardName || 'leaderboard';
+$ const billboardName = input.billboardName || 'billboard';
 $ const { hasCookie, cookieValue, cookieName } = get(out.global, "billboardState");
-$ const name = (hasCookie && cookieValue === "0") ? billboardZoneAlias : leaderboardZoneAlias;
+$ const name = (hasCookie && cookieValue === "0") ? billboardName : leaderboardName;
 $ const expires = 1/24; // Days
 
 <if(!hasCookie)>
@@ -18,7 +19,9 @@ $ const expires = 1/24; // Days
   />
 </else-if>
 
-<marko-web-broadstreet-zone
-  zone-alias=name
-  modifiers=[...input.modifiers,  "break-container", name]
+<theme-gam-define-display-ad
+  name=name
+  position=input.position
+  aliases=input.aliases
+  modifiers=[...input.modifiers, `template-${name}`]
 />

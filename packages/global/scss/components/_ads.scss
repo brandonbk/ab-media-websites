@@ -1,0 +1,26 @@
+.col-lg-8  {
+  .ad-container {
+    &--inline-content {
+      background-color: none;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+  // prevent stacking with the bottom of left column bottom ad on mobile
+  + .col-lg-4 .sticky-top:first-child .ad-container:first-child {
+    @include media-breakpoint-down(lg) {
+      display: none
+    }
+  }
+}
+.ad-container {
+  &--inline-content,
+  &--inline-section-feed  {
+    background-color: #fff;
+    & > :first-child {
+      border-bottom: 3px solid #f0f1f2;
+      border-top: 3px solid #f0f1f2;
+      padding-bottom: 30px;
+    }
+  }
+}

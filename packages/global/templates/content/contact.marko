@@ -80,7 +80,12 @@ $ const perPage = 10;
   </@section>
 
   <@section|{ aliases }|>
-    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["rotation", "inter-block", "content_page"] />
+    <theme-gam-define-display-ad
+      name="rotation"
+      position="content_page"
+      aliases=input.aliases
+      modifiers=["rotation", "inter-block", "content_page"]
+    />
   </@section>
 
   <@section>
@@ -88,7 +93,12 @@ $ const perPage = 10;
   </@section>
 
   <@section|{ aliases }|>
-    <marko-web-broadstreet-zone zone-alias="rotation" modifiers=["inter-block", "rotation"] />
+    <theme-gam-define-display-ad
+      name="rotation"
+      position="content_page"
+      aliases=input.aliases
+      modifiers=["rotation", "inter-block", "content_page"]
+    />
   </@section>
 
   <@section>
